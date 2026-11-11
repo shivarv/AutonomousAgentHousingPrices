@@ -47,3 +47,6 @@ Format: date — decision — alternatives considered — reason.
   directories (terms) — only open-licensed option. Consequence handled in Phase 5.
 - 2026-11-10 — Evictions: Eviction Lab tract filings (2000-2018, validated) — MA Trial Court
   dashboard (no machine-readable export) — only tract-level open source; its age is reported.
+- 2026-11-10 — DATA_SOURCES.md is generated from a Python registry (pipeline/sources.py) plus the
+  download manifests, and parsed back to load `data_sources` (matched to a stable key by dataset
+  name) — hand-written markdown — keeps file, table and manifests consistent.
