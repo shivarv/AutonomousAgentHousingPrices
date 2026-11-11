@@ -250,12 +250,15 @@ geometry, and stay within the 8 GB data budget.
       (top site overall or within a filter).
   - [x] item: SiteDao, SiteService (ranked list with total, best with offset for "next best", detail with rings, components, weights, overlaps), controller
   - [x] item: API tests (ranking, filters, best/next, labels, 404/422)
-- [ ] POST /api/area-stats {lat, lon, radii_km: [r1, r2, r3]}: for each ring, totals weighted by
+- [x] POST /api/area-stats {lat, lon, radii_km: [r1, r2, r3]}: for each ring, totals weighted by
       the share of each tract's area inside the circle (geodesic buffers via pyproj): estimated
       homeless, at-risk households (severely burdened ELI renters), ELI renter households,
       affordable units available, gap (shortage or surplus), shelters and beds, subsidised units,
       population. Also return "nearby points" for drawing: tracts with their estimate and
       centroid, and shelters with beds, inside the largest ring. Response < 1 s statewide.
+  - [x] item: GeoDao + GeoIndex (process-wide cache per database: tract polygons, metric arrays, area STRtrees, neighbours, point layers)
+  - [x] item: AreaService.ring_stats (geodesic rings, area-share totals, gap status, shelters, nearby tracts/shelters, sources), controller
+  - [x] item: API tests (Boston/Worcester/Springfield, all metrics, < 1 s, validation and outside-MA message)
 - [ ] GET /api/areas/at?lat=&lon=&level=tract|neighbourhood|municipality|county|coc : the area
       containing the point (point-in-polygon with a cached shapely STRtree), with its boundary
       (simplified GeoJSON), neighbouring areas' ids, and the same metrics as area-stats.
