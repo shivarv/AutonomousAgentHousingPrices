@@ -274,8 +274,10 @@ geometry, and stay within the 8 GB data budget.
 - [x] POST /api/areas/summary {level, ids: [...]} : combined totals for a user-built benefit area.
   - [x] item: AreaService.summary (combined tract weights per level, official at CoC level), controller
   - [x] item: API tests (counties and towns add up to the state, neighbours, CoC official, validation)
-- [ ] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
+- [x] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
       GET /api/model/metrics, GET /api/sources.
+  - [x] item: ShelterDao/Service, ModelService, reference controller (homelessness overall and per CoC, shelters, model metrics from model_runs, sources)
+  - [x] item: API tests (CoC-level labels, no DV shelters, model metrics, sources)
 - [ ] API tests for every endpoint against housing_test, including validation errors (radius
       limits 0.5-80 km, points outside MA return a clear message).
 

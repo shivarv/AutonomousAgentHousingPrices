@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from app.controllers import (
     area_controller,
     health_controller,
+    reference_controller,
     site_controller,
     stats_controller,
     tract_controller,
@@ -36,6 +37,7 @@ def create_app() -> FastAPI:
     app.include_router(tract_controller.router)
     app.include_router(site_controller.router)
     app.include_router(area_controller.router)
+    app.include_router(reference_controller.router)
     return app
 
 
