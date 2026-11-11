@@ -17,3 +17,10 @@ Format: date — decision — alternatives considered — reason.
   backend/ (`app.*`, `pipeline.*`) — src-layout package — simplest for `uv run` and Alembic.
 - 2026-11-10 — Alembic URL from app settings, overridable by ALEMBIC_DATABASE_URL (to migrate
   housing_test) — separate ini sections — one source of truth for the URL.
+- 2026-11-10 — Frontend look: "survey map" palette (paper #eef2f4, harbour ink #14324a, survey-marker
+  ochre #c98a0b focus/accent; shortage #b3261e and surplus #1f7a5c always paired with a sign/label;
+  estimate violet #6b4fa0), Public Sans (US civic typeface, self-hosted via @fontsource, tabular
+  numerals) — cream/serif or dark dashboard defaults — fits a civic planning audience, no
+  external font requests.
+- 2026-11-10 — Frontend lint is oxlint (the current Vite template default) — add ESLint —
+  `npm run lint` is what the plan requires; oxlint covers react hooks rules.
