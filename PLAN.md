@@ -278,8 +278,9 @@ geometry, and stay within the 8 GB data budget.
       GET /api/model/metrics, GET /api/sources.
   - [x] item: ShelterDao/Service, ModelService, reference controller (homelessness overall and per CoC, shelters, model metrics from model_runs, sources)
   - [x] item: API tests (CoC-level labels, no DV shelters, model metrics, sources)
-- [ ] API tests for every endpoint against housing_test, including validation errors (radius
+- [x] API tests for every endpoint against housing_test, including validation errors (radius
       limits 0.5-80 km, points outside MA return a clear message).
+  - [x] item: route-coverage test (every OpenAPI path is called by a test); validation cases in each endpoint test file
 
 ### Phase 10 – Frontend
 - [ ] Overview page (Outcome 1): statewide headline statistics, CoC homelessness trend chart,

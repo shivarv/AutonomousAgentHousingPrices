@@ -35,3 +35,4 @@
 - 2026-11-10 — Phase 9: GET /api/areas (outline layer per level, bbox filter, cached).
 - 2026-11-10 — Phase 9: POST /api/areas/summary (benefit area totals; all counties/towns add up to the state).
 - 2026-11-10 — Phase 9: GET /api/homelessness, /api/shelters, /api/model/metrics, /api/sources.
+- 2026-11-10 — Phase 9: API tests for every endpoint against housing_test (route-coverage guard); Phase 9 complete.
