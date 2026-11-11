@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "NotebookEdit",
+      "WebFetch",
+      "WebSearch",
+      "TodoWrite"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Edit(./.claude/**)",
+      "Write(./.claude/**)",
+      "Bash(sudo:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Read|Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
