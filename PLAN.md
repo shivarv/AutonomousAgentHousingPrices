@@ -1,30 +1,49 @@
-# Project: Massachusetts Housing Need & Impact Map
+# Project: Massachusetts Housing Need & Site Finder
 
 ## Goal
-Build a working product that shows housing costs and housing need across **the whole state of
-Massachusetts**: all 351 cities and towns and every census tract in the state. Boston and the
-Greater Boston area are the most important to get right (most people and most need), but the
-data, index, API and map must cover the entire state. Users must be able to filter by county
-and municipality.
+Build a working product for **the whole state of Massachusetts** (all 351 cities and towns,
+every census tract, 14 counties) that answers two questions:
+
+**Outcome 1 – The picture:** How many people are homeless or at risk, where is the affordable
+housing shortage, and which places are available and suitable for building new homes?
+Delivered as statewide/county/town statistics and a ranked list of candidate construction sites.
+
+**Outcome 2 – The site explorer:** An interactive map where a user can press "Show best
+location", or drag a pin anywhere, and immediately see how many people experiencing
+homelessness (estimated) and at-risk households could benefit, and whether there is a shortage
+or surplus of affordable homes, in two ways:
+- **Areas:** the subdivision under the pin (tract, Boston neighbourhood, town, county or
+  homelessness region) is highlighted with its numbers, and neighbouring areas can be added to
+  a "benefit area" with a running total.
+- **Rings:** three distance rings around the pin.
+
+Boston and Greater Boston matter most (most people, most need), but everything must work
+statewide.
 
 Deliverables:
-1. A data pipeline that downloads real public data, cleans it and loads it into Postgres.
-2. A home-value prediction model.
-3. A Housing Need Index (0-100) for every census tract.
-4. A ranked list of tracts where new affordable housing would have the highest impact.
-5. A FastAPI backend serving all of this.
-6. A React web app with an interactive map, tract details, rankings and data sources.
-7. Docker files to run the whole product, and a written report.
+1. Data pipeline: downloads real public data, cleans it, loads it into Postgres.
+2. Affordable housing shortage/surplus for every tract.
+3. Modelled homelessness distribution per tract (clearly labelled estimates).
+4. Housing Need Index (0-100) for every tract.
+5. Candidate construction sites, screened and ranked, with reasons.
+6. Home-value model (land/home cost context for sites).
+7. FastAPI backend, including a radius-stats service for any point on the map.
+8. React web app: statistics overview, site list, and the interactive site explorer map.
+9. Docker files and a written report.
 
 ## Audience
-City planners and housing nonprofits. Every number must be trustworthy and traceable.
+City planners and housing nonprofits. Every number must be trustworthy and traceable, and
+every estimate must be labelled as an estimate with its method available.
 
 ## How to work (details in CLAUDE.md and .claude/skills/)
 - Branch per task, split into items, commit per item, merge to main when checks pass
   (skill: git-task-workflow).
 - Backend layering controller → service → DAO → model/schema (skill: python-backend).
-- Database: private local Postgres 18 on port 5544 (skill: postgres).
+- Database: private local Postgres 18 on port 5544 (skill: postgres). No PostGIS: geometry as
+  GeoJSON in jsonb; spatial work with geopandas/shapely/pyproj in Python.
 - Frontend: modular feature folders, Tailwind v4 (skills: react, tailwind, frontend-design).
+- Maps: Leaflet + OpenStreetMap tiles; address search with the US Census Geocoder. No Google
+  Maps and no API keys for maps.
 - Docker files (skills: docker-project-foundations, docker-compose-patterns,
   docker-build-strategies). Docker isn't installed here: write the files, don't run them.
 
@@ -33,7 +52,8 @@ City planners and housing nonprofits. Every number must be trustworthy and trace
 backend/    FastAPI app (app/) + data pipeline (pipeline/) + alembic/ + tests/   (one uv project)
 frontend/   React + TypeScript + Vite + Tailwind
 scripts/    db.sh (local Postgres), validate.py
-reports/    REPORT.md, model_metrics.json, top_tracts.csv, data_audit.md, charts
+reports/    REPORT.md, STATISTICS.md, model_metrics.json, top_tracts.csv, candidate_sites.csv,
+            data_audit.md, charts
 data/       raw/ interim/ processed/ pg/   (git-ignored)
 compose.yaml, backend/Dockerfile, frontend/Dockerfile
 ```
@@ -41,30 +61,38 @@ compose.yaml, backend/Dockerfile, frontend/Dockerfile
 ## Data sources (try in order; log failures in BLOCKERS.md and move on)
 | Need | Primary source | Fallback |
 |---|---|---|
-| Tract, county and municipality boundaries | Census TIGER/Line (state FIPS 25, latest year) | MassGIS municipal boundaries |
-| Rent burden, income, poverty, overcrowding, tenure, population | ACS 5-year via api.census.gov for every MA tract (env var CENSUS_API_KEY) | data.census.gov bulk download |
-| Property values + features (statewide) | MassGIS Standardized Assessors' Parcels (assessor tables for all MA towns; use attribute tables, skip parcel geometry to save space) | Analyze Boston property assessment (Boston only) |
-| Value/rent trends | Zillow Research ZHVI and ZORI (all MA ZIPs) | Redfin Data Center |
-| Evictions | MA Trial Court housing court filings (statewide) | Eviction Lab |
-| Homelessness (CoC level ONLY) | HUD Point-in-Time counts for every Massachusetts Continuum of Care | HUD Exchange reports |
+| Tract, county, municipality boundaries | Census TIGER/Line (state FIPS 25, latest year) | MassGIS municipal boundaries |
+| Boston neighbourhood boundaries | Analyze Boston (BPDA neighbourhood boundaries) | — |
+| Homelessness region (CoC) boundaries | HUD CoC GIS boundaries | Build from CoC member-municipality lists |
+| Population, income, poverty, overcrowding, tenure, rent burden, housing units, vacancy | ACS 5-year via api.census.gov for every MA tract (env var CENSUS_API_KEY) | data.census.gov bulk download |
+| Affordable housing gap | HUD CHAS tract-level data (extremely-low-income renter households; units affordable and available to them) | ACS income x gross-rent tables |
+| Homeless counts (CoC level ONLY) | HUD Point-in-Time counts for every MA Continuum of Care, sheltered vs unsheltered, several years | HUD Exchange CoC reports |
+| Shelter beds | HUD Housing Inventory Count (HIC) per MA CoC | — |
+| Shelter locations | Public shelter directories (mass.gov, CoC websites, Analyze Boston). Never include domestic-violence shelters (confidential) | HIC project names geocoded with the Census Geocoder |
 | Student homelessness | MA DESE homeless student counts for every school district | — |
-| Shelters, subsidised housing | HUD LIHTC database, HUD Picture of Subsidized Households (MA), MA EOHLC/CHAPA public listings | Analyze Boston |
+| Subsidised housing | HUD LIHTC database, HUD Picture of Subsidized Households (MA) | — |
+| Parcels, land use, assessed values | MassGIS Standardized Assessors' Parcels (statewide; land-use codes, lot size, land and building values) | Analyze Boston property assessment |
+| Build constraints | MassGIS Protected and Recreational Open Space, MassDEP Wetlands, FEMA National Flood Hazard Layer | — |
+| Zoning for multifamily | MBTA Communities (Section 3A) district maps from mass.gov | — |
+| Transit | MBTA GTFS stops (subway, commuter rail, bus); regional transit authority GTFS | — |
+| Value/rent trends | Zillow Research ZHVI and ZORI (all MA ZIPs) | Redfin Data Center |
+| Evictions | MA Trial Court housing court filings | Eviction Lab |
 | ZIP to tract mapping | HUD USPS ZIP-tract crosswalk | Census ZCTA-to-tract relationship file |
 
-Data size: statewide parcel data is large. Keep only residential parcels and the columns the
-model needs; drop geometry; stay within the 8 GB data budget.
+Data size: statewide parcel and constraint layers are large. Keep only the columns and parcels
+you need (e.g. vacant/developable parcels with geometry; other parcels attributes only), simplify
+geometry, and stay within the 8 GB data budget.
 
 ## Tasks (in order; each task = one branch; split into items before starting)
 
 ### Phase 1 – Foundations
 - [ ] Repo skeleton: folders above, root README stub, .gitignore additions.
-- [ ] scripts/db.sh (init/start/stop/status) for the local Postgres on port 5544; create
-      databases `housing` and `housing_test`.
+- [ ] scripts/db.sh (init/start/stop/status) for the local Postgres on port 5544; databases
+      `housing` and `housing_test`.
 - [ ] Backend skeleton: uv project (Python 3.12), FastAPI app with core/, models/, schemas/,
-      dao/, services/, controllers/, dependencies.py; /api/health endpoint; Alembic configured;
-      pytest + ruff passing.
-- [ ] Frontend skeleton: Vite React TS, Tailwind v4, react-router, react-query, @/ alias,
-      layout shell; build and lint passing.
+      dao/, services/, controllers/, dependencies.py; /api/health; Alembic; pytest + ruff passing.
+- [ ] Frontend skeleton: Vite React TS, Tailwind v4, react-router, react-query, react-leaflet,
+      @/ alias, layout shell; build and lint passing.
 
 ### Phase 2 – Data collection (backend/pipeline/download/)
 - [ ] One idempotent download module per source, saving untouched files to data/raw/<source>/.
@@ -72,64 +100,138 @@ model needs; drop geometry; stay within the 8 GB data budget.
 - [ ] reports/data_audit.md: rows, years, geography, missing-value rates, known issues.
 
 ### Phase 3 – Database schema and loading
-- [ ] Models + Alembic migration: data_sources, counties, municipalities, tracts (geoid, name,
-      county, municipality, GeoJSON), tract_metrics (one row per tract per metric, with
-      source_id and year), properties, shelters_subsidised, homelessness_counts (per CoC, with
-      the municipalities each CoC covers), model_runs.
-- [ ] Pipeline clean/ + load.py: cleaned data into the tables via DAOs. Join ZIP data to tracts
-      via the crosswalk, weighted by residential share (record in DECISIONS.md).
-- [ ] Tests: tract count matches the statewide TIGER file, all 351 municipalities and 14
-      counties present, no duplicate geoids, every metric row has a source, dropped rows
-      logged with reasons.
+- [ ] Models + Alembic migrations: data_sources, counties, municipalities, cocs (with member
+      municipalities and boundary), boston_neighbourhoods (boundary, member tracts by area
+      share), tracts (geoid, county, municipality, coc, neighbourhood, centroid,
+      simplified GeoJSON, land area), tract_metrics (tract x metric x year, with source_id),
+      homelessness_counts (coc x year x sheltered/unsheltered/total), shelters (name, type,
+      beds, lat/lon, source; no DV shelters), subsidised_housing, transit_stops, parcels
+      (developable candidates only, with geometry), site_candidates, model_runs.
+- [ ] Pipeline clean/ + load.py: cleaned data into the tables via DAOs. ZIP data to tracts via
+      the crosswalk, weighted by residential share (record in DECISIONS.md).
+- [ ] Tests: tract count matches statewide TIGER, 351 municipalities, 14 counties, every MA
+      CoC present, no duplicate geoids, every metric row has a source, dropped rows logged.
 
-### Phase 4 – Home-value model (backend/pipeline/model/)
-- [ ] Residential parcels statewide. Split 70/15/15 stratified by county; save the test split
-      once and never tune on it.
-- [ ] Baseline: municipality median value. Record MAE and MAPE, overall and per county.
-- [ ] Linear regression, then LightGBM, tuned on validation only.
-- [ ] Target: beat baseline MAPE by >= 25% on test. Save model, reports/model_metrics.json,
-      feature importances, error-by-county chart, and a model_runs row.
+### Phase 4 – Affordable housing shortage
+- [ ] Per tract from CHAS: extremely-low-income (<=30% AMI) and very-low-income (<=50% AMI)
+      renter households, units affordable and available to them, and the gap
+      (households - available units; negative = surplus). Also affordable units per 100 ELI
+      renters.
+- [ ] Context per tract: total housing units, vacant for rent/sale (ACS), subsidised units.
+- [ ] Aggregate to municipality, county and state. Tests that tract sums equal the totals.
 
-### Phase 5 – Housing Need Index (backend/pipeline/index/)
-- [ ] Components scaled 0-1: renters paying >30% of income, >50%, eviction filing rate,
-      poverty rate, overcrowding rate, 5-year rent growth, distance to nearest shelter or
-      subsidised unit.
+### Phase 5 – Homelessness: official counts and modelled distribution
+- [ ] Official layer: PIT counts per CoC and year (sheltered, unsheltered, total, trend) and
+      HIC beds per CoC. These are the only exact figures; present them as CoC totals.
+- [ ] Modelled layer: allocate each CoC's latest total to its tracts. Sheltered people by share
+      of the CoC's shelter beds located in each tract; unsheltered and at-risk weighting by the
+      tract's share of severely rent-burdened ELI renter households. Tract estimates must sum
+      exactly to the CoC total. Store as metric `homeless_estimate` with method and year.
+- [ ] Document the method and its limits in DECISIONS.md and reports/REPORT.md. Every API
+      response and UI label for this metric says "estimate".
+- [ ] Sensitivity check: alternative allocation (population share); report how much the top
+      areas change.
+
+### Phase 6 – Housing Need Index
+- [ ] Components scaled 0-1: affordable gap per ELI renter, severe rent burden share, eviction
+      filing rate, poverty rate, overcrowding rate, 5-year rent growth, homeless estimate per
+      1,000 residents, distance to nearest shelter or subsidised unit.
 - [ ] Equal weights to start (justify changes in DECISIONS.md); store index and components.
 - [ ] Sensitivity check with 3 alternative weightings; report top-20 stability.
-- [ ] Impact ranking: need index x renter households, adjusted down for existing subsidised
-      units. reports/top_tracts.csv (top 50 statewide) plus top 10 per county; stored in the DB.
-- [ ] Municipality summary: population-weighted need index per city/town.
+- [ ] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
+      summary (population-weighted index).
 
-### Phase 6 – Backend API (controllers → services → DAOs)
-- [ ] GET /api/tracts?county=&municipality= (GeoJSON FeatureCollection with index + key
-      metrics; statewide must stay fast: simplified geometry, cached response)
-- [ ] GET /api/tracts/{geoid} (all metrics with source and year)
-- [ ] GET /api/municipalities and GET /api/counties (summaries for filters and the overview)
-- [ ] GET /api/rankings?limit=50&county= (statewide or per county)
-- [ ] GET /api/homelessness (counts per CoC by year, with covered municipalities, labelled as
-      CoC-level)
-- [ ] GET /api/model/metrics and GET /api/sources
-- [ ] API tests for every endpoint against housing_test, including 404 and validation errors.
+### Phase 7 – Home-value model (cost context for sites)
+- [ ] Residential parcels statewide; split 70/15/15 stratified by county; test split saved once,
+      never used for tuning.
+- [ ] Baseline: municipality median value. Then linear regression and LightGBM (validation
+      tuning only). Target: beat baseline MAPE by >= 25% on test.
+- [ ] Also estimate land value per square foot by tract (from assessor land values) for site
+      cost scoring.
+- [ ] Save model, reports/model_metrics.json, feature importances, error-by-county chart,
+      model_runs row.
 
-### Phase 7 – Frontend (feature modules)
-- [ ] features/map: statewide Leaflet choropleth (opens on all of Massachusetts) with county and
-      municipality filters that zoom the map, layer switcher (Need Index, median value, rent
-      burden, eviction rate), legend, shelter/subsidised markers, click to select a tract.
-- [ ] features/tracts: detail panel listing every index component with its source and year.
-- [ ] features/rankings: sortable table (statewide top 50, or per county) linked to the map.
-- [ ] features/municipalities: city/town summary view with its tracts.
-- [ ] features/homelessness: per-CoC panel, clearly labelled as not tract-level.
-- [ ] pages: Map (home), Rankings, Methodology & sources, About the model.
-- [ ] Loading, error and empty states everywhere; responsive down to phone width.
+### Phase 8 – Candidate construction sites
+- [ ] Screening: parcels with vacant or developable land-use codes (document the codes used),
+      minimum lot size (start 0.5 acre; record choice), not in protected open space, wetlands
+      or FEMA 100-year flood zones (drop parcels with >50% overlap; flag partial overlap).
+- [ ] Features per site: need index and affordable gap within 1.5/5/15 km, homeless estimate
+      and shelter beds within those rings, distance to nearest MBTA/RTA stop, inside an MBTA
+      Communities (3A) district, estimated land cost, lot size, municipality.
+- [ ] Site score 0-100 with documented weights; a plain-English "why this site" summary
+      generated from the features (no invented facts).
+- [ ] reports/candidate_sites.csv: top 100 statewide and top 10 per county. Store all scored
+      sites in site_candidates.
 
-### Phase 8 – Docker
+### Phase 9 – Backend API (controllers → services → DAOs)
+- [ ] GET /api/stats/overview?level=state|county|municipality&id= : population, homeless counts
+      (official, by CoC, with trend), shelter beds, ELI renters, affordable gap, vacancy, need index.
+- [ ] GET /api/tracts?county=&municipality= (GeoJSON with index + key metrics; statewide must
+      be fast: simplified geometry, cached) and GET /api/tracts/{geoid}.
+- [ ] GET /api/sites?county=&municipality=&limit= and GET /api/sites/{id}; GET /api/sites/best
+      (top site overall or within a filter).
+- [ ] POST /api/area-stats {lat, lon, radii_km: [r1, r2, r3]}: for each ring, totals weighted by
+      the share of each tract's area inside the circle (geodesic buffers via pyproj): estimated
+      homeless, at-risk households (severely burdened ELI renters), ELI renter households,
+      affordable units available, gap (shortage or surplus), shelters and beds, subsidised units,
+      population. Also return "nearby points" for drawing: tracts with their estimate and
+      centroid, and shelters with beds, inside the largest ring. Response < 1 s statewide.
+- [ ] GET /api/areas/at?lat=&lon=&level=tract|neighbourhood|municipality|county|coc : the area
+      containing the point (point-in-polygon with a cached shapely STRtree), with its boundary
+      (simplified GeoJSON), neighbouring areas' ids, and the same metrics as area-stats.
+      Homeless figure is the official count at level=coc and the summed estimate otherwise;
+      the response says which. Points outside MA (or outside Boston for neighbourhood) return
+      a clear message.
+- [ ] GET /api/areas?level=&bbox= : boundaries for drawing the outline layer (simplified, cached).
+- [ ] POST /api/areas/summary {level, ids: [...]} : combined totals for a user-built benefit area.
+- [ ] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
+      GET /api/model/metrics, GET /api/sources.
+- [ ] API tests for every endpoint against housing_test, including validation errors (radius
+      limits 0.5-80 km, points outside MA return a clear message).
+
+### Phase 10 – Frontend
+- [ ] Overview page (Outcome 1): statewide headline statistics, CoC homelessness trend chart,
+      affordable shortage by county, top municipalities by need, and the ranked candidate site
+      list (filterable by county/town, each row links to the map).
+- [ ] Site explorer map (Outcome 2), features/site-explorer:
+  - Opens on all of Massachusetts; county and town filters zoom the map; address search
+    (Census Geocoder).
+  - "Show best location" button: drops the pin on the top-ranked site (respecting filters);
+    "Next best" steps through the list.
+  - Draggable pin: drag it anywhere (or click the map) and the rings and numbers update
+    (debounced call to /api/area-stats).
+  - Mode toggle: **Areas** (default) or **Rings**.
+  - Areas mode: a boundary-level selector (Census tract, Boston neighbourhood, City/town,
+    County, Homelessness region). Faint outline lines show all areas at that level; the area
+    under the pin is highlighted and filled, with its name and numbers. Click neighbouring
+    areas to add/remove them from the "benefit area"; a running total shows estimated homeless
+    people, at-risk households, affordable shortage/surplus, shelters and beds for the whole
+    selection. "Clear" resets it. Label the homeless figure "official count" at region level
+    and "estimate" at every other level.
+  - Rings mode: three concentric rings around the pin with presets Urban 1.5 / 5 / 15 km
+    (default) and Regional 5 / 25 / 50 km, plus a custom slider per ring.
+  - Small dots around the pin inside the rings: tract centroids sized by estimated homeless
+    count (labelled "estimate"), and shelters with bed counts (a distinct marker).
+  - Side panel per ring: estimated homeless nearby, at-risk households, affordable units,
+    shortage/surplus (shown in red for shortage, green for surplus), shelters and beds.
+  - Layer switcher for the background: Need Index, affordable gap, homeless estimate,
+    candidate sites; legend for each.
+- [ ] Tract and site detail panels: every number with its source and year; estimates labelled.
+- [ ] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
+- [ ] Loading, error and empty states everywhere; responsive down to phone width; the map is
+      keyboard accessible (pin can be moved with arrow keys).
+
+### Phase 11 – Docker
 - [ ] backend/Dockerfile (multi-stage, uv, non-root), frontend/Dockerfile (build + static
       server), compose.yaml (postgres:18 with healthcheck, backend runs migrations then
-      uvicorn, frontend), .dockerignore files. Docker isn't installed here: validate the YAML
-      parses and paths exist; note in README that it's untested.
+      uvicorn, frontend), .dockerignore files. Validate YAML parses and paths exist; note in
+      README that it's untested here.
 
-### Phase 9 – Report and final checks
-- [ ] reports/REPORT.md: question, data, methods, results, limitations, next steps.
+### Phase 12 – Statistics, report and final checks
+- [ ] reports/STATISTICS.md (Outcome 1 in writing): statewide and per-county homeless counts and
+      trends, shelter capacity, affordable shortage, top need areas, top candidate sites.
+- [ ] reports/REPORT.md: question, data, methods (especially the homeless estimate and site
+      scoring), results, limitations, next steps.
 - [ ] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
 - [ ] scripts/validate.py passes (see Definition of done).
 
@@ -137,15 +239,22 @@ model needs; drop geometry; stay within the 8 GB data budget.
 All tasks merged into main AND `uv run --project backend python scripts/validate.py` exits 0.
 validate.py checks that:
 - every metric in tract_metrics has a source in data_sources, and DATA_SOURCES.md lists them all;
-- Need Index values are within 0-100 with no missing values (or each gap documented);
+- homeless estimates per tract sum to the official CoC totals (within rounding);
+- tract affordable-gap sums match municipality/county/state totals;
+- Need Index and site scores are within 0-100 with no missing values (or each gap documented);
+- site_candidates is non-empty and no candidate overlaps >50% with open space, wetlands or flood zones;
+- /api/area-stats returns all metrics for 3 rings at a Boston, a Worcester and a Springfield point;
+- /api/areas/at returns the right tract, town, county and CoC for those three points, and the
+  summed tract estimates for a CoC equal its official count;
 - reports/model_metrics.json exists; the test result meets the target, or REPORT.md says
   plainly that it doesn't (never change the target);
-- reports/REPORT.md and reports/top_tracts.csv exist and aren't empty;
+- reports/STATISTICS.md, REPORT.md, top_tracts.csv and candidate_sites.csv exist and aren't empty;
+- the database covers all MA tracts, 351 municipalities, 14 counties;
 - backend `pytest` and `ruff check` pass; frontend `npm run build` and `npm run lint` pass;
-- the database covers all MA tracts (statewide TIGER count), 351 municipalities, 14 counties;
 - git: no unmerged task/* branches, working tree clean (and, in PR mode, no open PRs).
 Then write DONE to the file STATUS (on main).
 
 ## Out of scope
-User accounts, paid data, scraping sites whose terms forbid it, tract-level homelessness
-estimates, deploying anywhere.
+User accounts, paid data or paid map APIs, scraping sites whose terms forbid it, exact
+locations of individual homeless people, publishing domestic-violence shelter locations,
+deploying anywhere.

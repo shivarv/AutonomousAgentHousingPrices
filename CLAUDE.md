@@ -39,8 +39,11 @@ Project skills live in .claude/skills/. Follow them for every change:
   or be computed from one. Never ship mock or placeholder data in the product.
 - Never fill missing values silently. If you impute, add a flag and record the method in
   DECISIONS.md.
-- Homelessness counts exist only at city/CoC level. Never divide them down to tracts or present
-  them as tract-level numbers, in the data, API or UI.
+- Official homelessness counts exist only per CoC. The only tract-level homeless numbers allowed
+  are the modelled estimates from PLAN.md Phase 5: they must sum to the CoC totals, carry the
+  method and year, and be labelled "estimate" everywhere (data, API, UI, reports).
+- Never show or store the location of individual homeless people, and never publish
+  domestic-violence shelter locations.
 - Treat data/raw/ as read-only once downloaded; write derived files elsewhere.
 - DATA_SOURCES.md entry format, one per dataset:
   `name | URL | download date | licence/terms | geography | year(s) | file path | columns used`
