@@ -130,3 +130,12 @@ Format: date — decision — alternatives considered — reason.
   summary in reports/municipality_need.csv. Small rural towns rank high (distance-to-service
   component, one or two tracts each); towns that share a single tract share its index — kept,
   and noted in REPORT.md — dropping the distance component (it is in PLAN.md's list).
+- 2026-11-10 — Parcels: assessor record key = TOWN_ID:PROP_ID:n (PROP_ID is unique only within a
+  town; 273 town+PROP_ID pairs list two different lines); only 96 fully identical rows dropped.
+  Parcel polygons read with the non-Arrow GDAL reader, which linearises curved boundaries.
+- 2026-11-10 — Home-value dataset: residential use codes 101-105, 109, 111, 112 (first three
+  digits of the DOR code), total value >= $10,000 and building value > 0 (4,673 records
+  dropped, logged); target TOTAL_VAL (assessed value; fiscal years 2023-2027 differ by town, so
+  FY is a feature). Split 70/15/15 stratified by county and grouped by parcel LOC_ID so condo
+  units of one building never straddle train and test — record-level split (leaks
+  near-identical units). Split saved once (data/processed/model/split.parquet), reused after.
