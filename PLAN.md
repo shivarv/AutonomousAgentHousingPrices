@@ -344,7 +344,8 @@ geometry, and stay within the 8 GB data budget.
 - [x] reports/REPORT.md: question, data, methods (especially the homeless estimate and site
       scoring), results, limitations, next steps.
   - [x] item: question, data summary, results (figures from STATISTICS.md / model_metrics.json), limitations, next steps; methods 3.1-3.5 already written in earlier phases
-- [ ] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
+- [x] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
+  - [x] item: README (what it is, local run and checks, full rebuild order, Docker untested note, licences)
 - [ ] scripts/validate.py passes (see Definition of done).
 
 ## Definition of done
