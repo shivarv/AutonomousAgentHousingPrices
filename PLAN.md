@@ -322,8 +322,10 @@ geometry, and stay within the 8 GB data budget.
 - [x] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
   - [x] item: methodology feature (methods in prose, live model results and site weights from /api/model/metrics, sources table from /api/sources; #homeless-estimate anchor for HomelessFigure.method_url)
   - [x] item: About the estimates page (what an estimate is, limits, sensitivity, privacy); screenshot checked
-- [ ] Loading, error and empty states everywhere; responsive down to phone width; the map is
+- [x] Loading, error and empty states everywhere; responsive down to phone width; the map is
       keyboard accessible (pin can be moved with arrow keys).
+  - [x] item: map layer status overlay (loading/error), collapsible legend, fixed-height map on phones; every async view has loading/error/empty states
+  - [x] item: keyboard: arrow-key pin control, focus-visible outlines, labelled controls, radio/pressed states; phone-width screenshots checked
 
 ### Phase 11 – Docker
 - [ ] backend/Dockerfile (multi-stage, uv, non-root), frontend/Dockerfile (build + static

@@ -1,10 +1,17 @@
 import { LAYER_SCALES, LAYER_TITLES, NO_DATA_COLOR } from '@/features/site-explorer/mapStyles'
 import type { BackgroundLayer } from '@/features/site-explorer/types'
 
+const WIDE = typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches
+
 export function MapLegend({ layer, showRings }: { layer: BackgroundLayer; showRings: boolean }) {
   return (
-    <div className="pointer-events-auto max-w-56 rounded-sm bg-paper-raised/95 p-3 text-xs shadow-sm">
-      <p className="font-semibold">{LAYER_TITLES[layer]}</p>
+    <details
+      open={WIDE}
+      className="pointer-events-auto max-w-56 rounded-sm bg-paper-raised/95 p-2 text-xs shadow-sm"
+    >
+      <summary className="cursor-pointer font-semibold">
+        Legend: {LAYER_TITLES[layer]}
+      </summary>
       {layer === 'sites' ? (
         <p className="mt-1 flex items-center gap-2">
           <span className="inline-block size-3 rounded-full border border-ink bg-marker" />
@@ -35,6 +42,6 @@ export function MapLegend({ layer, showRings }: { layer: BackgroundLayer; showRi
           </li>
         </ul>
       )}
-    </div>
+    </details>
   )
 }
