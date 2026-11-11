@@ -150,7 +150,8 @@ geometry, and stay within the 8 GB data budget.
       renters.
   - [x] item: pipeline.features.affordability (CHAS Tables 8, 15C, 14B) loaded as tract metrics
   - [x] item: tests (gap arithmetic, coverage, VLI includes ELI)
-- [ ] Context per tract: total housing units, vacant for rent/sale (ACS), subsidised units.
+- [x] Context per tract: total housing units, vacant for rent/sale (ACS), subsidised units.
+  - [x] item: metrics loaded in Phase 3 (ACS housing_units, vacant_for_rent/sale; HUD PSH hud_assisted_units; LIHTC lihtc_low_income_units); coverage test for every tract
 - [ ] Aggregate to municipality, county and state. Tests that tract sums equal the totals.
 
 ### Phase 5 – Homelessness: official counts and modelled distribution

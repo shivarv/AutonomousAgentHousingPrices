@@ -69,3 +69,22 @@ def test_gap_is_households_minus_available_units(db: Session) -> None:
 def test_vli_includes_eli(db: Session) -> None:
     data = _pivot(db, ["eli_renter_households", "vli_renter_households"])
     assert all(m["vli_renter_households"] >= m["eli_renter_households"] for m in data.values())
+
+
+@pytest.mark.parametrize(
+    "metric",
+    [
+        "housing_units",
+        "vacant_for_rent",
+        "vacant_for_sale",
+        "hud_assisted_units",
+        "lihtc_low_income_units",
+    ],
+)
+def test_context_metric_for_every_tract(db: Session, metric: str) -> None:
+    n_tracts = db.execute(text("SELECT count(*) FROM tracts")).scalar()
+    n = db.execute(
+        text("SELECT count(DISTINCT tract_geoid) FROM tract_metrics WHERE metric = :m"),
+        {"m": metric},
+    ).scalar()
+    assert n == n_tracts
