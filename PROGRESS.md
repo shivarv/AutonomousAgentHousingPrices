@@ -37,3 +37,4 @@
 - 2026-11-10 — Phase 9: GET /api/homelessness, /api/shelters, /api/model/metrics, /api/sources.
 - 2026-11-10 — Phase 9: API tests for every endpoint against housing_test (route-coverage guard); Phase 9 complete.
 - 2026-11-10 — Phase 10: Overview page (headline stats, PIT trend, CoC table, county shortage, top towns, ranked sites with filters).
+- 2026-11-10 — Phase 10: site explorer map (areas and rings modes, benefit area, best/next best, address search, layers with legends, keyboard pin).

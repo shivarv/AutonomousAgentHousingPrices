@@ -289,7 +289,7 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: GET /api/stats/areas (county/town table for rankings and filters) + tests
   - [x] item: shared UI (loading/error states, estimate/official label, select), areas feature (filters), sites feature (ranked list linking to the map)
   - [x] item: overview feature (headline stats with sources, PIT trend line, CoC table, county shortage bars, top towns), screenshot checked
-- [ ] Site explorer map (Outcome 2), features/site-explorer:
+- [x] Site explorer map (Outcome 2), features/site-explorer:
   - Opens on all of Massachusetts; county and town filters zoom the map; address search
     (Census Geocoder).
   - "Show best location" button: drops the pin on the top-ranked site (respecting filters);
@@ -312,6 +312,10 @@ geometry, and stay within the 8 GB data budget.
     shortage/surplus (shown in red for shortage, green for surplus), shelters and beds.
   - Layer switcher for the background: Need Index, affordable gap, homeless estimate,
     candidate sites; legend for each.
+  - [x] item: GET /api/geocode (Census Geocoder relay, MA matches only) + tests
+  - [x] item: explorer state, API hooks (debounced area-stats/areas-at, outlines, summary, tracts, geocode)
+  - [x] item: map layers (tract choropleth with classed CVD-safe scales, outlines with pin area + benefit areas, draggable pin, rings, nearby estimate dots and shelters, site markers, viewport zoom to filters)
+  - [x] item: panel (filters, best/next best, address search, mode toggle, layer select, keyboard pin control, areas and rings panels, legend, deep links ?site= / ?lat=&lon=&mode=), screenshots checked
 - [ ] Tract and site detail panels: every number with its source and year; estimates labelled.
 - [ ] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
 - [ ] Loading, error and empty states everywhere; responsive down to phone width; the map is
