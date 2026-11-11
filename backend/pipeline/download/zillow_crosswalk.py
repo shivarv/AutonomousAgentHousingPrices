@@ -13,8 +13,7 @@ ZILLOW_BASE = "https://files.zillowstatic.com/research/public_csvs"
 ZHVI_URL = f"{ZILLOW_BASE}/zhvi/Zip_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"
 ZORI_URL = f"{ZILLOW_BASE}/zori/Zip_zori_uc_sfrcondomfr_sm_month.csv"
 ZCTA_TRACT_URL = (
-    "https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/"
-    "tab20_zcta520_tract20_natl.txt"
+    "https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/tab20_zcta520_tract20_natl.txt"
 )
 # Residential weights for ZIP -> tract: 2020 blocks carry HOUSING20/POP20; ZCTA polygons let us
 # place each block (by internal point) in a ZCTA.
