@@ -21,6 +21,7 @@ from app.schemas.area import (
     AreaFigures,
     AreaRef,
     AreaStatsResponse,
+    AreaSummary,
     NearbyShelter,
     NearbyTract,
     RingStats,
@@ -317,3 +318,19 @@ class AreaService:
         ]
         doc = {"type": "FeatureCollection", "level": level, "features": features}
         return json.dumps(doc, separators=(",", ":")).encode()
+
+    # ---------------------------------------------------------------- benefit area
+    def summary(self, level: str, ids: list[str]) -> AreaSummary:
+        self._check_level(level)
+        unique = list(dict.fromkeys(str(i) for i in ids))
+        fig, est = self.area_figures(level, unique)
+        layer = self.index.layers[level]
+        official = fig.homeless.label == "official CoC count"
+        return AreaSummary(
+            level=level,  # type: ignore[arg-type]
+            areas=[AreaRef(id=a, name=layer.names[layer.pos[a]]) for a in unique],
+            figures=fig,
+            homeless_estimate_sum=est,
+            homeless_basis="official CoC count" if official else "sum of tract estimates",
+            note=COC_NOTE if official else AREA_NOTE,
+        )

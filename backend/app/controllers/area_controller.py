@@ -9,6 +9,8 @@ from app.schemas.area import (
     AreaOutlines,
     AreaStatsRequest,
     AreaStatsResponse,
+    AreaSummary,
+    AreaSummaryRequest,
 )
 from app.services.area_service import AreaService
 
@@ -42,3 +44,8 @@ def areas(
         media_type="application/json",
         headers={"Cache-Control": "public, max-age=3600"},
     )
+
+
+@router.post("/areas/summary", response_model=AreaSummary)
+def areas_summary(body: AreaSummaryRequest, service: Service) -> AreaSummary:
+    return service.summary(body.level, body.ids)

@@ -101,3 +101,20 @@ class AreaOutlines(BaseModel):
     type: Literal["FeatureCollection"] = "FeatureCollection"
     level: AreaLevel
     features: list[AreaOutlineFeature]
+
+
+class AreaSummaryRequest(BaseModel):
+    level: AreaLevel
+    ids: list[str] = Field(min_length=1, max_length=500)
+
+
+class AreaSummary(BaseModel):
+    """Combined totals for a user-built benefit area (areas of one level; each tract counted
+    once with its combined weight, so nothing is double counted)."""
+
+    level: AreaLevel
+    areas: list[AreaRef]
+    figures: AreaFigures
+    homeless_estimate_sum: HomelessFigure
+    homeless_basis: Literal["official CoC count", "sum of tract estimates"]
+    note: str
