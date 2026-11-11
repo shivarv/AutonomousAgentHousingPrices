@@ -65,3 +65,23 @@ class AreaStatsResponse(BaseModel):
     nearby_shelters: list[NearbyShelter]
     sources: dict[str, dict[str, Any]]
     notes: list[str]
+
+
+class AreaRef(BaseModel):
+    id: str
+    name: str
+
+
+class AreaAt(BaseModel):
+    """The area of ``level`` containing a point. At level=coc the homeless figure is the
+    official PIT count; at every other level it is the sum of tract estimates."""
+
+    level: AreaLevel
+    id: str
+    name: str
+    boundary: dict[str, Any]
+    neighbours: list[AreaRef]
+    figures: AreaFigures
+    homeless_estimate_sum: HomelessFigure
+    homeless_basis: Literal["official CoC count", "sum of tract estimates"]
+    note: str

@@ -87,6 +87,8 @@ class GeoIndex:
     shelter_xy: np.ndarray
     subsidised: list[dict[str, Any]]
     subsidised_xy: np.ndarray
+    members: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]]
+    official: dict[str, dict[str, Any]]
 
     @classmethod
     def build(cls, dao: GeoDao) -> GeoIndex:
@@ -118,6 +120,7 @@ class GeoIndex:
             layers[level] = AreaLayer.build(level, dao.areas(level))
         shelters = [r for r in dao.shelters() if r["lat"] is not None and r["lon"] is not None]
         subs = dao.subsidised()
+        members = build_members(tract_rows, dao.town_weights(), layers)
         cx, cy = rings.to_state_plane_many(
             np.array([t["centroid_lon"] for t in tract_rows]),
             np.array([t["centroid_lat"] for t in tract_rows]),
@@ -133,7 +136,42 @@ class GeoIndex:
             shelter_xy=_xy(shelters),
             subsidised=subs,
             subsidised_xy=_xy(subs),
+            members=members,
+            official=dao.latest_pit(),
         )
+
+
+def build_members(
+    tract_rows: list[dict[str, Any]],
+    town_weights: list[dict[str, Any]],
+    layers: dict[str, AreaLayer],
+) -> dict[str, dict[str, tuple[np.ndarray, np.ndarray]]]:
+    """level -> area id -> (tract indexes, weights). County, CoC and neighbourhood hold each
+    tract once (the area with most of its land); towns use the tract's housing share in the
+    town, so towns sum exactly to the state (same rules as the area_metrics aggregates)."""
+    pos = {t["geoid"]: i for i, t in enumerate(tract_rows)}
+    acc: dict[str, dict[str, list[tuple[int, float]]]] = {lvl: {} for lvl in LEVELS}
+    for i, t in enumerate(tract_rows):
+        acc["tract"].setdefault(t["geoid"], []).append((i, 1.0))
+        acc["county"].setdefault(t["county_geoid"], []).append((i, 1.0))
+        acc["coc"].setdefault(t["coc_number"], []).append((i, 1.0))
+        if t["neighbourhood_id"] is not None:
+            acc["neighbourhood"].setdefault(str(t["neighbourhood_id"]), []).append((i, 1.0))
+    for w in town_weights:
+        if w["tract_geoid"] in pos and w["housing_share"]:
+            acc["municipality"].setdefault(w["municipality_geoid"], []).append(
+                (pos[w["tract_geoid"]], float(w["housing_share"]))
+            )
+    out: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]] = {}
+    for level, areas in acc.items():
+        out[level] = {}
+        for area_id in layers[level].ids:
+            pairs = areas.get(area_id, [])
+            out[level][area_id] = (
+                np.array([p[0] for p in pairs], dtype=int),
+                np.array([p[1] for p in pairs], dtype=float),
+            )
+    return out
 
 
 def _xy(rows: list[dict[str, Any]]) -> np.ndarray:
