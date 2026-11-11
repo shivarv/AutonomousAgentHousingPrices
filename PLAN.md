@@ -242,8 +242,10 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: scripts/seed_test_db.sh (migrate housing_test, copy housing data) and `seeded` test fixture
   - [x] item: AreaDao, MetricValue schema, StatsService.overview (CoC official counts + trend, area estimate, HIC beds), controller
   - [x] item: API tests (state sum = CoCs, county/town, validation and 404)
-- [ ] GET /api/tracts?county=&municipality= (GeoJSON with index + key metrics; statewide must
+- [x] GET /api/tracts?county=&municipality= (GeoJSON with index + key metrics; statewide must
       be fast: simplified geometry, cached) and GET /api/tracts/{geoid}.
+  - [x] item: TractDao, TractService (pre-serialised GeoJSON cached per filter, detail with every metric, source, year, flags), controller, gzip
+  - [x] item: API tests (1,620 features < 1 s warm, filters, estimate labels, 404)
 - [ ] GET /api/sites?county=&municipality=&limit= and GET /api/sites/{id}; GET /api/sites/best
       (top site overall or within a filter).
 - [ ] POST /api/area-stats {lat, lon, radii_km: [r1, r2, r3]}: for each ring, totals weighted by

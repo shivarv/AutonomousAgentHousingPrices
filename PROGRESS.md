@@ -28,3 +28,4 @@
 - 2026-11-10 — Phase 8: site scores 0-100 (7 documented components) and plain-English summaries; top sites Fall River, Lawrence, Worcester.
 - 2026-11-10 — Phase 8: reports/candidate_sites.csv (185 rows) and 40,873 scored sites stored in parcels/site_candidates; REPORT.md 3.5.
 - 2026-11-10 — Phase 9: GET /api/stats/overview (state/county/town; CoC counts with trend, area estimate, HIC beds); housing_test seeded from housing for API tests.
+- 2026-11-10 — Phase 9: GET /api/tracts (cached GeoJSON, filters) and /api/tracts/{geoid} (all metrics with source/year, estimate label).
