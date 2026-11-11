@@ -71,3 +71,8 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — Subsidised units are kept as two metrics, hud_assisted_units (HUD PSH 2025, all
   HUD programs incl. vouchers) and lihtc_low_income_units (LIHTC), because the programs overlap
   and summing them would double count — one combined figure.
+- 2026-11-10 — Affordable and available units (CHAS): units with rent at or below the
+  threshold that are occupied by a household at or below that income, plus vacant-for-rent units
+  at that rent (Tables 15C, 14B); complete-facility units only. ELI/VLI renters and severe burden
+  from Table 8. Statewide: 314,258 ELI renters, 144,912 available units (46 per 100), gap
+  169,346 — alternative ACS income x rent tables — CHAS is the primary source in PLAN.md.

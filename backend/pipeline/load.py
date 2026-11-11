@@ -57,7 +57,7 @@ def _geo(df: pd.DataFrame, source_key: str) -> list[dict]:
     return _records(df)
 
 
-METRIC_FILES = ["metrics_acs", "metrics_context"]
+METRIC_FILES = ["metrics_acs", "metrics_context", "metrics_chas"]
 
 
 def load_all(service: LoadService) -> dict[str, int]:
