@@ -203,6 +203,9 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests (split proportions/stratification/immutability, lot size units)
 - [ ] Baseline: municipality median value. Then linear regression and LightGBM (validation
       tuning only). Target: beat baseline MAPE by >= 25% on test.
+  - [ ] item: pipeline.model.home_value features (parcel, train-only town/tract medians, tract context)
+  - [ ] item: baseline, ridge and gradient boosting (HistGradientBoosting; LightGBM blocked) tuned on validation; one final test evaluation -> reports/model_metrics.json
+  - [ ] item: tests (MAPE, baseline fallback, train-only encodings, test never used for selection)
 - [ ] Also estimate land value per square foot by tract (from assessor land values) for site
       cost scoring.
 - [ ] Save model, reports/model_metrics.json, feature importances, error-by-county chart,

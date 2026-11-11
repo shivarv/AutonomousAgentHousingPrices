@@ -10,3 +10,9 @@
 - 2026-11-10 — MA DESE homeless student counts: published only on mass.gov / DESE web pages that
   refuse automated clients (403); skipped (optional context, not used by any required metric).
 - 2026-11-10 — MA Trial Court eviction filings: no downloadable dataset; Eviction Lab used.
+- 2026-11-10 — LightGBM cannot load on this Mac: its wheel links @rpath/libomp.dylib with rpaths
+  only to Homebrew/MacPorts locations, and libomp is not installed (no global installs allowed).
+  Tried (1) plain import, (2) preloading scikit-learn's bundled libomp via ctypes RTLD_GLOBAL,
+  (3) DYLD_FALLBACK_LIBRARY_PATH pointing at that libomp. Fallback: scikit-learn
+  HistGradientBoostingRegressor (histogram gradient boosting, the algorithm family LightGBM
+  implements; OpenMP bundled). See DECISIONS.md.
