@@ -13,3 +13,4 @@
 - 2026-11-10 — Phase 4: CHAS affordable gap per tract (ELI/VLI renters, affordable & available units, gap, per-100).
 - 2026-11-10 — Phase 4: tract context metrics verified for all tracts.
 - 2026-11-10 — Phase 4: aggregates to town (351, housing-share apportioned), county, CoC, neighbourhood, state; totals = tract sums.
+- 2026-11-10 — Phase 5: official CoC layer service (PIT 2012-2025 + HIC beds, trend; statewide 2025 = 28,311 = sum of 11 CoCs).

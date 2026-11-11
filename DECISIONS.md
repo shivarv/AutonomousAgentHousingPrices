@@ -85,3 +85,6 @@ Format: date — decision — alternatives considered — reason.
   Rates are recomputed from summed numerators/denominators — primary-town only (leaves 37 towns
   with no figures); area-share weights (poor proxy for where people live) — all 351 towns need
   figures and housing units track where households are.
+- 2026-11-10 — Statewide homelessness = sum of the 11 MA CoC PIT counts, only for years every CoC
+  reported; a statewide sub-total (sheltered/unsheltered/beds) is left empty if any CoC lacks it —
+  partial sums — a partial sum would understate the total.
