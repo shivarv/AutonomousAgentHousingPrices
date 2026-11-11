@@ -202,3 +202,9 @@ Format: date — decision — alternatives considered — reason.
   local-only `${POSTGRES_PASSWORD:-housing}`; CENSUS_API_KEY is passed through from the shell.
   Docker is not installed, so validation is static (pytest test_docker_files.py); pyyaml added
   as a dev dependency for it.
+- 2026-11-10 — reports/STATISTICS.md is generated (pipeline.stats_report) through the API
+  services, not written by hand, so report and app always agree. Per-county homelessness is
+  shown as the summed tract estimate (labelled "estimate") next to the overlapping CoCs, whose
+  official totals are listed separately — apportioning official counts to counties would be an
+  estimate anyway. Town rankings show all towns and, separately, towns with 10,000+ residents
+  because one- or two-tract towns dominate the top of the population-weighted index.
