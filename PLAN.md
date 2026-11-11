@@ -139,8 +139,9 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: clean geography (counties, towns, CoCs, neighbourhoods, tracts + area shares)
   - [x] item: clean ACS, PIT/HIC, shelters, subsidised housing, transit, ZIP weights, Zillow, evictions
   - [x] item: load.py via BulkDao/LoadService, dropped-row log and reports/load_summary.md
-- [ ] Tests: tract count matches statewide TIGER, 351 municipalities, 14 counties, every MA
+- [x] Tests: tract count matches statewide TIGER, 351 municipalities, 14 counties, every MA
       CoC present, no duplicate geoids, every metric row has a source, dropped rows logged.
+  - [x] item: tests/test_data_integrity.py against the loaded housing database
 
 ### Phase 4 – Affordable housing shortage
 - [ ] Per tract from CHAS: extremely-low-income (<=30% AMI) and very-low-income (<=50% AMI)
