@@ -1,0 +1,12 @@
+# Keep local data, secrets and build output out of `vercel deploy` uploads.
+.env
+.env.*
+data/
+logs/
+run.log
+STOP
+**/.venv/
+**/node_modules/
+**/__pycache__/
+frontend/dist/
+.claude/
