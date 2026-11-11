@@ -32,3 +32,4 @@
 - 2026-11-10 — Phase 9: GET /api/sites, /api/sites/best (offset = next best), /api/sites/{id}.
 - 2026-11-10 — Phase 9: POST /api/area-stats (geodesic rings, tract area shares; ~30-50 ms warm).
 - 2026-11-10 — Phase 9: GET /api/areas/at (5 levels; official CoC count at region level, tract estimates sum to it).
+- 2026-11-10 — Phase 9: GET /api/areas (outline layer per level, bbox filter, cached).

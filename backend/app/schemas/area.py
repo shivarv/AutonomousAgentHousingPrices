@@ -85,3 +85,19 @@ class AreaAt(BaseModel):
     homeless_estimate_sum: HomelessFigure
     homeless_basis: Literal["official CoC count", "sum of tract estimates"]
     note: str
+
+
+class AreaOutlineFeature(BaseModel):
+    type: Literal["Feature"] = "Feature"
+    id: str
+    geometry: dict[str, Any]
+    properties: dict[str, Any]
+
+
+class AreaOutlines(BaseModel):
+    """Simplified boundaries of every area at a level (optionally only those meeting a
+    bounding box), for the faint outline layer of the map."""
+
+    type: Literal["FeatureCollection"] = "FeatureCollection"
+    level: AreaLevel
+    features: list[AreaOutlineFeature]
