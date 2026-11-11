@@ -1,17 +1,47 @@
 # Massachusetts Housing Need & Site Finder — Report
 
-Status: in progress. Sections are filled as each phase is completed; results below are from
-the data loaded on 2026-11-10.
+Data downloaded and loaded on 2026-11-10. Every figure below comes from those downloads or is
+computed from them; detailed tables are in `reports/STATISTICS.md` (generated from the
+database by `pipeline.stats_report`). Homelessness figures below Continuum of Care (CoC) level
+are modelled **estimates** (section 3.2).
 
 ## 1. Question
 
 How many people are homeless or at risk in Massachusetts, where is the affordable housing
 shortage, and which places are available and suitable for building new homes?
 
+The audience is city planners and housing nonprofits, so the product covers the whole state
+(1,620 census tracts, 351 cities and towns, 14 counties, 11 CoCs, Boston neighbourhoods) and
+delivers (1) statewide, county and town statistics with a ranked list of candidate sites and
+(2) an interactive site explorer: drop or drag a pin and see the estimated people experiencing
+homelessness, at-risk households and the affordable shortage or surplus for the area under the
+pin (tract, Boston neighbourhood, town, county or CoC, extendable into a "benefit area") or
+for three distance rings.
+
 ## 2. Data
 
 All datasets, URLs, download dates, licences and columns are listed in `DATA_SOURCES.md`;
-row counts, years and missing-value rates are in `reports/data_audit.md`.
+row counts, years and missing-value rates are in `reports/data_audit.md`. In short (23
+datasets, all public, no paid data):
+
+| Need | Dataset | Year(s) | Geography |
+|---|---|---|---|
+| Boundaries | Census TIGER/Line tracts, towns, counties; BPDA Boston neighbourhoods; HUD CoC boundaries | 2026 vintage; CoC 2025 | tract, town, county, neighbourhood, CoC |
+| Population, income, poverty, crowding, rent burden, vacancy | ACS 5-year (api.census.gov) | 2020-2024 | tract |
+| Affordable gap | HUD CHAS | 2018-2022 | tract |
+| Homeless counts and beds | HUD PIT and HIC | 2007-2025 (2012-2025 used for MA CoC series) | CoC only |
+| Subsidised housing | HUD LIHTC; HUD Picture of Subsidized Households | to 2024; 2025 | property, tract |
+| Shelters (locations only) | OpenStreetMap, domestic-violence facilities excluded | download snapshot | point |
+| Parcels and values | MassGIS Standardized Assessors' Parcels (L3) | FY 2023-2027 by town | parcel |
+| Build constraints | MassGIS open space; MassDEP wetlands; FEMA NFHL | 2026; 2005 mapping; 2025 | polygon |
+| Multifamily zoning | MBTA Communities (Section 3A) districts | 2026-10 | polygon |
+| Transit | MBTA and regional transit authority GTFS | current feeds | stop |
+| Rents and values | Zillow ZORI and ZHVI with Census ZCTA-tract relationship | 2015-2026; 2000-2026 | ZIP -> tract |
+| Evictions | Eviction Lab tract filings | MA validated 2004-2018 | tract |
+
+Sources that could not be used are recorded in `BLOCKERS.md`: shelter bed counts by location
+(not published; HIC is per CoC), DESE homeless student counts (pages refuse automated
+clients) and Trial Court eviction filings (no downloadable dataset; Eviction Lab used).
 
 ## 3. Methods
 
@@ -170,12 +200,81 @@ values are assumed evenly spread within each tract.
 
 ## 4. Results
 
-To be completed (Phases 6-8 and 12).
+**Homelessness (official CoC counts).** On the night of the January 2025 Point-in-Time count,
+28,311 people were experiencing homelessness in Massachusetts (sum of the 11 CoCs): 26,563
+sheltered and 1,748 unsheltered. That is 1,049 (3.6%) fewer than the 2024 peak of 29,360 but
+61.8% more than in 2012 (17,501); the series low was 15,079 in 2021, and the count nearly
+doubled between 2022 (15,507) and 2024. The Balance of State CoC (MA-516, 10,539 people) and
+Boston (MA-500, 5,540) account for 57% of the total; Worcester (2,864) and Springfield/Hampden
+(2,709) follow. Year-round shelter beds (HIC 2025) total 19,647, 0.69 per person counted.
+
+**At risk.** 314,258 renter households have extremely low incomes (<= 30% of area median);
+170,134 of them pay more than half their income for housing.
+
+**Affordable housing shortage.** Only 144,912 homes are both affordable and available to those
+households — 46 per 100 — a statewide shortage of 169,346 (CHAS 2018-2022). Every county has a
+shortage; the largest are Suffolk (34,964), Middlesex (33,346), Essex (23,301) and Worcester
+(19,192). By town the largest shortages are Boston (30,053), Worcester (9,303), Springfield
+(7,001), Fall River (4,686), Lowell (4,580), Lynn (4,430) and Lawrence (4,321). Among those
+15 largest-shortage towns, coverage is lowest in Everett (27 available units per 100 ELI
+households) and Salem (29).
+
+**Where need is greatest.** Among cities and towns with at least 10,000 residents, the
+population-weighted Housing Need Index is highest in Ware (66.3), Lawrence (63.8), Lynn (62.8),
+Hull (61.9), Lowell (61.8), Fall River (61.7), Southbridge (61.3), Gardner and Chelsea (60.7)
+and Fitchburg (60.0); the statewide mean is 49.5. Several very small towns rank above them on a
+single tract (section 3.3). Of the 20 highest-scoring tracts statewide, 4 are in Springfield,
+3 each in Lowell and Lynn, and 2 in Boston (`reports/top_tracts.csv`).
+
+**Candidate sites.** 40,873 developable parcels of at least 0.5 acre pass the constraint
+screen. The highest-scoring sites (score 87.2 to 83.9 for the top 15) are close to transit
+inside MBTA Communities districts in Fall River, Lawrence, Worcester, Taunton and Lowell, each
+with an estimated shortage of 1,400-8,700 ELI homes and an estimated 170-1,300 people
+experiencing homelessness within 5 km (estimates). The best site in every county is listed in
+`reports/STATISTICS.md` 6.2; on the Islands (Dukes, Nantucket) the best sites score only 42-44
+because need, transit and zoning components are low there.
+
+**Home-value model.** Test MAPE 11.4% against 32.6% for the town-median baseline, a 65%
+reduction; the target (at least 25%) is met (section 3.4, `reports/model_metrics.json`).
+
+**Product.** A FastAPI backend serves every figure with its source and year (statistics,
+tracts, sites, ring statistics for any point in under a second, area lookup, outlines,
+benefit-area summaries, official CoC series, shelters, model metrics, sources), and a React app
+provides the overview, the site explorer map and the methodology pages. Docker files are
+provided but could not be run on the build machine (README).
 
 ## 5. Limitations
 
-See the limits listed with each method above, `BLOCKERS.md`, and `reports/data_audit.md`.
+- **Tract homelessness numbers are modelled estimates, not counts** (3.2). They distribute
+  each CoC's official count by an at-risk weight; tract rankings change a lot under another
+  weight (top-20 overlap 2/20 with a population weight), town rankings much less (15/20).
+  Shelter bed locations are not published, so sheltered people could not be placed by beds.
+- **Periods differ**: CHAS 2018-2022, ACS 2020-2024, PIT/HIC 2025, Eviction Lab 2004-2018,
+  assessor fiscal years 2023-2027. The shortage reflects 2018-2022 conditions.
+- **Sparse components**: rent growth covers 519 tracts and evictions 1,137; the top of the
+  Need Index partly depends on where these exist (3.3). 29 tracts have no index (flagged).
+- **Small areas**: ACS and CHAS tract values carry sampling error (margins are not
+  propagated); CHAS rounds counts. Small towns with one or two tracts are volatile.
+- **Site screen is partial**: zoning other than 3A, ownership, contamination, slopes, utilities
+  and the willingness of owners to sell are not checked; assessor use codes vary in quality;
+  land cost is a tract median assessed value, not a price; site weights are a judgement.
+- **Uniform-spread assumption**: ring and benefit-area totals assume tract counts are spread
+  evenly over each tract's area.
+- **Home values** are assessed values, not sale prices; the gradient-boosting model ran in
+  scikit-learn because LightGBM could not load on the build machine.
+- **Untested Docker files** (no Docker on the build machine).
+
+See also `BLOCKERS.md` and `reports/data_audit.md`.
 
 ## 6. Next steps
 
-To be completed.
+1. Obtain shelter bed counts by site (from CoCs under a data-sharing agreement, without
+   domestic-violence shelters) to allocate sheltered people by bed location as planned.
+2. Add the MA DESE homeless student counts and Trial Court eviction filings when they can be
+   downloaded, and refresh Eviction Lab with newer years.
+3. Propagate ACS margins of error into the Need Index and ring totals, and show ranges.
+4. Screen sites further: local zoning by-laws, MassDEP contamination sites, slope (LiDAR),
+   sewer and water service, and public ownership (often the most feasible land).
+5. Calibrate site weights with planners and nonprofits; let users change them in the app.
+6. Re-run the pipeline when PIT 2026, CHAS 2019-2023 and ACS 2021-2025 are released, and build
+   and test the Docker images on a machine with Docker.

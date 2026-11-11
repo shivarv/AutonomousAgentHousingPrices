@@ -341,8 +341,9 @@ geometry, and stay within the 8 GB data budget.
       trends, shelter capacity, affordable shortage, top need areas, top candidate sites.
   - [x] item: pipeline.stats_report (figures via StatsService/HomelessnessService/SiteService; CoC official counts, county estimates labelled) + tests
   - [x] item: reports/STATISTICS.md generated
-- [ ] reports/REPORT.md: question, data, methods (especially the homeless estimate and site
+- [x] reports/REPORT.md: question, data, methods (especially the homeless estimate and site
       scoring), results, limitations, next steps.
+  - [x] item: question, data summary, results (figures from STATISTICS.md / model_metrics.json), limitations, next steps; methods 3.1-3.5 already written in earlier phases
 - [ ] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
 - [ ] scripts/validate.py passes (see Definition of done).
 
