@@ -7,10 +7,13 @@ estimates and always travel as HomelessFigure(label="estimate").
 
 from __future__ import annotations
 
+import json
+import threading
 from typing import Any
 
 import numpy as np
 import shapely
+from shapely.geometry import box
 
 from app.core.exceptions import NotFoundError, OutsideCoverageError, ValidationError
 from app.schemas.area import (
@@ -52,6 +55,9 @@ AREA_NOTE = (
     "Homeless figures below CoC level are modelled estimates; official counts exist only "
     "per Continuum of Care."
 )
+_outline_cache: dict[tuple[int, str], bytes] = {}
+_outline_lock = threading.Lock()
+
 COUNT_KEYS = (
     "population",
     "homeless_estimate",
@@ -267,3 +273,47 @@ class AreaService:
             homeless_basis="official CoC count" if level == "coc" else "sum of tract estimates",
             note=COC_NOTE if level == "coc" else AREA_NOTE,
         )
+
+    # ---------------------------------------------------------------- outlines
+    @staticmethod
+    def parse_bbox(bbox: str | None) -> tuple[float, float, float, float] | None:
+        """'minLon,minLat,maxLon,maxLat' -> floats, validated."""
+        if not bbox:
+            return None
+        try:
+            w, s_, e, n = (float(v) for v in bbox.split(","))
+        except ValueError as exc:
+            raise ValidationError("bbox must be 'minLon,minLat,maxLon,maxLat'") from exc
+        if not (-180 <= w < e <= 180 and -90 <= s_ < n <= 90):
+            raise ValidationError("bbox must be 'minLon,minLat,maxLon,maxLat' with min < max")
+        return w, s_, e, n
+
+    def outlines(self, level: str, bbox: str | None) -> bytes:
+        self._check_level(level)
+        box_ll = self.parse_bbox(bbox)
+        layer = self.index.layers[level]
+        if box_ll is None:
+            key = (id(self.index), level)
+            with _outline_lock:
+                if key not in _outline_cache:
+                    _outline_cache[key] = self._outline_json(level, range(len(layer.ids)))
+                return _outline_cache[key]
+        w, s_, e, n = box_ll
+        x0, y0 = rings.to_state_plane(w, s_)
+        x1, y1 = rings.to_state_plane(e, n)
+        hits = layer.tree.query(box(min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)))
+        return self._outline_json(level, sorted(int(i) for i in hits))
+
+    def _outline_json(self, level: str, positions: Any) -> bytes:
+        layer = self.index.layers[level]
+        features = [
+            {
+                "type": "Feature",
+                "id": layer.ids[i],
+                "geometry": layer.boundaries[i],
+                "properties": {"name": layer.names[i], "level": level},
+            }
+            for i in positions
+        ]
+        doc = {"type": "FeatureCollection", "level": level, "features": features}
+        return json.dumps(doc, separators=(",", ":")).encode()

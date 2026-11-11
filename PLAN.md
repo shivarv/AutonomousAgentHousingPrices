@@ -268,7 +268,9 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: GeoIndex memberships (tract weights per area, same rules as area_metrics) and official PIT/HIC per CoC
   - [x] item: AreaService.area_at (STRtree point-in-polygon, boundary, neighbours, figures; official count at CoC, estimate elsewhere), controller
   - [x] item: API tests (three cities x levels, CoC estimate sum = official, outside Boston/MA messages)
-- [ ] GET /api/areas?level=&bbox= : boundaries for drawing the outline layer (simplified, cached).
+- [x] GET /api/areas?level=&bbox= : boundaries for drawing the outline layer (simplified, cached).
+  - [x] item: AreaService.outlines (all areas of a level, pre-serialised and cached; bbox via STRtree), controller
+  - [x] item: API tests (counts per level, bbox, validation)
 - [ ] POST /api/areas/summary {level, ids: [...]} : combined totals for a user-built benefit area.
 - [ ] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
       GET /api/model/metrics, GET /api/sources.
