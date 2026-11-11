@@ -34,3 +34,4 @@
 - 2026-11-10 — Phase 9: GET /api/areas/at (5 levels; official CoC count at region level, tract estimates sum to it).
 - 2026-11-10 — Phase 9: GET /api/areas (outline layer per level, bbox filter, cached).
 - 2026-11-10 — Phase 9: POST /api/areas/summary (benefit area totals; all counties/towns add up to the state).
+- 2026-11-10 — Phase 9: GET /api/homelessness, /api/shelters, /api/model/metrics, /api/sources.
