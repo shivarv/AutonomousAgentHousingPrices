@@ -48,3 +48,4 @@
 - 2026-11-10 — Phase 12: scripts/validate.py (14 Definition-of-done checks; all pass on the branch with --skip-git).
 - 2026-11-10 — Definition of done met: all tasks merged, scripts/validate.py 15/15 on main; STATUS = DONE.
 - 2026-11-11 — Phase 13: Vercel deployment files (api/index.py + slim requirements.txt, vercel.json, frontend/vercel.json, scripts/publish_db.sh, README section); slim-deps server checked locally against all key endpoints.
+- 2026-11-11 — Phase 14: harbour-chart visual refresh (CSS only: grain, contour header, brass/ink buttons, tinted tiles + graticule + framed map); build and lint pass; screenshots checked at desktop and phone widths.

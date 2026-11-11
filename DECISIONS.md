@@ -229,3 +229,11 @@ Format: date — decision — alternatives considered — reason.
   A rewrite proxy was rejected because it would hard-code the API URL in vercel.json. The data
   reaches the hosted database through `scripts/publish_db.sh` (pg_dump/pg_restore, URL taken
   from the environment). The pipeline itself is not run on Vercel.
+- 2026-11-11 — Visual refresh (Phase 14, requested by the owner: "more texture, gradients,
+  flavour on the map, purely CSS"). Direction: a harbour chart. Deep harbour-blue header with
+  depth-contour rings (repeating-radial-gradient), a brass hairline and brass for the primary
+  action, paper-fibre grain (an inline SVG feTurbulence data URI in CSS), and a chart-plate map:
+  desaturated tiles with a harbour-blue multiply wash, a graticule that pans with the map, and a
+  framed edge with a soft vignette. Alternatives considered: CSS filters on the whole map,
+  rejected because they would shift the colour-blind-safe choropleth away from its legend. All
+  textures sit on the tile pane or the map's edges only. No new dependencies, images or fonts.
