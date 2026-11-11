@@ -183,7 +183,9 @@ geometry, and stay within the 8 GB data budget.
       1,000 residents, distance to nearest shelter or subsidised unit.
   - [x] item: pipeline.index.components (8 raw components, direction, percentile scaling 0-1, missing kept NULL)
   - [x] item: tests (scaling range/order, distance, ratio NULL on zero denominators)
-- [ ] Equal weights to start (justify changes in DECISIONS.md); store index and components.
+- [x] Equal weights to start (justify changes in DECISIONS.md); store index and components.
+  - [x] item: pipeline.index.need_index (weighted mean of available scores x 100, min 5 of 8, flags) -> metrics_need.parquet, loaded
+  - [x] item: tests (0-100 range, equal weights, renormalisation over missing, NULL + flag below minimum; loaded rows)
 - [ ] Sensitivity check with 3 alternative weightings; report top-20 stability.
 - [ ] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
       summary (population-weighted index).
