@@ -54,3 +54,20 @@ Format: date — decision — alternatives considered — reason.
   tract_municipalities (tract x town area shares), zip_tracts (ZIP to tract residential weights),
   neighbourhood_tracts (area shares). Each tract also gets one primary municipality, CoC and
   neighbourhood: the one holding the largest share of its area.
+- 2026-11-10 — PIT/HIC series start in 2012: 2007-2011 include MA-501 (Holyoke) and MA-514
+  (Framingham/Waltham), which HUD lists in no merger record, so they cannot be put on current
+  CoC boundaries. Earlier merged CoCs are summed into their post-merger CoC (HUD CoC Mergers
+  sheet) — keep 2007-2011 with partial coverage — totals would be inconsistent across years.
+- 2026-11-10 — HIC total beds = ES + TH + SH year-round beds computed from the components
+  (2013 published totals include rapid re-housing) — published totals — consistent definition.
+- 2026-11-10 — Zillow ZIP values to tracts: residential-share weighted mean over ZIPs that have a
+  value, renormalised over the covered share; rows with coverage < 100% carry a flag. ZORI covers
+  only 204 MA ZIPs (and 30% of them five years ago), so rent growth exists for ~520 tracts —
+  missing values stay NULL (no imputation here).
+- 2026-11-10 — Evictions: Eviction Lab monthly file on 2020 tracts; metric = mean annual observed
+  filings 2014-2016 (best-covered validated years, 1,144 tracts) / ACS 2020-2024 renter
+  households. Periods differ; documented in each row's method. Tracts without validated data
+  stay NULL.
+- 2026-11-10 — Subsidised units are kept as two metrics, hud_assisted_units (HUD PSH 2025, all
+  HUD programs incl. vouchers) and lihtc_low_income_units (LIHTC), because the programs overlap
+  and summing them would double count — one combined figure.

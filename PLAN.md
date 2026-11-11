@@ -134,8 +134,11 @@ geometry, and stay within the 8 GB data budget.
       (developable candidates only, with geometry), site_candidates, model_runs.
   - [x] item: ORM models for every table (geography, metrics, homelessness, housing, sites)
   - [x] item: Alembic migration, applied to housing and housing_test (downgrade/upgrade checked)
-- [ ] Pipeline clean/ + load.py: cleaned data into the tables via DAOs. ZIP data to tracts via
+- [x] Pipeline clean/ + load.py: cleaned data into the tables via DAOs. ZIP data to tracts via
       the crosswalk, weighted by residential share (record in DECISIONS.md).
+  - [x] item: clean geography (counties, towns, CoCs, neighbourhoods, tracts + area shares)
+  - [x] item: clean ACS, PIT/HIC, shelters, subsidised housing, transit, ZIP weights, Zillow, evictions
+  - [x] item: load.py via BulkDao/LoadService, dropped-row log and reports/load_summary.md
 - [ ] Tests: tract count matches statewide TIGER, 351 municipalities, 14 counties, every MA
       CoC present, no duplicate geoids, every metric row has a source, dropped rows logged.
 
