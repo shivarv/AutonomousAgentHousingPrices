@@ -4,7 +4,15 @@ from typing import Any
 from sqlalchemy import Row, Select, func, select
 from sqlalchemy.orm import Session
 
-from app.models import County, ModelRun, Municipality, Parcel, SiteCandidate, TractMetric
+from app.models import (
+    County,
+    DataSource,
+    ModelRun,
+    Municipality,
+    Parcel,
+    SiteCandidate,
+    TractMetric,
+)
 
 
 class SiteDao:
@@ -88,3 +96,13 @@ class SiteDao:
         return self.session.scalar(
             select(func.max(TractMetric.year)).where(TractMetric.metric == "homeless_estimate")
         )
+
+    def metric_provenance(self, metrics: Sequence[str]) -> dict[str, tuple[int, str]]:
+        """Latest year and source key of each tract metric (inputs of the site features)."""
+        rows = self.session.execute(
+            select(TractMetric.metric, func.max(TractMetric.year), DataSource.key)
+            .join(DataSource, DataSource.id == TractMetric.source_id)
+            .where(TractMetric.metric.in_(metrics))
+            .group_by(TractMetric.metric, DataSource.key)
+        ).all()
+        return {m: (int(y), k) for m, y, k in rows}

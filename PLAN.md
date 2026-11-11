@@ -316,7 +316,9 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: explorer state, API hooks (debounced area-stats/areas-at, outlines, summary, tracts, geocode)
   - [x] item: map layers (tract choropleth with classed CVD-safe scales, outlines with pin area + benefit areas, draggable pin, rings, nearby estimate dots and shelters, site markers, viewport zoom to filters)
   - [x] item: panel (filters, best/next best, address search, mode toggle, layer select, keyboard pin control, areas and rings panels, legend, deep links ?site= / ?lat=&lon=&mode=), screenshots checked
-- [ ] Tract and site detail panels: every number with its source and year; estimates labelled.
+- [x] Tract and site detail panels: every number with its source and year; estimates labelled.
+  - [x] item: site provenance (year and source per feature group) in /api/sites/{id} + test
+  - [x] item: tract detail panel (all metrics grouped, source, year, estimate and flags) in Areas mode; site detail panel (score breakdown, rings, land cost, transit, zoning, constraints, provenance); screenshot checked
 - [ ] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
 - [ ] Loading, error and empty states everywhere; responsive down to phone width; the map is
       keyboard accessible (pin can be moved with arrow keys).

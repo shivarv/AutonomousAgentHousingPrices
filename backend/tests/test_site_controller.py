@@ -30,6 +30,10 @@ def test_best_and_next_best(client: TestClient, seeded) -> None:
     assert best["boundary"]["type"] in ("Polygon", "MultiPolygon")
     assert not any(k.startswith("homeless_est") for k in best["features"])
     assert max(best["overlaps"].values()) <= 0.5
+    prov = best["provenance"]
+    assert prov["affordable_gap_eli"]["source"] == "hud_chas"
+    assert prov["homeless_estimate"]["year"] == best["homeless_5km"]["year"]
+    assert prov["parcel"]["year"] == best["fiscal_year"]
 
 
 def test_site_errors(client: TestClient, seeded) -> None:

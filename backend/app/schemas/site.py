@@ -5,6 +5,12 @@ from pydantic import BaseModel
 from app.schemas.estimate import HomelessFigure
 
 
+class Provenance(BaseModel):
+    year: int | None
+    source: str
+    note: str | None = None
+
+
 class SiteRing(BaseModel):
     radius_km: float
     need_index: float | None
@@ -56,3 +62,4 @@ class SiteDetail(SiteSummary):
     land_value: float | None
     fiscal_year: int | None
     sources: list[str]
+    provenance: dict[str, Provenance]

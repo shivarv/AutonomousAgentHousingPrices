@@ -7,7 +7,7 @@ from typing import Any
 from app.core.exceptions import NotFoundError, ValidationError
 from app.dao.site_dao import SiteDao
 from app.schemas.estimate import HomelessFigure
-from app.schemas.site import SiteDetail, SiteList, SiteRing, SiteSummary
+from app.schemas.site import Provenance, SiteDetail, SiteList, SiteRing, SiteSummary
 
 MAX_LIMIT = 500
 RING_METHOD = (
@@ -27,6 +27,16 @@ SITE_SOURCES = [
     "rta_gtfs",
     "osm_shelters",
 ]
+
+
+# site feature -> tract metric it is built from
+PROVENANCE_METRICS = {
+    "need_index": "need_index",
+    "affordable_gap_eli": "affordable_gap_eli",
+    "homeless_estimate": "homeless_estimate",
+    "population": "population",
+    "land_value_per_sqft": "land_value_per_sqft",
+}
 
 
 def ring_tag(r: float) -> str:
@@ -135,4 +145,28 @@ class SiteService:
             land_value=float(r.land_value) if r.land_value is not None else None,
             fiscal_year=r.fiscal_year,
             sources=SITE_SOURCES,
+            provenance=self._provenance(r.fiscal_year),
         )
+
+    def _provenance(self, fiscal_year: int | None) -> dict[str, Provenance]:
+        found = self.dao.metric_provenance(list(PROVENANCE_METRICS.values()))
+        out = {
+            k: Provenance(year=found[m][0], source=found[m][1])
+            for k, m in PROVENANCE_METRICS.items()
+            if m in found
+        }
+        if "need_index" in out:
+            out["need_index"].note = (
+                "index build year; inputs from ACS, HUD CHAS, HUD PIT, Zillow, Eviction Lab"
+            )
+        if "homeless_estimate" in out:
+            out["homeless_estimate"].note = "modelled estimate from the CoC Point-in-Time count"
+        out["parcel"] = Provenance(
+            year=fiscal_year, source="massgis_parcels", note="assessor fiscal year"
+        )
+        out["transit"] = Provenance(year=None, source="mbta_gtfs, rta_gtfs", note="stops")
+        out["shelters"] = Provenance(year=None, source="osm_shelters", note="no bed counts")
+        out["constraints"] = Provenance(
+            year=None, source="massgis_openspace, massgis_wetlands, massgis_flood, massgis_mbta3a"
+        )
+        return out

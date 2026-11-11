@@ -1,4 +1,4 @@
-import type { GapStatus, GeoJsonGeometry, HomelessFigure } from '@/types/figures'
+import type { GapStatus, GeoJsonGeometry, HomelessFigure, MetricValue } from '@/types/figures'
 
 export type ExplorerMode = 'areas' | 'rings'
 export type AreaLevel = 'tract' | 'neighbourhood' | 'municipality' | 'county' | 'coc'
@@ -109,4 +109,19 @@ export interface GeocodeResult {
   query: string
   matches: { address: string; lat: number; lon: number }[]
   source: string
+}
+
+export interface TractDetail {
+  geoid: string
+  name: string
+  county_name: string
+  municipality_name: string
+  municipalities: { geoid: string; name: string; area_share: number; housing_share: number | null }[]
+  coc_number: string
+  coc_name: string
+  neighbourhood_name: string | null
+  land_area_km2: number
+  homeless: HomelessFigure
+  metrics: Record<string, MetricValue>
+  flags: Record<string, string>
 }
