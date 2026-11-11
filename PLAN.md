@@ -283,9 +283,12 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: route-coverage test (every OpenAPI path is called by a test); validation cases in each endpoint test file
 
 ### Phase 10 – Frontend
-- [ ] Overview page (Outcome 1): statewide headline statistics, CoC homelessness trend chart,
+- [x] Overview page (Outcome 1): statewide headline statistics, CoC homelessness trend chart,
       affordable shortage by county, top municipalities by need, and the ranked candidate site
       list (filterable by county/town, each row links to the map).
+  - [x] item: GET /api/stats/areas (county/town table for rankings and filters) + tests
+  - [x] item: shared UI (loading/error states, estimate/official label, select), areas feature (filters), sites feature (ranked list linking to the map)
+  - [x] item: overview feature (headline stats with sources, PIT trend line, CoC table, county shortage bars, top towns), screenshot checked
 - [ ] Site explorer map (Outcome 2), features/site-explorer:
   - Opens on all of Massachusetts; county and town filters zoom the map; address search
     (Census Geocoder).
