@@ -178,9 +178,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests + REPORT.md summary
 
 ### Phase 6 – Housing Need Index
-- [ ] Components scaled 0-1: affordable gap per ELI renter, severe rent burden share, eviction
+- [x] Components scaled 0-1: affordable gap per ELI renter, severe rent burden share, eviction
       filing rate, poverty rate, overcrowding rate, 5-year rent growth, homeless estimate per
       1,000 residents, distance to nearest shelter or subsidised unit.
+  - [x] item: pipeline.index.components (8 raw components, direction, percentile scaling 0-1, missing kept NULL)
+  - [x] item: tests (scaling range/order, distance, ratio NULL on zero denominators)
 - [ ] Equal weights to start (justify changes in DECISIONS.md); store index and components.
 - [ ] Sensitivity check with 3 alternative weightings; report top-20 stability.
 - [ ] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
