@@ -214,3 +214,18 @@ Format: date — decision — alternatives considered — reason.
   sums of fractional estimates are compared with a 0.5-person tolerance. The git check requires
   a clean `main` with no unmerged task branches or open PRs, so on a task branch it is run with
   `--skip-git`; the final run is on main after the merge.
+- 2026-11-11 — Vercel deployment (Phase 13, requested by the owner): two Vercel projects from
+  one repo. The API is a root-level `api/index.py` that adds backend/ to sys.path and exports
+  the FastAPI app, with a root `requirements.txt` of runtime packages only (about 88 MB
+  installed). Alternatives considered: (1) a Vercel project rooted at backend/, which would
+  install the full pyproject (geopandas, scikit-learn, pyarrow, matplotlib and more, close to
+  Vercel's 500 MB Python limit), and Vercel's docs don't say which file wins when pyproject.toml
+  and requirements.txt both exist; (2) moving pipeline packages into extras or dependency
+  groups, which would change every local `uv run` command. A test keeps requirements.txt in
+  step with the app's imports. Serverless instances are frozen between requests, so
+  `DB_NULL_POOL=true` uses SQLAlchemy NullPool with the provider's pooled URL, and
+  `postgres://` URLs are normalised to the psycopg driver. The frontend reads the API origin
+  from `VITE_API_BASE_URL` (already supported), and the API allows it through `CORS_ORIGINS`.
+  A rewrite proxy was rejected because it would hard-code the API URL in vercel.json. The data
+  reaches the hosted database through `scripts/publish_db.sh` (pg_dump/pg_restore, URL taken
+  from the environment). The pipeline itself is not run on Vercel.

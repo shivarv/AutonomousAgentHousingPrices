@@ -47,3 +47,4 @@
 - 2026-11-10 — Phase 12: README.md (what it is, local run, rebuild order, Docker).
 - 2026-11-10 — Phase 12: scripts/validate.py (14 Definition-of-done checks; all pass on the branch with --skip-git).
 - 2026-11-10 — Definition of done met: all tasks merged, scripts/validate.py 15/15 on main; STATUS = DONE.
+- 2026-11-11 — Phase 13: Vercel deployment files (api/index.py + slim requirements.txt, vercel.json, frontend/vercel.json, scripts/publish_db.sh, README section); slim-deps server checked locally against all key endpoints.
