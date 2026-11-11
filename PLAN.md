@@ -86,9 +86,9 @@ geometry, and stay within the 8 GB data budget.
 ## Tasks (in order; each task = one branch; split into items before starting)
 
 ### Phase 1 – Foundations
-- [ ] Repo skeleton: folders above, root README stub, .gitignore additions.
+- [x] Repo skeleton: folders above, root README stub, .gitignore additions.
   - [x] item: folders (backend, frontend, scripts, reports, data/*) with keep files
-  - [ ] item: root README stub, .gitignore additions, PROGRESS/DECISIONS/BLOCKERS files
+  - [x] item: root README stub, .gitignore additions, PROGRESS/DECISIONS/BLOCKERS files
 - [ ] scripts/db.sh (init/start/stop/status) for the local Postgres on port 5544; databases
       `housing` and `housing_test`.
 - [ ] Backend skeleton: uv project (Python 3.12), FastAPI app with core/, models/, schemas/,

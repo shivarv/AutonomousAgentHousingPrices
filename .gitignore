@@ -59,6 +59,15 @@ logs/
 *.log
 STOP
 
+# --- Project additions ---
+# Any data folder anywhere (backend/data, frontend/public/data dumps) stays out of git
+**/data/raw/
+**/data/interim/
+**/data/pg/
+backend/models_store/
+.eslintcache
+*.geojson.tmp
+
 # --- Editors / OS ---
 .DS_Store
 Thumbs.db
