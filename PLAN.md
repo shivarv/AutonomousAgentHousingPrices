@@ -215,9 +215,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pipeline.model.artifacts (permutation importances on validation, error-by-county chart/table, model_runs row)
 
 ### Phase 8 – Candidate construction sites
-- [ ] Screening: parcels with vacant or developable land-use codes (document the codes used),
+- [x] Screening: parcels with vacant or developable land-use codes (document the codes used),
       minimum lot size (start 0.5 acre; record choice), not in protected open space, wetlands
       or FEMA 100-year flood zones (drop parcels with >50% overlap; flag partial overlap).
+  - [x] item: pipeline.sites.screen (developable codes, 0.5-acre GIS lot, open space/wetland/flood overlap shares and union, 3A district, simplified boundary)
+  - [x] item: tests (codes and sums, lot size and poly type, overlap union not double-counted)
 - [ ] Features per site: need index and affordable gap within 1.5/5/15 km, homeless estimate
       and shelter beds within those rings, distance to nearest MBTA/RTA stop, inside an MBTA
       Communities (3A) district, estimated land cost, lot size, municipality.
