@@ -88,3 +88,13 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — Statewide homelessness = sum of the 11 MA CoC PIT counts, only for years every CoC
   reported; a statewide sub-total (sheltered/unsheltered/beds) is left empty if any CoC lacks it —
   partial sums — a partial sum would understate the total.
+- 2026-11-10 — Homeless estimate per tract: each CoC's PIT 2025 sheltered and unsheltered counts
+  are allocated to the tracts whose primary CoC it is, by the tract's share of the CoC's ELI
+  renters with severe rent burden (CHAS 2018-2022); sheltered uses the same weight because no
+  source gives shelter beds by location (BLOCKERS.md), instead of the bed-share weighting in
+  PLAN.md. Fallback for a CoC with zero weight: ACS population share, flagged (not triggered).
+  Values are unrounded expected counts (sum exactly to the CoC counts); stored as
+  homeless_estimate / _sheltered / _unsheltered, is_estimate=true, method starting "ESTIMATE:",
+  source hud_pit — OSM shelter locations (10 points, no beds) as a sheltered weight;
+  integer rounding (false precision at tract level, rounding drift) — only defensible weight
+  available for every tract.
