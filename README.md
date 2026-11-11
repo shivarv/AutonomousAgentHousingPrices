@@ -125,6 +125,46 @@ docker compose --profile pipeline run --rm pipeline python -m pipeline.load
 ```
 Set `POSTGRES_PASSWORD` in your shell (or in a git-ignored `.env`) for anything beyond local use.
 
+## Deploy to Vercel
+The app runs on Vercel as **two projects from this one repository**, plus a hosted Postgres.
+Vercel only serves the app. The data pipeline and model training stay local, and their results
+are copied into the hosted database.
+
+**1. Hosted Postgres.** Create a Postgres 17 or 18 database with any provider (for example Neon,
+from Vercel's Storage tab or neon.com). The loaded data is about 205 MB, which fits a free tier.
+Then copy the local database into it:
+```bash
+scripts/db.sh start
+TARGET_DATABASE_URL='postgresql://user:pass@host/db?sslmode=require' scripts/publish_db.sh
+```
+Use the provider's direct (non-pooled) URL for this step. The script replaces any existing
+tables and prints row counts at the end.
+
+**2. API project** (Vercel → Add New Project → import this repo):
+- Root Directory: the repository root (`./`). Framework preset: Other.
+- Vercel uses `api/index.py`, `requirements.txt` (runtime packages only, about 90 MB) and
+  `vercel.json`, which routes every path to the FastAPI app.
+- Environment variables:
+  - `DATABASE_URL`: the provider's **pooled** URL. `postgres://` and `postgresql://` URLs are
+    accepted as they are.
+  - `DB_NULL_POOL=true`: one connection per request, which suits serverless instances.
+  - `CORS_ORIGINS`: a JSON list with the frontend's URL, e.g. `["https://your-web.vercel.app"]`.
+    Add it once the frontend project exists, then redeploy.
+- Check `https://<api>.vercel.app/api/health` and `https://<api>.vercel.app/docs`.
+
+**3. Frontend project** (Add New Project → the same repo again):
+- Root Directory: `frontend`. `frontend/vercel.json` sets Vite, `npm ci`, `dist` and the
+  single-page-app fallback.
+- Environment variable `VITE_API_BASE_URL`: the API project's URL with no trailing slash, e.g.
+  `https://your-api.vercel.app`. It is baked into the build, so redeploy after changing it.
+
+With the Vercel CLI, run `vercel` from the repo root for the API and `vercel` from
+`frontend/` for the web app. `.vercelignore` keeps `data/`, `.env` and `node_modules` out of
+CLI uploads.
+
+The first request on a cold instance loads the tract polygons and indexes from the database,
+so it takes a few seconds. Later requests are fast.
+
 ## Data and licences
 All sources are public and free. Licences and terms are listed per dataset in
 `DATA_SOURCES.md`. The app uses OpenStreetMap tiles and the US Census Geocoder, so it needs no

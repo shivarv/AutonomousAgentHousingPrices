@@ -349,6 +349,13 @@ geometry, and stay within the 8 GB data budget.
 - [x] scripts/validate.py passes (see Definition of done).
   - [x] item: scripts/validate.py (data, API, report, command and git/PR checks; --skip-git for branch runs; independent brute-force point-in-polygon for /api/areas/at)
 
+### Phase 13 – Vercel deployment (added 2026-11-11 at the owner's request)
+- [x] Deployable to Vercel: API and frontend as two projects, data copied to hosted Postgres.
+  - [x] item: settings accept postgres:// URLs; DB_NULL_POOL for serverless (tests)
+  - [x] item: api/index.py entrypoint, runtime requirements.txt, vercel.json, .vercelignore (requirements coverage test)
+  - [x] item: frontend/vercel.json; scripts/publish_db.sh (pg_dump/pg_restore to TARGET_DATABASE_URL)
+  - [x] item: README deploy section, DECISIONS, PROGRESS
+
 ## Definition of done
 All tasks merged into main AND `uv run --project backend python scripts/validate.py` exits 0.
 validate.py checks that:
