@@ -174,3 +174,10 @@ Format: date — decision — alternatives considered — reason.
   centroid-in-circle (unstable for 1.5 km rings), block-level weights (would need a new
   table; PLAN specifies tract area shares). Shelter beds within rings are not available
   (OSM shelters have no bed counts; HIC beds are CoC-level only) — shelters are counted.
+- 2026-11-10 — Site score weights: need 0.25, ELI shortage 0.20, homeless estimate 0.15 (all
+  within 5 km), transit closeness 0.15, 3A district 0.10, low land cost per sq ft 0.10, lot size
+  0.05; continuous components as statewide percentile ranks among the 40,873 screened sites —
+  min-max (outlier-driven: lot sizes reach 5,000 acres), learned weights (no outcome to learn
+  from). 5 km is the main ring (walk/short transit trip catchment for residents); 1.5 and 15 km
+  are stored and shown. Weights favour need (60% on need, shortage and homelessness) because
+  the audience is housing-need planning; they are a documented judgement, not an optimum.
