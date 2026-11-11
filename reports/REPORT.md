@@ -140,6 +140,34 @@ Limits: the target is assessed value, not sale price; assessment years differ by
 Tract land value per sq ft (median assessed land value per lot sq ft, taxable non-condo
 parcels) is computed separately for site cost scoring (1,604 of 1,620 tracts).
 
+### 3.5 Candidate construction sites
+
+Screening (`pipeline.sites.screen`): parcels whose state use code is developable or
+potentially developable vacant land (130/131 residential, 390/391 commercial, 440/441
+industrial), at least 0.5 acre by GIS polygon area, tax parcels only. For each parcel the
+share of its area in MassGIS open space (all protection levels), MassDEP wetlands (all
+types) and FEMA 100-year flood zones (SFHA) is computed, and parcels with more than half
+their area in the union of these layers are dropped; any overlap of 1% or more is flagged.
+44,935 lots -> 40,873 sites (4,062 dropped; 14,067 flagged).
+
+Features (`pipeline.sites.features`): for geodesic rings of 1.5, 5 and 15 km, tract values
+summed by the share of each tract's area inside the ring (ELI affordable gap, homeless
+estimate — a modelled estimate — and population) and the population-weighted Need Index;
+OSM shelters in the ring (no per-shelter bed counts exist); distance to the nearest MBTA/RTA
+stop and rapid-transit stop; MBTA Communities (3A) district; land cost = tract median
+assessed land value per sq ft x lot area.
+
+Score (`pipeline.sites.score`): 100 x weighted mean of statewide percentile ranks among the
+screened sites — Need Index within 5 km 25%, ELI shortage within 5 km 20%, homeless estimate
+within 5 km 15%, transit closeness 15%, inside a 3A district 10%, low land cost 10%, lot size
+5%. Weights are a documented judgement favouring need, not an optimum. Each site has a
+plain-English summary generated only from its own features. Scores range 4.6-87.2; the top
+sites are in Fall River, Lawrence and Worcester. `reports/candidate_sites.csv` lists the top
+100 statewide plus the top 10 in each county (185 rows); all sites are in `site_candidates`.
+Limits: use codes and assessed values come from town assessors and vary in quality;
+zoning other than 3A, ownership, contamination and slopes are not screened; tract-level
+values are assumed evenly spread within each tract.
+
 ## 4. Results
 
 To be completed (Phases 6-8 and 12).
