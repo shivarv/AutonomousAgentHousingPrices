@@ -1,0 +1,181 @@
+scope,rank,geoid,tract_name,municipality,county,coc_number,need_index,components_used,population,eli_renter_households,affordable_gap_eli,affordable_units_per_100_eli,severe_rent_burden_share,poverty_rate,homeless_estimate_ESTIMATE,homeless_estimate_per_1000_ESTIMATE,need_index_flag
+Massachusetts,1,25017310400,Census Tract 3104,Lowell,Middlesex County,MA-516,83.1,7,3730,430,390,9.302,0.4538,0.3347,64.38,17.26,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,2,25017311200,Census Tract 3112,Lowell,Middlesex County,MA-516,81.6,7,3198,430,410,4.651,0.486,0.2521,67.82,21.21,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,3,25005650700,Census Tract 6507,New Bedford,Bristol County,MA-505,81.1,7,2305,465,375,19.35,0.5131,0.3831,40.78,17.69,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,4,25009206500,Census Tract 2065,Lynn,Essex County,MA-502,81,6,3163,530,420,20.75,0.6983,0.2472,101.2,32.01,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,5,25013800202,Census Tract 8002.02,Springfield,Hampden County,MA-504,79.8,6,1587,60,56,6.667,0.37,0.1858,9.89,6.232,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,6,25009215101,Census Tract 2151.01,Hamilton,Essex County,MA-516,79.1,6,4657,65,65,0,0.6508,0.0991,8.584,1.843,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,7,25013802300,Census Tract 8023,Springfield,Hampden County,MA-504,78.4,6,6940,430,390,9.302,0.3936,0.3277,69.23,9.975,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,8,25017311300,Census Tract 3113,Lowell,Middlesex County,MA-516,76.7,7,4875,290,200,31.03,0.3763,0.3167,35.2,7.22,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,9,25013801901,Census Tract 8019.01,Springfield,Hampden County,MA-504,76.5,6,3985,545,370,32.11,0.3891,0.4091,87.03,21.84,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,10,25025080300,Census Tract 803,Boston,Suffolk County,MA-500,76.5,8,2210,375,270,28,0.4113,0.2394,47.32,21.41,
+Massachusetts,11,25009250300,Census Tract 2503,Lawrence,Essex County,MA-516,76.3,6,2662,220,191,13.18,0.346,0.2524,33.48,12.58,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,12,25027732203,Census Tract 7322.03,Worcester,Worcester County,MA-506,75.9,8,3318,145,135,6.897,0.3104,0.2101,20.32,6.123,
+Massachusetts,13,25009206000,Census Tract 2060,Lynn,Essex County,MA-502,75.8,6,3280,260,205,21.15,0.5079,0.119,41.04,12.51,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,14,25023521102,Census Tract 5211.02,Whitman,Plymouth County,MA-511,75.7,7,3499,220,210,4.545,0.387,0.1246,18.95,5.416,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,15,25005641900,Census Tract 6419,Fall River,Bristol County,MA-515,75.6,8,2933,220,205,6.818,0.2653,0.2158,17.02,5.802,
+Massachusetts,16,25021413500,Census Tract 4135,Norwood,Norfolk County,MA-516,75.6,6,4559,280,280,0,0.4722,0.1642,43.78,9.603,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,17,25025090600,Census Tract 906,Boston,Suffolk County,MA-500,75.6,8,2202,250,155,38,0.4652,0.2856,34.82,15.81,
+Massachusetts,18,25009206700,Census Tract 2067,Lynn,Essex County,MA-502,75.2,6,4240,465,340,26.88,0.5558,0.2098,94.4,22.26,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,19,25013802101,Census Tract 8021.01,Springfield,Hampden County,MA-504,74.9,6,6701,505,245,51.49,0.4287,0.311,57.36,8.56,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,20,25015820600,Census Tract 8206,Amherst Town,Hampshire County,MA-507,74.9,6,1727,4,4,0,0.7143,0.3778,0.4469,0.2588,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,21,25009205900,Census Tract 2059,Lynn,Essex County,MA-502,74.4,6,4754,270,140,48.15,0.4284,0.1959,46.52,9.785,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,22,25005631600,Census Tract 6316,Attleboro,Bristol County,MA-505,74.2,7,3669,250,235,6,0.4387,0.1664,24.92,6.792,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,23,25017368902,Census Tract 3689.02,Waltham,Middlesex County,MA-516,74.2,7,3540,390,250,35.9,0.5216,0.2287,46.36,13.09,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,24,25017310200,Census Tract 3102,Lowell,Middlesex County,MA-516,73.5,7,7273,265,225,15.09,0.3859,0.1903,38.63,5.311,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,25,25025101102,Census Tract 1011.02,Boston,Suffolk County,MA-500,73.4,7,5471,590,355,39.83,0.3906,0.2919,70.54,12.89,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,26,25001015300,Census Tract 153,Barnstable Town,Barnstable County,MA-503,73.3,7,3841,510,190,62.75,0.4549,0.2734,33.01,8.595,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,27,25009250700,Census Tract 2507,Lawrence,Essex County,MA-516,73.3,6,5425,425,405,4.706,0.395,0.1491,58.37,10.76,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,28,25017311700,Census Tract 3117,Lowell,Middlesex County,MA-516,73.3,7,5051,175,160,8.571,0.2937,0.1708,25.75,5.099,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,29,25001012502,Census Tract 125.02,Barnstable Town,Barnstable County,MA-503,73.2,7,3622,315,230,26.98,0.4277,0.09194,29.54,8.155,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,30,25013801200,Census Tract 8012,Springfield,Hampden County,MA-504,73.2,6,2593,620,385,37.9,0.4744,0.5947,66.26,25.55,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,31,25005640201,Census Tract 6402.01,Fall River,Bristol County,MA-515,72.9,7,2800,240,210,12.5,0.433,0.3071,28.11,10.04,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,32,25025080100,Census Tract 801,Boston,Suffolk County,MA-500,72.9,8,2775,290,165,43.1,0.3069,0.2849,32.14,11.58,
+Massachusetts,33,25009205200,Census Tract 2052,Lynn,Essex County,MA-502,72.8,6,6155,185,170,8.108,0.4046,0.1186,30.1,4.89,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,34,25013812202,Census Tract 8122.02,West Springfield Town,Hampden County,MA-504,72.8,6,3931,310,310,0,0.2603,0.151,54.39,13.84,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,35,25013801902,Census Tract 8019.02,Springfield,Hampden County,MA-504,72.7,6,3323,725,440,39.31,0.5678,0.5306,91.97,27.68,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,36,25013802200,Census Tract 8022,Springfield,Hampden County,MA-504,72.7,6,3098,350,240,31.43,0.6447,0.408,44.5,14.37,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,37,25025091700,Census Tract 917,Boston,Suffolk County,MA-500,72.5,8,3477,210,130,38.1,0.4429,0.2787,29.47,8.474,
+Massachusetts,38,25013800102,Census Tract 8001.02,Springfield,Hampden County,MA-504,72.4,6,4833,375,270,28,0.3187,0.2286,55.38,11.46,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,39,25025090100,Census Tract 901,Boston,Suffolk County,MA-500,72.4,7,5752,930,470,49.46,0.5403,0.3326,117,20.34,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,40,25009251400,Census Tract 2514,Lawrence,Essex County,MA-516,72.3,6,5483,470,255,45.74,0.3504,0.3094,59.23,10.8,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Massachusetts,41,25017312000,Census Tract 3120,Lowell,Middlesex County,MA-516,72.3,8,2776,205,150,26.83,0.4081,0.1942,27.47,9.895,
+Massachusetts,42,25027702201,Census Tract 7022.01,Royalston,Worcester County,MA-506,72.3,7,1460,30,10,66.67,0.7143,0.1178,2.344,1.606,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,43,25027710500,Census Tract 7105,Fitchburg,Worcester County,MA-506,72.3,7,3409,380,270,28.95,0.3705,0.1828,44.54,13.07,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,44,25025080900,Census Tract 809,Boston,Suffolk County,MA-500,72.2,8,3288,400,370,7.5,0.3416,0.3978,52.68,16.02,
+Massachusetts,45,25027731203,Census Tract 7312.03,Worcester,Worcester County,MA-506,72.2,7,6651,1100,525,52.27,0.3821,0.4859,78.14,11.75,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,46,25027733000,Census Tract 7330,Worcester,Worcester County,MA-506,72.2,7,4274,310,245,20.97,0.3595,0.2309,31.26,7.313,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,47,25027757200,Census Tract 7572,Southbridge Town,Worcester County,MA-506,72.1,7,2346,360,190,47.22,0.4366,0.3461,36.73,15.65,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,48,25005614000,Census Tract 6140,Taunton,Bristol County,MA-505,72,7,5154,695,435,37.41,0.2874,0.2401,43.61,8.461,missing components (weights renormalised): zori_growth_5yr
+Massachusetts,49,25005641200,Census Tract 6412,Fall River,Bristol County,MA-515,72,8,3409,515,335,34.95,0.3249,0.2438,53.27,15.63,
+Massachusetts,50,25005651300,Census Tract 6513,New Bedford,Bristol County,MA-505,71.9,7,2231,280,195,30.36,0.3207,0.2766,15.86,7.108,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,1,25001015300,Census Tract 153,Barnstable Town,Barnstable County,MA-503,73.3,7,3841,510,190,62.75,0.4549,0.2734,33.01,8.595,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,2,25001012502,Census Tract 125.02,Barnstable Town,Barnstable County,MA-503,73.2,7,3622,315,230,26.98,0.4277,0.09194,29.54,8.155,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,3,25001010700,Census Tract 107,Chatham,Barnstable County,MA-503,69.8,7,3218,85,75,11.76,0.4911,0.1224,8.688,2.7,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,4,25001012602,Census Tract 126.02,Barnstable Town,Barnstable County,MA-503,67.7,7,5276,230,200,13.04,0.3082,0.116,23.17,4.391,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,5,25001012002,Census Tract 120.02,Yarmouth,Barnstable County,MA-503,64.5,7,3020,225,150,33.33,0.5385,0.1812,17.95,5.945,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,6,25001010304,Census Tract 103.04,Eastham,Barnstable County,MA-503,63.9,6,2649,0,0,,0.4737,0.09022,0,0,"missing components (weights renormalised): affordable_gap_per_eli_renter, zori_growth_5yr"
+Barnstable County,7,25001012001,Census Tract 120.01,Yarmouth,Barnstable County,MA-503,62.1,7,6216,30,30,0,0.3213,0.1093,3.475,0.5591,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,8,25001010208,Census Tract 102.08,Truro,Barnstable County,MA-503,61.6,7,1708,40,40,0,1,0.04394,4.633,2.713,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,9,25001012601,Census Tract 126.01,Barnstable Town,Barnstable County,MA-503,59.8,7,3060,40,40,0,0.7722,0.1283,4.633,1.514,missing components (weights renormalised): zori_growth_5yr
+Barnstable County,10,25001014600,Census Tract 146,Falmouth,Barnstable County,MA-503,59.8,7,4334,140,120,14.29,0.4582,0.05607,13.9,3.207,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,1,25003900600,Census Tract 9006,Pittsfield,Berkshire County,MA-507,68.9,7,4083,300,190,36.67,0.378,0.3894,22.9,5.61,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,2,25003935200,Census Tract 9352,Pittsfield,Berkshire County,MA-507,66.9,7,4567,75,75,0,0.2772,0.06711,8.38,1.835,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,3,25003901100,Census Tract 9011,Pittsfield,Berkshire County,MA-507,64.5,7,3475,170,125,26.47,0.4348,0.109,16.2,4.662,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,4,25003932200,Census Tract 9322,Becket,Berkshire County,MA-507,64,7,2488,10,6,40,0.6923,0.101,0.4469,0.1796,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,5,25003900900,Census Tract 9009,Pittsfield,Berkshire County,MA-507,63.2,7,5356,175,140,20,0.3154,0.2948,13.97,2.608,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,6,25003900200,Census Tract 9002,Pittsfield,Berkshire County,MA-507,63,7,4537,365,335,8.219,0.2255,0.1693,31.28,6.895,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,7,25003921300,Census Tract 9213,North Adams,Berkshire County,MA-507,61.6,7,5135,405,170,58.02,0.2422,0.2466,25.7,5.004,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,8,25003922200,Census Tract 9222,Adams,Berkshire County,MA-507,60,7,3769,195,140,28.21,0.3695,0.1165,16.2,4.298,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,9,25003921400,Census Tract 9214,North Adams,Berkshire County,MA-507,58.5,7,1294,90,65,27.78,0.1866,0.1097,8.38,6.476,missing components (weights renormalised): zori_growth_5yr
+Berkshire County,10,25003932300,Census Tract 9323,Hinsdale,Berkshire County,MA-507,57.3,7,1859,75,75,0,0.179,0.0312,8.38,4.508,missing components (weights renormalised): zori_growth_5yr
+Bristol County,1,25005650700,Census Tract 6507,New Bedford,Bristol County,MA-505,81.1,7,2305,465,375,19.35,0.5131,0.3831,40.78,17.69,missing components (weights renormalised): zori_growth_5yr
+Bristol County,2,25005641900,Census Tract 6419,Fall River,Bristol County,MA-515,75.6,8,2933,220,205,6.818,0.2653,0.2158,17.02,5.802,
+Bristol County,3,25005631600,Census Tract 6316,Attleboro,Bristol County,MA-505,74.2,7,3669,250,235,6,0.4387,0.1664,24.92,6.792,missing components (weights renormalised): zori_growth_5yr
+Bristol County,4,25005640201,Census Tract 6402.01,Fall River,Bristol County,MA-515,72.9,7,2800,240,210,12.5,0.433,0.3071,28.11,10.04,missing components (weights renormalised): zori_growth_5yr
+Bristol County,5,25005614000,Census Tract 6140,Taunton,Bristol County,MA-505,72,7,5154,695,435,37.41,0.2874,0.2401,43.61,8.461,missing components (weights renormalised): zori_growth_5yr
+Bristol County,6,25005641200,Census Tract 6412,Fall River,Bristol County,MA-515,72,8,3409,515,335,34.95,0.3249,0.2438,53.27,15.63,
+Bristol County,7,25005651300,Census Tract 6513,New Bedford,Bristol County,MA-505,71.9,7,2231,280,195,30.36,0.3207,0.2766,15.86,7.108,missing components (weights renormalised): zori_growth_5yr
+Bristol County,8,25005642000,Census Tract 6420,Fall River,Bristol County,MA-515,71.7,8,3369,425,210,50.59,0.2446,0.3007,40.69,12.08,
+Bristol County,9,25005641300,Census Tract 6413,Fall River,Bristol County,MA-515,71.6,7,5958,820,400,51.22,0.2584,0.2929,55.49,9.314,missing components (weights renormalised): zori_growth_5yr
+Bristol County,10,25005641400,Census Tract 6414,Fall River,Bristol County,MA-515,71,7,3282,625,365,41.6,0.3909,0.2865,51.79,15.78,missing components (weights renormalised): zori_growth_5yr
+Dukes County,1,25007200300,Census Tract 2003,Edgartown,Dukes County,MA-503,53.8,7,5278,80,80,0,0.225,0.04713,2.317,0.4389,missing components (weights renormalised): zori_growth_5yr
+Dukes County,2,25007200200,Census Tract 2002,Oak Bluffs,Dukes County,MA-503,33.7,7,5407,105,65,38.1,0.1253,0.02178,7.529,1.393,missing components (weights renormalised): zori_growth_5yr
+Dukes County,3,25007200400,Census Tract 2004,Chilmark,Dukes County,MA-503,33.1,7,5355,15,11,26.67,0.09202,0.03971,0.4633,0.08653,missing components (weights renormalised): zori_growth_5yr
+Dukes County,4,25007200100,Census Tract 2001,Tisbury,Dukes County,MA-503,32.8,7,4893,180,60,66.67,0.0758,0.07097,6.95,1.42,missing components (weights renormalised): zori_growth_5yr
+Essex County,1,25009206500,Census Tract 2065,Lynn,Essex County,MA-502,81,6,3163,530,420,20.75,0.6983,0.2472,101.2,32.01,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,2,25009215101,Census Tract 2151.01,Hamilton,Essex County,MA-516,79.1,6,4657,65,65,0,0.6508,0.0991,8.584,1.843,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,3,25009250300,Census Tract 2503,Lawrence,Essex County,MA-516,76.3,6,2662,220,191,13.18,0.346,0.2524,33.48,12.58,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,4,25009206000,Census Tract 2060,Lynn,Essex County,MA-502,75.8,6,3280,260,205,21.15,0.5079,0.119,41.04,12.51,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,5,25009206700,Census Tract 2067,Lynn,Essex County,MA-502,75.2,6,4240,465,340,26.88,0.5558,0.2098,94.4,22.26,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,6,25009205900,Census Tract 2059,Lynn,Essex County,MA-502,74.4,6,4754,270,140,48.15,0.4284,0.1959,46.52,9.785,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,7,25009250700,Census Tract 2507,Lawrence,Essex County,MA-516,73.3,6,5425,425,405,4.706,0.395,0.1491,58.37,10.76,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,8,25009205200,Census Tract 2052,Lynn,Essex County,MA-502,72.8,6,6155,185,170,8.108,0.4046,0.1186,30.1,4.89,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,9,25009251400,Census Tract 2514,Lawrence,Essex County,MA-516,72.3,6,5483,470,255,45.74,0.3504,0.3094,59.23,10.8,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Essex County,10,25009208401,Census Tract 2084.01,Saugus,Essex County,MA-516,71.7,6,3364,65,65,0,0.4952,0.05856,11.16,3.317,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Franklin County,1,25011040501,Census Tract 405.01,Orange,Franklin County,MA-507,71.8,7,4023,130,90,30.77,0.3226,0.2339,9.497,2.361,missing components (weights renormalised): zori_growth_5yr
+Franklin County,2,25011040701,Census Tract 407.01,Montague,Franklin County,MA-507,70.3,7,3965,340,245,27.94,0.2397,0.1391,27.93,7.045,missing components (weights renormalised): zori_growth_5yr
+Franklin County,3,25011041501,Census Tract 415.01,Ashfield,Franklin County,MA-507,65.7,7,3648,60,60,0,0.3165,0.06839,5.586,1.531,missing components (weights renormalised): zori_growth_5yr
+Franklin County,4,25011041000,Census Tract 410,Greenfield,Franklin County,MA-507,65.4,7,3488,210,85,59.52,0.4484,0.1673,13.97,4.004,missing components (weights renormalised): zori_growth_5yr
+Franklin County,5,25011040600,Census Tract 406,New Salem,Franklin County,MA-507,63,7,4572,75,65,13.33,0.3222,0.07123,7.821,1.711,missing components (weights renormalised): zori_growth_5yr
+Franklin County,6,25011041302,Census Tract 413.02,Greenfield,Franklin County,MA-507,62.8,7,2241,200,90,55,0.443,0.2173,17.32,7.728,missing components (weights renormalised): zori_growth_5yr
+Franklin County,7,25011041400,Census Tract 414,Greenfield,Franklin County,MA-507,57.6,7,2539,355,145,59.15,0.3664,0.1612,15.64,6.161,missing components (weights renormalised): zori_growth_5yr
+Franklin County,8,25011041502,Census Tract 415.02,Shelburne,Franklin County,MA-507,56.5,7,3603,135,80,40.74,0.3131,0.1185,8.938,2.481,missing components (weights renormalised): zori_growth_5yr
+Franklin County,9,25011040800,Census Tract 408,Whately,Franklin County,MA-507,55.9,7,5140,345,330,4.348,0.2225,0.1172,26.81,5.217,missing components (weights renormalised): zori_growth_5yr
+Franklin County,10,25011041200,Census Tract 412,Greenfield,Franklin County,MA-507,55.1,7,3159,80,70,12.5,0.482,0.1187,7.262,2.299,missing components (weights renormalised): zori_growth_5yr
+Hampden County,1,25013800202,Census Tract 8002.02,Springfield,Hampden County,MA-504,79.8,6,1587,60,56,6.667,0.37,0.1858,9.89,6.232,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,2,25013802300,Census Tract 8023,Springfield,Hampden County,MA-504,78.4,6,6940,430,390,9.302,0.3936,0.3277,69.23,9.975,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,3,25013801901,Census Tract 8019.01,Springfield,Hampden County,MA-504,76.5,6,3985,545,370,32.11,0.3891,0.4091,87.03,21.84,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,4,25013802101,Census Tract 8021.01,Springfield,Hampden County,MA-504,74.9,6,6701,505,245,51.49,0.4287,0.311,57.36,8.56,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,5,25013801200,Census Tract 8012,Springfield,Hampden County,MA-504,73.2,6,2593,620,385,37.9,0.4744,0.5947,66.26,25.55,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,6,25013812202,Census Tract 8122.02,West Springfield Town,Hampden County,MA-504,72.8,6,3931,310,310,0,0.2603,0.151,54.39,13.84,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,7,25013801902,Census Tract 8019.02,Springfield,Hampden County,MA-504,72.7,6,3323,725,440,39.31,0.5678,0.5306,91.97,27.68,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,8,25013802200,Census Tract 8022,Springfield,Hampden County,MA-504,72.7,6,3098,350,240,31.43,0.6447,0.408,44.5,14.37,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,9,25013800102,Census Tract 8001.02,Springfield,Hampden County,MA-504,72.4,6,4833,375,270,28,0.3187,0.2286,55.38,11.46,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampden County,10,25013811800,Census Tract 8118,Holyoke,Hampden County,MA-504,70.6,6,4150,410,325,20.73,0.3403,0.3022,62.31,15.01,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampshire County,1,25015820600,Census Tract 8206,Amherst Town,Hampshire County,MA-507,74.9,6,1727,4,4,0,0.7143,0.3778,0.4469,0.2588,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Hampshire County,2,25015820101,Census Tract 8201.01,Ware,Hampshire County,MA-507,67.5,7,6715,130,130,0,0.3544,0.06938,11.17,1.664,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,3,25015822200,Census Tract 8222,Northampton,Hampshire County,MA-507,67,7,5514,130,100,23.08,0.5019,0.1226,8.38,1.52,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,4,25015820300,Census Tract 8203,Amherst Town,Hampshire County,MA-507,65.6,7,7451,465,325,30.11,0.4296,0.337,39.66,5.323,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,5,25015820700,Census Tract 8207,Amherst Town,Hampshire County,MA-507,64.9,7,3584,230,226,1.739,0.5306,0.1922,19.55,5.455,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,6,25015820102,Census Tract 8201.02,Ware,Hampshire County,MA-507,64,7,3333,325,135,58.46,0.2927,0.2165,20.67,6.201,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,7,25015820500,Census Tract 8205,Amherst Town,Hampshire County,MA-507,59.9,7,6272,1005,790,21.39,0.5156,0.2693,86.03,13.72,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,8,25015821300,Census Tract 8213,South Hadley,Hampshire County,MA-507,58,7,4458,75,35,53.33,0.3103,0.1086,4.469,1.002,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,9,25015821601,Census Tract 8216.01,Northampton,Hampshire County,MA-507,57.4,7,3990,255,200,21.57,0.2455,0.07572,24.02,6.02,missing components (weights renormalised): zori_growth_5yr
+Hampshire County,10,25015820205,Census Tract 8202.05,Belchertown,Hampshire County,MA-507,56.4,7,7518,45,45,0,0.3158,0.07364,5.028,0.6688,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,1,25017310400,Census Tract 3104,Lowell,Middlesex County,MA-516,83.1,7,3730,430,390,9.302,0.4538,0.3347,64.38,17.26,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,2,25017311200,Census Tract 3112,Lowell,Middlesex County,MA-516,81.6,7,3198,430,410,4.651,0.486,0.2521,67.82,21.21,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,3,25017311300,Census Tract 3113,Lowell,Middlesex County,MA-516,76.7,7,4875,290,200,31.03,0.3763,0.3167,35.2,7.22,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,4,25017368902,Census Tract 3689.02,Waltham,Middlesex County,MA-516,74.2,7,3540,390,250,35.9,0.5216,0.2287,46.36,13.09,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,5,25017310200,Census Tract 3102,Lowell,Middlesex County,MA-516,73.5,7,7273,265,225,15.09,0.3859,0.1903,38.63,5.311,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,6,25017311700,Census Tract 3117,Lowell,Middlesex County,MA-516,73.3,7,5051,175,160,8.571,0.2937,0.1708,25.75,5.099,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,7,25017312000,Census Tract 3120,Lowell,Middlesex County,MA-516,72.3,8,2776,205,150,26.83,0.4081,0.1942,27.47,9.895,
+Middlesex County,8,25017311800,Census Tract 3118,Lowell,Middlesex County,MA-516,71.7,7,3879,270,185,31.48,0.3092,0.2993,42.06,10.84,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,9,25017314101,Census Tract 3141.01,Dracut,Middlesex County,MA-516,71.6,7,7052,230,230,0,0.5934,0.0519,27.47,3.895,missing components (weights renormalised): zori_growth_5yr
+Middlesex County,10,25017332402,Census Tract 3324.02,Burlington,Middlesex County,MA-516,70,7,1809,165,165,0,0.2736,0.1365,28.33,15.66,missing components (weights renormalised): zori_growth_5yr
+Nantucket County,1,25019950400,Census Tract 9504,Nantucket,Nantucket County,MA-503,51.7,7,3319,15,5,66.67,0.3509,0.01416,0.4633,0.1396,missing components (weights renormalised): zori_growth_5yr
+Nantucket County,2,25019950100,Census Tract 9501,Nantucket,Nantucket County,MA-503,47.3,7,1662,40,25,37.5,0.3462,0.0679,0.4633,0.2788,missing components (weights renormalised): zori_growth_5yr
+Nantucket County,3,25019950202,Census Tract 9502.02,Nantucket,Nantucket County,MA-503,43.7,7,3089,100,90,10,0.2123,0.03207,11.58,3.75,missing components (weights renormalised): zori_growth_5yr
+Nantucket County,4,25019950500,Census Tract 9505,Nantucket,Nantucket County,MA-503,42.8,7,1123,35,0,100,0.06711,0.1122,0,0,missing components (weights renormalised): zori_growth_5yr
+Nantucket County,5,25019950201,Census Tract 9502.01,Nantucket,Nantucket County,MA-503,40.7,6,4096,0,0,,0.1236,0.01679,0,0,"missing components (weights renormalised): affordable_gap_per_eli_renter, zori_growth_5yr"
+Nantucket County,6,25019950307,Census Tract 9503.07,Nantucket,Nantucket County,MA-503,31,7,1194,4,0,100,0,0.0067,0,0,missing components (weights renormalised): zori_growth_5yr
+Norfolk County,1,25021413500,Census Tract 4135,Norwood,Norfolk County,MA-516,75.6,6,4559,280,280,0,0.4722,0.1642,43.78,9.603,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Norfolk County,2,25021410400,Census Tract 4104,Foxborough,Norfolk County,MA-516,70.9,6,6958,295,285,3.39,0.2895,0.08551,46.36,6.662,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Norfolk County,3,25021415202,Census Tract 4152.02,Canton,Norfolk County,MA-516,70.8,6,3389,70,70,0,0.5541,0.09904,12.02,3.546,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Norfolk County,4,25021422303,Census Tract 4223.03,Weymouth Town,Norfolk County,MA-511,69.5,7,5009,295,240,18.64,0.337,0.1275,34.99,6.985,missing components (weights renormalised): eviction_filing_rate
+Norfolk County,5,25021422401,Census Tract 4224.01,Weymouth Town,Norfolk County,MA-511,69.5,6,3476,475,225,52.63,0.391,0.1357,51.02,14.68,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Norfolk County,6,25021442105,Census Tract 4421.05,Franklin Town,Norfolk County,MA-516,69.3,7,2235,50,50,0,0.4074,0.05772,8.584,3.841,missing components (weights renormalised): eviction_filing_rate
+Norfolk County,7,25021443106,Census Tract 4431.06,Bellingham,Norfolk County,MA-516,69,6,6306,150,140,6.667,0.5409,0.009869,24.04,3.812,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Norfolk County,8,25021401202,Census Tract 4012.02,Brookline,Norfolk County,MA-516,66.9,7,1773,45,45,0,0.5787,0.04477,7.726,4.358,missing components (weights renormalised): eviction_filing_rate
+Norfolk County,9,25021417202,Census Tract 4172.02,Quincy,Norfolk County,MA-511,66.9,7,4034,185,170,8.108,0.383,0.1272,24.05,5.963,missing components (weights renormalised): eviction_filing_rate
+Norfolk County,10,25021456102,Census Tract 4561.02,Stoughton,Norfolk County,MA-516,66.5,6,4973,265,150,43.4,0.5308,0.1555,27.47,5.524,"missing components (weights renormalised): eviction_filing_rate, zori_growth_5yr"
+Plymouth County,1,25023521102,Census Tract 5211.02,Whitman,Plymouth County,MA-511,75.7,7,3499,220,210,4.545,0.387,0.1246,18.95,5.416,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,2,25023510200,Census Tract 5102,Brockton,Plymouth County,MA-511,70.3,7,7408,180,150,16.67,0.2737,0.0772,22.6,3.05,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,3,25023561400,Census Tract 5614,Bridgewater Town,Plymouth County,MA-511,69.7,7,5918,165,150,9.091,0.3372,0.05255,21.87,3.695,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,4,25023510400,Census Tract 5104,Brockton,Plymouth County,MA-511,69.5,7,4321,320,150,53.12,0.3389,0.2004,27.7,6.41,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,5,25023500104,Census Tract 5001.04,Hull,Plymouth County,MA-511,68.8,7,3584,65,55,15.38,0.3439,0.0797,8.018,2.237,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,6,25023510503,Census Tract 5105.03,Brockton,Plymouth County,MA-511,68.5,7,4249,370,150,59.46,0.3121,0.1648,35.71,8.405,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,7,25023510300,Census Tract 5103,Brockton,Plymouth County,MA-511,68.4,7,4465,425,255,40,0.327,0.1337,32.07,7.183,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,8,25023510800,Census Tract 5108,Brockton,Plymouth County,MA-511,66.9,7,7904,480,300,37.5,0.2403,0.154,35.71,4.519,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,9,25023511301,Census Tract 5113.01,Brockton,Plymouth County,MA-511,66.5,7,6185,185,135,27.03,0.3021,0.1152,19.68,3.182,missing components (weights renormalised): zori_growth_5yr
+Plymouth County,10,25023502200,Census Tract 5022,Rockland,Plymouth County,MA-511,66.3,7,6098,235,140,40.43,0.6688,0.09542,32.07,5.259,missing components (weights renormalised): zori_growth_5yr
+Suffolk County,1,25025080300,Census Tract 803,Boston,Suffolk County,MA-500,76.5,8,2210,375,270,28,0.4113,0.2394,47.32,21.41,
+Suffolk County,2,25025090600,Census Tract 906,Boston,Suffolk County,MA-500,75.6,8,2202,250,155,38,0.4652,0.2856,34.82,15.81,
+Suffolk County,3,25025101102,Census Tract 1011.02,Boston,Suffolk County,MA-500,73.4,7,5471,590,355,39.83,0.3906,0.2919,70.54,12.89,missing components (weights renormalised): zori_growth_5yr
+Suffolk County,4,25025080100,Census Tract 801,Boston,Suffolk County,MA-500,72.9,8,2775,290,165,43.1,0.3069,0.2849,32.14,11.58,
+Suffolk County,5,25025091700,Census Tract 917,Boston,Suffolk County,MA-500,72.5,8,3477,210,130,38.1,0.4429,0.2787,29.47,8.474,
+Suffolk County,6,25025090100,Census Tract 901,Boston,Suffolk County,MA-500,72.4,7,5752,930,470,49.46,0.5403,0.3326,117,20.34,missing components (weights renormalised): zori_growth_5yr
+Suffolk County,7,25025080900,Census Tract 809,Boston,Suffolk County,MA-500,72.2,8,3288,400,370,7.5,0.3416,0.3978,52.68,16.02,
+Suffolk County,8,25025101001,Census Tract 1010.01,Boston,Suffolk County,MA-500,69.6,7,6809,500,410,18,0.3903,0.08254,75.9,11.15,missing components (weights renormalised): zori_growth_5yr
+Suffolk County,9,25025170302,Census Tract 1703.02,Revere,Suffolk County,MA-516,69.5,8,3540,405,355,12.35,0.3015,0.2157,34.34,9.7,
+Suffolk County,10,25025160602,Census Tract 1606.02,Chelsea,Suffolk County,MA-516,69.4,8,4941,315,250,20.63,0.5844,0.2473,43.78,8.861,
+Worcester County,1,25027732203,Census Tract 7322.03,Worcester,Worcester County,MA-506,75.9,8,3318,145,135,6.897,0.3104,0.2101,20.32,6.123,
+Worcester County,2,25027702201,Census Tract 7022.01,Royalston,Worcester County,MA-506,72.3,7,1460,30,10,66.67,0.7143,0.1178,2.344,1.606,missing components (weights renormalised): zori_growth_5yr
+Worcester County,3,25027710500,Census Tract 7105,Fitchburg,Worcester County,MA-506,72.3,7,3409,380,270,28.95,0.3705,0.1828,44.54,13.07,missing components (weights renormalised): zori_growth_5yr
+Worcester County,4,25027731203,Census Tract 7312.03,Worcester,Worcester County,MA-506,72.2,7,6651,1100,525,52.27,0.3821,0.4859,78.14,11.75,missing components (weights renormalised): zori_growth_5yr
+Worcester County,5,25027733000,Census Tract 7330,Worcester,Worcester County,MA-506,72.2,7,4274,310,245,20.97,0.3595,0.2309,31.26,7.313,missing components (weights renormalised): zori_growth_5yr
+Worcester County,6,25027757200,Census Tract 7572,Southbridge Town,Worcester County,MA-506,72.1,7,2346,360,190,47.22,0.4366,0.3461,36.73,15.65,missing components (weights renormalised): zori_growth_5yr
+Worcester County,7,25027732302,Census Tract 7323.02,Worcester,Worcester County,MA-506,70.7,8,4542,270,200,25.93,0.3521,0.1369,29.69,6.538,
+Worcester County,8,25027730402,Census Tract 7304.02,Worcester,Worcester County,MA-506,70.5,7,2053,120,116,3.333,0.2555,0.1587,13.28,6.47,missing components (weights renormalised): zori_growth_5yr
+Worcester County,9,25027757300,Census Tract 7573,Southbridge Town,Worcester County,MA-506,70.4,7,2966,400,325,18.75,0.2841,0.2102,53.92,18.18,missing components (weights renormalised): zori_growth_5yr
+Worcester County,10,25027731802,Census Tract 7318.02,Worcester,Worcester County,MA-506,70.3,8,4381,890,340,61.8,0.2976,0.3367,64.86,14.8,
