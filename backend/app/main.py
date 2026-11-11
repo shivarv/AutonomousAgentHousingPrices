@@ -5,7 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 
-from app.controllers import health_controller, stats_controller, tract_controller
+from app.controllers import (
+    health_controller,
+    site_controller,
+    stats_controller,
+    tract_controller,
+)
 from app.core.config import get_settings
 from app.core.exceptions import DomainError
 
@@ -28,6 +33,7 @@ def create_app() -> FastAPI:
     app.include_router(health_controller.router)
     app.include_router(stats_controller.router)
     app.include_router(tract_controller.router)
+    app.include_router(site_controller.router)
     return app
 
 

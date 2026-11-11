@@ -246,8 +246,10 @@ geometry, and stay within the 8 GB data budget.
       be fast: simplified geometry, cached) and GET /api/tracts/{geoid}.
   - [x] item: TractDao, TractService (pre-serialised GeoJSON cached per filter, detail with every metric, source, year, flags), controller, gzip
   - [x] item: API tests (1,620 features < 1 s warm, filters, estimate labels, 404)
-- [ ] GET /api/sites?county=&municipality=&limit= and GET /api/sites/{id}; GET /api/sites/best
+- [x] GET /api/sites?county=&municipality=&limit= and GET /api/sites/{id}; GET /api/sites/best
       (top site overall or within a filter).
+  - [x] item: SiteDao, SiteService (ranked list with total, best with offset for "next best", detail with rings, components, weights, overlaps), controller
+  - [x] item: API tests (ranking, filters, best/next, labels, 404/422)
 - [ ] POST /api/area-stats {lat, lon, radii_km: [r1, r2, r3]}: for each ring, totals weighted by
       the share of each tract's area inside the circle (geodesic buffers via pyproj): estimated
       homeless, at-risk households (severely burdened ELI renters), ELI renter households,

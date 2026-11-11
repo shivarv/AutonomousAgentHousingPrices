@@ -9,9 +9,11 @@ from app.core.database import get_db
 from app.dao.area_dao import AreaDao
 from app.dao.health_dao import HealthDao
 from app.dao.homelessness_dao import HomelessnessDao
+from app.dao.site_dao import SiteDao
 from app.dao.tract_dao import TractDao
 from app.services.health_service import HealthService
 from app.services.homelessness_service import HomelessnessService
+from app.services.site_service import SiteService
 from app.services.stats_service import StatsService
 from app.services.tract_service import TractService
 
@@ -37,3 +39,7 @@ def db_key(db: Session) -> str:
 
 def get_tract_service(db: DbSession) -> TractService:
     return TractService(TractDao(db), db_key(db))
+
+
+def get_site_service(db: DbSession) -> SiteService:
+    return SiteService(SiteDao(db))
