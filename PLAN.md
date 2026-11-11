@@ -111,7 +111,7 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: HUD CHAS 2018-2022 tract tables + dictionary
   - [x] item: HUD PIT and HIC counts by CoC
   - [x] item: subsidised housing (LIHTC, Picture of Subsidized Households)
-  - [ ] item: transit GTFS (MBTA + RTAs)
+  - [x] item: transit GTFS (MBTA + RTAs)
   - [ ] item: Zillow ZHVI/ZORI and ZCTA-tract relationship file
   - [ ] item: MassGIS parcels (assessor attributes + developable candidates)
   - [ ] item: build constraints (open space, wetlands, FEMA flood) and MBTA Communities 3A
