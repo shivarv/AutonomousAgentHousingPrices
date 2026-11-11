@@ -1,0 +1,70 @@
+# --- Secrets (never commit) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials*.json
+.netrc
+
+# --- Data and large files ---
+data/
+artifacts/
+*.parquet
+*.feather
+*.zip
+*.gz
+*.tar
+*.7z
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.gdb/
+*.pkl
+*.joblib
+*.h5
+*.onnx
+*.sqlite
+*.db
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# --- Node / React ---
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+
+# --- Run output ---
+logs/
+*.log
+STOP
+
+# --- Editors / OS ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Claude Code (personal settings stay local; .claude/settings.json is shared) ---
+.claude/settings.local.json
