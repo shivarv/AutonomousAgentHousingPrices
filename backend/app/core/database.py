@@ -5,13 +5,18 @@ from functools import lru_cache
 
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.pool import NullPool
 
-from app.core.config import get_settings
+from app.core.config import get_settings, normalise_database_url
 
 
 @lru_cache
 def get_engine(url: str | None = None) -> Engine:
-    return create_engine(url or get_settings().database_url, pool_pre_ping=True)
+    settings = get_settings()
+    target = normalise_database_url(url) if url else settings.database_url
+    if settings.db_null_pool:
+        return create_engine(target, poolclass=NullPool)
+    return create_engine(target, pool_pre_ping=True)
 
 
 @lru_cache
