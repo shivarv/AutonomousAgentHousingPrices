@@ -24,3 +24,26 @@ Format: date — decision — alternatives considered — reason.
   external font requests.
 - 2026-11-10 — Frontend lint is oxlint (the current Vite template default) — add ESLint —
   `npm run lint` is what the plan requires; oxlint covers react hooks rules.
+- 2026-11-10 — Latest vintages: TIGER/Line 2026 (2020 tracts, 1,620 MA tracts; 351 towns =
+  county subdivisions excluding the 6 "not defined" water records), ACS 2020-2024 5-year, CHAS
+  2018-2022, PIT/HIC 2007-2025, HUD CoC boundaries 2025 (10 MA CoCs), Picture of Subsidized
+  Households 2025 — older vintages — newest releases available on 2026-11-10.
+- 2026-11-10 — huduser.gov answers non-browser clients with an empty HTTP 202; HUD downloads send
+  a browser User-Agent string — skip HUD data — the files are public-domain federal data meant
+  for download; no login or terms are bypassed.
+- 2026-11-10 — ZIP→tract: HUD USPS crosswalk needs an API token we don't have; use the Census 2020
+  ZCTA-tract relationship file, weighted by residential share = 2020 block housing units
+  (TIGER tabblock20 HOUSING20, block internal point located in a ZCTA polygon) — land-area
+  weights — residential weighting is what PLAN.md asks for.
+- 2026-11-10 — RTA GTFS from the MobilityData catalogue mirror (latest.zip per feed), including
+  WRTA and GATRA whose direct feeds are marked inactive — agency sites one by one — one stable
+  source; stop locations change slowly. MBTA GTFS comes directly from cdn.mbta.com.
+- 2026-11-10 — Parcels: MassGIS statewide L3 parcels gdb (754 MB, 2.2 M polygons, 2.55 M assessing
+  rows) — 8.5 GB aggregate gdb / per-town downloads — fits the 8 GB budget. Owner name/address
+  columns are never read or stored.
+- 2026-11-10 — Shelters: no public structured list of MA shelter addresses with beds exists (HIC is
+  CoC-level only). Use OpenStreetMap homeless-shelter features (10 in MA), with DV-related tags
+  excluded in the Overpass query so DV locations are never downloaded — scraping commercial
+  directories (terms) — only open-licensed option. Consequence handled in Phase 5.
+- 2026-11-10 — Evictions: Eviction Lab tract filings (2000-2018, validated) — MA Trial Court
+  dashboard (no machine-readable export) — only tract-level open source; its age is reported.
