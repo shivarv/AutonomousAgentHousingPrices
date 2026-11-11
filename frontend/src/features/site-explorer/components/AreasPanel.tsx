@@ -2,6 +2,7 @@ import { ErrorState } from '@/components/ui/ErrorState'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { SelectField } from '@/components/ui/SelectField'
 import { FiguresList } from '@/features/site-explorer/components/FiguresList'
+import { TractDetailPanel } from '@/features/site-explorer/components/TractDetailPanel'
 import type { ExplorerState } from '@/features/site-explorer/hooks/useExplorerState'
 import { useAreaAt, useAreaSummary } from '@/features/site-explorer/hooks/useExplorerData'
 import type { AreaLevel, LatLon } from '@/features/site-explorer/types'
@@ -36,6 +37,16 @@ export function AreasPanel({ s, pin }: { s: ExplorerState; pin: LatLon | null })
           <p className="mt-2 text-xs text-ink-soft">
             Click neighbouring areas on the map to add them to a benefit area.
           </p>
+          {s.level === 'tract' && (
+            <details className="mt-3 rounded-sm border border-rule p-2">
+              <summary className="cursor-pointer text-sm font-semibold">
+                All figures for this tract, with sources
+              </summary>
+              <div className="mt-2">
+                <TractDetailPanel geoid={at.data.id} />
+              </div>
+            </details>
+          )}
         </section>
       )}
       {at.data && s.benefit.length > 0 && (

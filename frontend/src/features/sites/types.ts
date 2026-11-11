@@ -51,6 +51,7 @@ export interface SiteDetail extends SiteSummary {
   land_value: number | null
   fiscal_year: number | null
   sources: string[]
+  provenance: Record<string, { year: number | null; source: string; note: string | null }>
 }
 
 export interface SiteFilter {

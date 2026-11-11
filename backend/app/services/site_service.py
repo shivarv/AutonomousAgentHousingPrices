@@ -155,6 +155,10 @@ class SiteService:
             for k, m in PROVENANCE_METRICS.items()
             if m in found
         }
+        if "need_index" in out:
+            out["need_index"].note = (
+                "index build year; inputs from ACS, HUD CHAS, HUD PIT, Zillow, Eviction Lab"
+            )
         if "homeless_estimate" in out:
             out["homeless_estimate"].note = "modelled estimate from the CoC Point-in-Time count"
         out["parcel"] = Provenance(
