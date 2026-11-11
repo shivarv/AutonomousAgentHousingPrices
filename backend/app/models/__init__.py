@@ -15,10 +15,11 @@ from app.models.geography import (
 )
 from app.models.homelessness import CocBedCount, HomelessnessCount, Shelter
 from app.models.housing import Parcel, SubsidisedHousing, TransitStop
-from app.models.metric import TractMetric
+from app.models.metric import AreaMetric, TractMetric
 from app.models.site import ModelRun, SiteCandidate
 
 __all__ = [
+    "AreaMetric",
     "Base",
     "BostonNeighbourhood",
     "Coc",

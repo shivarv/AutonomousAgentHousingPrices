@@ -110,7 +110,12 @@ class Tract(Base):
 
 
 class TractMunicipality(Base):
-    """Tract x municipality overlap (area share of the tract), for tracts crossing town lines."""
+    """Tract x municipality overlap, for tracts crossing town lines.
+
+    ``area_share``: share of the tract's area in the town. ``housing_share``: share of the
+    tract's 2020 housing units (census blocks) in the town; used to apportion tract counts to
+    towns (falls back to the area share for tracts with no housing units).
+    """
 
     __tablename__ = "tract_municipalities"
 
@@ -119,6 +124,7 @@ class TractMunicipality(Base):
         ForeignKey("municipalities.geoid"), primary_key=True, index=True
     )
     area_share: Mapped[float] = mapped_column(Float)
+    housing_share: Mapped[float | None] = mapped_column(Float)
 
 
 class ZipTract(Base):
