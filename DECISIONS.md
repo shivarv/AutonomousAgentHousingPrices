@@ -208,3 +208,9 @@ Format: date — decision — alternatives considered — reason.
   official totals are listed separately — apportioning official counts to counties would be an
   estimate anyway. Town rankings show all towns and, separately, towns with 10,000+ residents
   because one- or two-tract towns dominate the top of the population-weighted index.
+- 2026-11-10 — scripts/validate.py checks /api/areas/at against an independent brute-force
+  shapely point-in-polygon over the stored boundaries (not the API's own STRtree), calls the
+  API in-process with FastAPI's TestClient on the `housing` database (no server needed), and
+  sums of fractional estimates are compared with a 0.5-person tolerance. The git check requires
+  a clean `main` with no unmerged task branches or open PRs, so on a task branch it is run with
+  `--skip-git`; the final run is on main after the merge.

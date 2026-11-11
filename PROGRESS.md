@@ -45,3 +45,4 @@
 - 2026-11-10 — Phase 12: reports/STATISTICS.md generated from the database (statewide, PIT trend, 11 CoCs, 14 counties, top towns, top sites).
 - 2026-11-10 — Phase 12: reports/REPORT.md completed (question, data, methods, results, limitations, next steps).
 - 2026-11-10 — Phase 12: README.md (what it is, local run, rebuild order, Docker).
+- 2026-11-10 — Phase 12: scripts/validate.py (14 Definition-of-done checks; all pass on the branch with --skip-git).

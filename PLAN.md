@@ -346,7 +346,8 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: question, data summary, results (figures from STATISTICS.md / model_metrics.json), limitations, next steps; methods 3.1-3.5 already written in earlier phases
 - [x] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
   - [x] item: README (what it is, local run and checks, full rebuild order, Docker untested note, licences)
-- [ ] scripts/validate.py passes (see Definition of done).
+- [x] scripts/validate.py passes (see Definition of done).
+  - [x] item: scripts/validate.py (data, API, report, command and git/PR checks; --skip-git for branch runs; independent brute-force point-in-polygon for /api/areas/at)
 
 ## Definition of done
 All tasks merged into main AND `uv run --project backend python scripts/validate.py` exits 0.
