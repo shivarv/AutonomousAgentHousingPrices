@@ -7,7 +7,16 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.dao.area_dao import AreaDao
-from app.models import DataSource, Shelter, SubsidisedHousing, Tract, TractMetric
+from app.models import (
+    CocBedCount,
+    DataSource,
+    HomelessnessCount,
+    Shelter,
+    SubsidisedHousing,
+    Tract,
+    TractMetric,
+    TractMunicipality,
+)
 
 
 class GeoDao:
@@ -73,3 +82,37 @@ class GeoDao:
             ).where(SubsidisedHousing.lat.is_not(None), SubsidisedHousing.lon.is_not(None))
         ).all()
         return [dict(r._mapping) for r in rows]
+
+    def town_weights(self) -> list[dict[str, Any]]:
+        """(tract, town, housing_share): how each tract's counts are apportioned to towns."""
+        rows = self.session.execute(
+            select(
+                TractMunicipality.tract_geoid,
+                TractMunicipality.municipality_geoid,
+                TractMunicipality.housing_share,
+            )
+        ).all()
+        return [dict(r._mapping) for r in rows]
+
+    def latest_pit(self) -> dict[str, dict[str, Any]]:
+        """Latest official PIT count per CoC, with that year's HIC year-round beds."""
+        pit = self.session.execute(
+            select(
+                HomelessnessCount.coc_number,
+                HomelessnessCount.year,
+                HomelessnessCount.total,
+                HomelessnessCount.sheltered,
+                HomelessnessCount.unsheltered,
+            ).order_by(HomelessnessCount.coc_number, HomelessnessCount.year.desc())
+        ).all()
+        beds = {
+            (b.coc_number, b.year): b.total_year_round_beds
+            for b in self.session.execute(
+                select(CocBedCount.coc_number, CocBedCount.year, CocBedCount.total_year_round_beds)
+            ).all()
+        }
+        out: dict[str, dict[str, Any]] = {}
+        for r in pit:
+            if r.coc_number not in out:
+                out[r.coc_number] = dict(r._mapping) | {"beds": beds.get((r.coc_number, r.year))}
+        return out

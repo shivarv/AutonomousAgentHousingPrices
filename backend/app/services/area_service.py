@@ -12,9 +12,11 @@ from typing import Any
 import numpy as np
 import shapely
 
-from app.core.exceptions import OutsideCoverageError, ValidationError
+from app.core.exceptions import NotFoundError, OutsideCoverageError, ValidationError
 from app.schemas.area import (
+    AreaAt,
     AreaFigures,
+    AreaRef,
     AreaStatsResponse,
     NearbyShelter,
     NearbyTract,
@@ -22,7 +24,7 @@ from app.schemas.area import (
 )
 from app.schemas.estimate import HomelessFigure
 from app.services import rings
-from app.services.geo_index import GeoIndex
+from app.services.geo_index import LEVELS, GeoIndex
 
 MIN_RADIUS_KM = 0.5
 MAX_RADIUS_KM = 80.0
@@ -37,6 +39,18 @@ BEDS_NOTE = (
 SPREAD_NOTE = (
     "Tract figures are assumed to be spread evenly over each tract's area when a ring cuts "
     "through a tract."
+)
+AREA_HOMELESS_METHOD = (
+    "sum of modelled tract estimates (CoC Point-in-Time count allocated to tracts); towns get "
+    "each tract's housing-unit share; not a count"
+)
+COC_NOTE = (
+    "Official HUD Point-in-Time count for the whole Continuum of Care; the tract estimates "
+    "inside it sum to this count. Shelter beds are the CoC's HIC year-round beds."
+)
+AREA_NOTE = (
+    "Homeless figures below CoC level are modelled estimates; official counts exist only "
+    "per Continuum of Care."
 )
 COUNT_KEYS = (
     "population",
@@ -189,3 +203,67 @@ class AreaService:
                 )
             )
         return out
+
+    # ---------------------------------------------------------------- areas
+    def _check_level(self, level: str) -> None:
+        if level not in LEVELS:
+            raise ValidationError(f"level must be one of {', '.join(LEVELS)}")
+
+    def area_figures(self, level: str, area_ids: list[str]) -> tuple[AreaFigures, HomelessFigure]:
+        """Combined figures for areas of one level (weights summed per tract) and the summed
+        tract estimate. At CoC level the homeless figure and beds are the official ones."""
+        members = self.index.members[level]
+        layer = self.index.layers[level]
+        weights: dict[int, float] = {}
+        shelter_ids: set[int] = set()
+        for a in area_ids:
+            if a not in members:
+                raise NotFoundError(f"no {level} with id '{a}'")
+            for i, w in zip(*members[a], strict=True):
+                weights[int(i)] = weights.get(int(i), 0.0) + float(w)
+            shelter_ids.update(self.shelters_in(layer.geoms[layer.pos[a]]))
+        idx = np.array(sorted(weights), dtype=int)
+        share = np.array([weights[i] for i in idx], dtype=float)
+        fig = self.figures(idx, share, sorted(shelter_ids))
+        meta = self.index.metric_meta.get("homeless_estimate", {})
+        est = HomelessFigure.estimate(fig.homeless.value, meta.get("year"), AREA_HOMELESS_METHOD)
+        if level == "coc":
+            off = [self.index.official.get(a) for a in area_ids]
+            years = {o["year"] for o in off if o}
+            if all(off) and len(years) == 1:
+                fig.homeless = HomelessFigure.official(
+                    float(sum(o["total"] for o in off)), years.pop()
+                )
+                beds = [o["beds"] for o in off]
+                fig.shelter_beds = None if any(b is None for b in beds) else int(sum(beds))
+            else:
+                fig.homeless = est
+        else:
+            fig.homeless = est
+        return fig, est
+
+    def area_at(self, lat: float, lon: float, level: str) -> AreaAt:
+        self._check_level(level)
+        x, y = self.locate(lat, lon)
+        layer = self.index.layers[level]
+        i = layer.at(x, y)
+        if i is None:
+            if level == "neighbourhood":
+                raise OutsideCoverageError(
+                    "Boston neighbourhoods cover the City of Boston only; this point is "
+                    "outside Boston. Choose another boundary level."
+                )
+            raise OutsideCoverageError(f"no {level} boundary contains this point")
+        area_id = layer.ids[i]
+        fig, est = self.area_figures(level, [area_id])
+        return AreaAt(
+            level=level,  # type: ignore[arg-type]
+            id=area_id,
+            name=layer.names[i],
+            boundary=layer.boundaries[i],
+            neighbours=[AreaRef(id=n, name=layer.names[layer.pos[n]]) for n in layer.neighbours[i]],
+            figures=fig,
+            homeless_estimate_sum=est,
+            homeless_basis="official CoC count" if level == "coc" else "sum of tract estimates",
+            note=COC_NOTE if level == "coc" else AREA_NOTE,
+        )

@@ -259,12 +259,15 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: GeoDao + GeoIndex (process-wide cache per database: tract polygons, metric arrays, area STRtrees, neighbours, point layers)
   - [x] item: AreaService.ring_stats (geodesic rings, area-share totals, gap status, shelters, nearby tracts/shelters, sources), controller
   - [x] item: API tests (Boston/Worcester/Springfield, all metrics, < 1 s, validation and outside-MA message)
-- [ ] GET /api/areas/at?lat=&lon=&level=tract|neighbourhood|municipality|county|coc : the area
+- [x] GET /api/areas/at?lat=&lon=&level=tract|neighbourhood|municipality|county|coc : the area
       containing the point (point-in-polygon with a cached shapely STRtree), with its boundary
       (simplified GeoJSON), neighbouring areas' ids, and the same metrics as area-stats.
       Homeless figure is the official count at level=coc and the summed estimate otherwise;
       the response says which. Points outside MA (or outside Boston for neighbourhood) return
       a clear message.
+  - [x] item: GeoIndex memberships (tract weights per area, same rules as area_metrics) and official PIT/HIC per CoC
+  - [x] item: AreaService.area_at (STRtree point-in-polygon, boundary, neighbours, figures; official count at CoC, estimate elsewhere), controller
+  - [x] item: API tests (three cities x levels, CoC estimate sum = official, outside Boston/MA messages)
 - [ ] GET /api/areas?level=&bbox= : boundaries for drawing the outline layer (simplified, cached).
 - [ ] POST /api/areas/summary {level, ids: [...]} : combined totals for a user-built benefit area.
 - [ ] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
