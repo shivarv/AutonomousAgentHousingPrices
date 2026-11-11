@@ -122,3 +122,6 @@ Format: date — decision — alternatives considered — reason.
   impute missing components (would invent values) / require all 8 (only 408 tracts). Stored
   year 2026 (build year; inputs span 2014-2026). need_index source_id = hud_chas (primary
   component) because source_id holds one source; the method text lists every input source.
+- 2026-11-10 — Need Index alternatives: affordability x2, homelessness+eviction x2, sparse components
+  dropped. Equal weights kept as the main index (PLAN.md default; no alternative is better
+  justified); the 10/20 top-20 overlap without sparse components is reported, not hidden.

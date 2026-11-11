@@ -186,7 +186,9 @@ geometry, and stay within the 8 GB data budget.
 - [x] Equal weights to start (justify changes in DECISIONS.md); store index and components.
   - [x] item: pipeline.index.need_index (weighted mean of available scores x 100, min 5 of 8, flags) -> metrics_need.parquet, loaded
   - [x] item: tests (0-100 range, equal weights, renormalisation over missing, NULL + flag below minimum; loaded rows)
-- [ ] Sensitivity check with 3 alternative weightings; report top-20 stability.
+- [x] Sensitivity check with 3 alternative weightings; report top-20 stability.
+  - [x] item: pipeline.index.sensitivity (affordability-heavy, homelessness/eviction-heavy, dense-components-only) -> reports/need_index_sensitivity.md/.json
+  - [x] item: tests + REPORT.md summary
 - [ ] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
       summary (population-weighted index).
 
