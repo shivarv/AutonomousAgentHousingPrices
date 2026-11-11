@@ -196,8 +196,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests (weighted mean arithmetic, CSV contents)
 
 ### Phase 7 – Home-value model (cost context for sites)
-- [ ] Residential parcels statewide; split 70/15/15 stratified by county; test split saved once,
+- [x] Residential parcels statewide; split 70/15/15 stratified by county; test split saved once,
       never used for tuning.
+  - [x] item: pipeline.clean.parcels (assessor attributes without owner/address, parcel points located in tract/town/county)
+  - [x] item: pipeline.model.dataset (residential use codes, value filters logged, 70/15/15 split stratified by county, saved once)
+  - [x] item: tests (split proportions/stratification/immutability, lot size units)
 - [ ] Baseline: municipality median value. Then linear regression and LightGBM (validation
       tuning only). Target: beat baseline MAPE by >= 25% on test.
 - [ ] Also estimate land value per square foot by tract (from assessor land values) for site
