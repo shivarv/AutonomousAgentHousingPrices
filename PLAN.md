@@ -333,7 +333,7 @@ geometry, and stay within the 8 GB data budget.
       uvicorn, frontend), .dockerignore files. Validate YAML parses and paths exist; note in
       README that it's untested here.
   - [x] item: backend/Dockerfile (uv multi-stage, non-root, migrations then uvicorn) + backend/.dockerignore
-  - [ ] item: frontend/Dockerfile (npm build, nginx static server proxying /api) + frontend/.dockerignore
+  - [x] item: frontend/Dockerfile (npm build, nginx static server proxying /api) + frontend/.dockerignore
   - [ ] item: compose.yaml (postgres:18 healthcheck, backend, frontend, optional pipeline profile), static validation test, README note
 
 ### Phase 12 – Statistics, report and final checks
