@@ -319,7 +319,9 @@ geometry, and stay within the 8 GB data budget.
 - [x] Tract and site detail panels: every number with its source and year; estimates labelled.
   - [x] item: site provenance (year and source per feature group) in /api/sites/{id} + test
   - [x] item: tract detail panel (all metrics grouped, source, year, estimate and flags) in Areas mode; site detail panel (score breakdown, rings, land cost, transit, zoning, constraints, provenance); screenshot checked
-- [ ] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
+- [x] Pages: Overview, Site explorer (home), Methodology & sources, About the estimates.
+  - [x] item: methodology feature (methods in prose, live model results and site weights from /api/model/metrics, sources table from /api/sources; #homeless-estimate anchor for HomelessFigure.method_url)
+  - [x] item: About the estimates page (what an estimate is, limits, sensitivity, privacy); screenshot checked
 - [ ] Loading, error and empty states everywhere; responsive down to phone width; the map is
       keyboard accessible (pin can be moved with arrow keys).
 
