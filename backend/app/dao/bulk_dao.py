@@ -8,9 +8,12 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import DeclarativeBase, Session
 
 BATCH = 5000
+MAX_PARAMS = 60_000  # Postgres allows at most 65,535 bind parameters per statement
 
 
 def _batches(rows: Sequence[dict[str, Any]], size: int = BATCH) -> Iterable[Sequence[dict]]:
+    if rows:
+        size = max(1, min(size, MAX_PARAMS // max(1, len(rows[0]))))
     for start in range(0, len(rows), size):
         yield rows[start : start + size]
 

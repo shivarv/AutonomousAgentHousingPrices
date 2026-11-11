@@ -231,8 +231,10 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pipeline.sites.score (7 weighted percentile components, ranks state/county, missing component flagged)
   - [x] item: plain-English summary from the site's own features (strengths, need, gap, estimate label, transit, land cost, flags)
   - [x] item: tests (percentile bounds/direction, score range, missing = 0, summary facts)
-- [ ] reports/candidate_sites.csv: top 100 statewide and top 10 per county. Store all scored
+- [x] reports/candidate_sites.csv: top 100 statewide and top 10 per county. Store all scored
       sites in site_candidates.
+  - [x] item: pipeline.sites.load (candidate_sites.csv, parcels, site_candidates, model_runs site_scoring row); bulk batches capped by parameter limit
+  - [x] item: tests (batch size, JSON cleaning, report selection) and REPORT.md 3.5
 
 ### Phase 9 – Backend API (controllers → services → DAOs)
 - [ ] GET /api/stats/overview?level=state|county|municipality&id= : population, homeless counts

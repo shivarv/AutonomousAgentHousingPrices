@@ -26,3 +26,4 @@
 - 2026-11-10 — Phase 8: site screening — 40,873 developable parcels >= 0.5 acre kept (4,062 dropped as >50% constrained; 14,067 flagged partial overlap).
 - 2026-11-10 — Phase 8: site features for 40,873 sites (rings 1.5/5/15 km, transit distance, shelters, land cost); shared ring module.
 - 2026-11-10 — Phase 8: site scores 0-100 (7 documented components) and plain-English summaries; top sites Fall River, Lawrence, Worcester.
+- 2026-11-10 — Phase 8: reports/candidate_sites.csv (185 rows) and 40,873 scored sites stored in parcels/site_candidates; REPORT.md 3.5.
