@@ -105,6 +105,18 @@ geometry, and stay within the 8 GB data budget.
 
 ### Phase 2 – Data collection (backend/pipeline/download/)
 - [ ] One idempotent download module per source, saving untouched files to data/raw/<source>/.
+  - [x] item: download helpers (idempotent, manifest with url/date/sha256)
+  - [x] item: boundaries (TIGER 2026 tracts/towns/counties, Boston neighbourhoods, HUD CoC 2025)
+  - [x] item: ACS 2020-2024 5-year tract variables
+  - [x] item: HUD CHAS 2018-2022 tract tables + dictionary
+  - [ ] item: HUD PIT and HIC counts by CoC
+  - [ ] item: subsidised housing (LIHTC, Picture of Subsidized Households)
+  - [ ] item: transit GTFS (MBTA + RTAs)
+  - [ ] item: Zillow ZHVI/ZORI and ZCTA-tract relationship file
+  - [ ] item: MassGIS parcels (assessor attributes + developable candidates)
+  - [ ] item: build constraints (open space, wetlands, FEMA flood) and MBTA Communities 3A
+  - [ ] item: shelters, DESE homeless students, evictions (best effort)
+  - [ ] item: pipeline.download CLI running every module
 - [ ] DATA_SOURCES.md entries for every dataset, plus a `data_sources` table loaded from it.
 - [ ] reports/data_audit.md: rows, years, geography, missing-value rates, known issues.
 
