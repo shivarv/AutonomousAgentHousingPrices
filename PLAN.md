@@ -226,8 +226,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: app.services.rings (geodesic circles, tract area shares, share-weighted totals, weighted mean) shared with /api/area-stats
   - [x] item: pipeline.sites.features (rings 1.5/5/15 km, nearest stop, shelters, land cost, municipality)
   - [x] item: tests (circle area, shares inside/crossing/outside, missing values, land cost)
-- [ ] Site score 0-100 with documented weights; a plain-English "why this site" summary
+- [x] Site score 0-100 with documented weights; a plain-English "why this site" summary
       generated from the features (no invented facts).
+  - [x] item: pipeline.sites.score (7 weighted percentile components, ranks state/county, missing component flagged)
+  - [x] item: plain-English summary from the site's own features (strengths, need, gap, estimate label, transit, land cost, flags)
+  - [x] item: tests (percentile bounds/direction, score range, missing = 0, summary facts)
 - [ ] reports/candidate_sites.csv: top 100 statewide and top 10 per county. Store all scored
       sites in site_candidates.
 

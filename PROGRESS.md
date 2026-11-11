@@ -25,3 +25,4 @@
 - 2026-11-10 — Phase 7: home-value model (HistGradientBoosting, test MAPE 11.4% vs baseline 32.6%, target met), land value per sq ft by tract, importances, error-by-county chart, model_runs row.
 - 2026-11-10 — Phase 8: site screening — 40,873 developable parcels >= 0.5 acre kept (4,062 dropped as >50% constrained; 14,067 flagged partial overlap).
 - 2026-11-10 — Phase 8: site features for 40,873 sites (rings 1.5/5/15 km, transit distance, shelters, land cost); shared ring module.
+- 2026-11-10 — Phase 8: site scores 0-100 (7 documented components) and plain-English summaries; top sites Fall River, Lawrence, Worcester.
