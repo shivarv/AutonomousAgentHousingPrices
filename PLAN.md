@@ -125,13 +125,15 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pipeline.audit generating reports/data_audit.md for all 23 datasets
 
 ### Phase 3 – Database schema and loading
-- [ ] Models + Alembic migrations: data_sources, counties, municipalities, cocs (with member
+- [x] Models + Alembic migrations: data_sources, counties, municipalities, cocs (with member
       municipalities and boundary), boston_neighbourhoods (boundary, member tracts by area
       share), tracts (geoid, county, municipality, coc, neighbourhood, centroid,
       simplified GeoJSON, land area), tract_metrics (tract x metric x year, with source_id),
       homelessness_counts (coc x year x sheltered/unsheltered/total), shelters (name, type,
       beds, lat/lon, source; no DV shelters), subsidised_housing, transit_stops, parcels
       (developable candidates only, with geometry), site_candidates, model_runs.
+  - [x] item: ORM models for every table (geography, metrics, homelessness, housing, sites)
+  - [x] item: Alembic migration, applied to housing and housing_test (downgrade/upgrade checked)
 - [ ] Pipeline clean/ + load.py: cleaned data into the tables via DAOs. ZIP data to tracts via
       the crosswalk, weighted by residential share (record in DECISIONS.md).
 - [ ] Tests: tract count matches statewide TIGER, 351 municipalities, 14 counties, every MA

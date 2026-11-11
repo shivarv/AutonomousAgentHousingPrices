@@ -7,3 +7,4 @@
 - 2026-11-10 — Phase 2: download modules for all sources (2.1 GB raw); DESE skipped (blocked), shelters via OSM, evictions via Eviction Lab.
 - 2026-11-10 — Phase 2: DATA_SOURCES.md (23 datasets, generated from manifests) and data_sources table loader.
 - 2026-11-10 — Phase 2: reports/data_audit.md generated (pipeline.audit) for all 23 datasets.
+- 2026-11-10 — Phase 3: ORM models + core schema migration (15 tables).

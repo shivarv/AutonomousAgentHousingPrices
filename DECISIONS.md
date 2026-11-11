@@ -50,3 +50,7 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — DATA_SOURCES.md is generated from a Python registry (pipeline/sources.py) plus the
   download manifests, and parsed back to load `data_sources` (matched to a stable key by dataset
   name) — hand-written markdown — keeps file, table and manifests consistent.
+- 2026-11-10 — Schema additions beyond PLAN.md's list: coc_bed_counts (HIC per CoC/year),
+  tract_municipalities (tract x town area shares), zip_tracts (ZIP to tract residential weights),
+  neighbourhood_tracts (area shares). Each tract also gets one primary municipality, CoC and
+  neighbourhood: the one holding the largest share of its area.
