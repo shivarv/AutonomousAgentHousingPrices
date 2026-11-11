@@ -201,12 +201,12 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pipeline.clean.parcels (assessor attributes without owner/address, parcel points located in tract/town/county)
   - [x] item: pipeline.model.dataset (residential use codes, value filters logged, 70/15/15 split stratified by county, saved once)
   - [x] item: tests (split proportions/stratification/immutability, lot size units)
-- [ ] Baseline: municipality median value. Then linear regression and LightGBM (validation
+- [x] Baseline: municipality median value. Then linear regression and LightGBM (validation
       tuning only). Target: beat baseline MAPE by >= 25% on test.
-  - [ ] item: pipeline.model.home_value features (parcel, train-only town/tract medians, tract context)
-  - [ ] item: baseline, ridge and gradient boosting (HistGradientBoosting; LightGBM blocked) tuned on validation; one final test evaluation -> reports/model_metrics.json
-  - [ ] item: tests (MAPE, baseline fallback, train-only encodings, test never used for selection)
-- [ ] Also estimate land value per square foot by tract (from assessor land values) for site
+  - [x] item: pipeline.model.home_value features (parcel, train-only town/tract medians, tract context)
+  - [x] item: baseline, ridge and gradient boosting (HistGradientBoosting; LightGBM blocked) tuned on validation; one final test evaluation -> reports/model_metrics.json
+  - [x] item: tests (MAPE, baseline fallback, train-only encodings, test never used for selection)
+- [x] Also estimate land value per square foot by tract (from assessor land values) for site
       cost scoring.
   - [x] item: pipeline.features.land_value (median LAND_VAL / lot sq ft per tract, taxable non-condo parcels; flag < 10 parcels) loaded into tract_metrics
   - [x] item: tests (filters, record summing, flag, missing stays NULL)
