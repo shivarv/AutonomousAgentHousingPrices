@@ -82,6 +82,14 @@ RATIOS = {
     "eli_severe_burden_share": ("eli_severely_burdened_renters", "eli_renter_households", 1.0),
 }
 
+# population-weighted means: metric -> weight metric. Computed as sum(value x weight) /
+# sum(weight) over tracts that have a value; helper sums are not stored.
+WEIGHTED_MEANS = {"need_index": "population"}
+WEIGHTED_METHOD = (
+    "population-weighted mean of tract values (ACS 2020-2024 population); "
+    "tracts without a value are excluded"
+)
+
 MUNICIPALITY_METHOD = (
     "sum of tracts; tracts crossing town lines apportioned by 2020 census-block housing-unit "
     "share (area share where a tract has no housing units)"
@@ -159,7 +167,10 @@ def aggregate(
     """metrics: tract_geoid, metric, year, value, is_estimate, method, source_key.
     assign: geoid + one column per LEVELS entry. town_weights: tract_geoid,
     municipality_geoid, housing_share. Returns long area metrics."""
-    sums_in = metrics[metrics.metric.isin(SUM_METRICS)]
+    sums_in = pd.concat(
+        [metrics[metrics.metric.isin(SUM_METRICS)], weighted_mean_parts(metrics)],
+        ignore_index=True,
+    )
     out = []
     m = sums_in.merge(assign, left_on="tract_geoid", right_on="geoid", how="left")
     for level, col in LEVELS.items():
@@ -181,7 +192,8 @@ def aggregate(
 
     ratio_rows = []
     present = set(sums.metric)
-    for name, (num, den, scale) in RATIOS.items():
+    ratios = {**RATIOS, **{m: (f"_{m}_x_w", f"_{m}_w", 1.0) for m in WEIGHTED_MEANS}}
+    for name, (num, den, scale) in ratios.items():
         if num not in present or den not in present:
             continue
         nn = sums[sums.metric == num].set_index(["level", "area_id", "year"])
@@ -192,16 +204,35 @@ def aggregate(
         r["metric"] = name
         r["value"] = val.values
         r["is_estimate"] = False
-        r["method"] = None
+        r["method"] = WEIGHTED_METHOD if name in WEIGHTED_MEANS else None
         ratio_rows.append(r)
-    return pd.concat([sums, *ratio_rows], ignore_index=True)
+    result = pd.concat([sums, *ratio_rows], ignore_index=True)
+    return result[~result.metric.str.startswith("_")].reset_index(drop=True)
+
+
+def weighted_mean_parts(metrics: pd.DataFrame) -> pd.DataFrame:
+    """Helper rows _<m>_x_w (value x weight) and _<m>_w (weight) for tracts with a value."""
+    parts = []
+    for name, weight in WEIGHTED_MEANS.items():
+        v = metrics[(metrics.metric == name) & metrics.value.notna()]
+        w = metrics[metrics.metric == weight].set_index("tract_geoid").value
+        v = v.assign(w=v.tract_geoid.map(w)).dropna(subset=["w"])
+        if v.empty:
+            continue
+        v = v.assign(value=v.value.astype(float), w=v.w.astype(float))
+        base = v.drop(columns=["w"])
+        parts.append(base.assign(metric=f"_{name}_x_w", value=v.value * v.w))
+        parts.append(base.assign(metric=f"_{name}_w", value=v.w))
+    if not parts:
+        return metrics.iloc[0:0]
+    return pd.concat(parts, ignore_index=True)
 
 
 def main() -> int:
     with get_session_factory()() as session:
         dao = MetricDao(session)
         metrics = pd.DataFrame(
-            dao.tract_metric_rows(SUM_METRICS),
+            dao.tract_metric_rows(SUM_METRICS + list(WEIGHTED_MEANS)),
             columns=[
                 "tract_geoid",
                 "metric",
