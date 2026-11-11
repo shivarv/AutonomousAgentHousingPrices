@@ -20,3 +20,4 @@
 - 2026-11-10 — Phase 6: Need Index components (8, percentile-scaled 0-1; missing kept NULL).
 - 2026-11-10 — Phase 6: Need Index (equal weights) for 1,591 tracts; 29 tracts without index, each flagged.
 - 2026-11-10 — Phase 6: Need Index sensitivity (top-20 overlap 15/16/10 of 20; Spearman 0.95-0.98); REPORT.md 3.3.
+- 2026-11-10 — Phase 6: reports/top_tracts.csv (top 50 + top 10 per county) and municipality_need.csv (351 towns, population-weighted index; also in area_metrics).

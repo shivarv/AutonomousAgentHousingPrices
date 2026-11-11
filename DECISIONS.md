@@ -125,3 +125,8 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — Need Index alternatives: affordability x2, homelessness+eviction x2, sparse components
   dropped. Equal weights kept as the main index (PLAN.md default; no alternative is better
   justified); the 10/20 top-20 overlap without sparse components is reported, not hidden.
+- 2026-11-10 — Town/county/state Need Index = population-weighted mean of tract indexes (town
+  weights = population x tract housing share); tracts without an index are excluded. Town
+  summary in reports/municipality_need.csv. Small rural towns rank high (distance-to-service
+  component, one or two tracts each); towns that share a single tract share its index — kept,
+  and noted in REPORT.md — dropping the distance component (it is in PLAN.md's list).

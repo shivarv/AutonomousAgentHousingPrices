@@ -71,3 +71,25 @@ def test_aggregate_sums_and_recomputes_ratios() -> None:
     towns = out.xs("municipality", level="level").xs("affordable_gap_eli", level="metric").value
     assert towns.sum() == pytest.approx(80.0)
     assert out.loc[("municipality", "m1", "affordable_gap_eli"), "method"].startswith("sum of")
+
+
+def test_population_weighted_need_index() -> None:
+    m = _metrics()
+    extra = pd.DataFrame(
+        [
+            ("t1", "need_index", 2026, 80.0),
+            ("t2", "need_index", 2026, 20.0),
+            ("t1", "population", 2024, 300.0),
+            ("t2", "population", 2024, 100.0),
+        ],
+        columns=["tract_geoid", "metric", "year", "value"],
+    ).assign(is_estimate=False, method=None, source_key="hud_chas")
+    weights = pd.DataFrame(
+        {"tract_geoid": ["t1", "t2"], "municipality_geoid": ["m1", "m1"], "housing_share": 1.0}
+    )
+    out = aggregate(pd.concat([m, extra]), _assign(), weights).set_index(
+        ["level", "area_id", "metric"]
+    )
+    assert out.value[("state", "25", "need_index")] == pytest.approx(65.0)
+    assert out.value[("municipality", "m1", "need_index")] == pytest.approx(65.0)
+    assert not out.index.get_level_values("metric").str.startswith("_").any()
