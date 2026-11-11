@@ -119,7 +119,7 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pipeline.download CLI running every module
 - [ ] DATA_SOURCES.md entries for every dataset, plus a `data_sources` table loaded from it.
   - [x] item: dataset registry + DATA_SOURCES.md generated from download manifests
-  - [ ] item: DataSource model + first Alembic migration
+  - [x] item: DataSource model + first Alembic migration
   - [ ] item: data_sources loader (DAO + service) from DATA_SOURCES.md, with tests
 - [ ] reports/data_audit.md: rows, years, geography, missing-value rates, known issues.
 
