@@ -70,6 +70,20 @@ a method text beginning "ESTIMATE:". Values are not rounded: they are expected c
 - Sums over a user-drawn area (rings, benefit areas) inherit these limits; only the CoC-level
   figure is an official count.
 
+**Sensitivity check** (`reports/homeless_sensitivity.md`). Re-allocating the same CoC counts
+by tract population share instead of the at-risk weight:
+
+| Level | Top-20 overlap | Spearman rank correlation | People allocated to a different area |
+|---|---|---|---|
+| Tract (1,620) | 2 / 20 | 0.36 | 37.0% |
+| Town (351) | 15 / 20 | 0.89 | 19.3% |
+
+Town-level patterns are fairly robust to the weight (8 of the top 10 towns are the same), but
+**individual tract estimates and tract rankings depend strongly on the chosen weight**. Tract
+estimates should be read as "where severely cost-burdened very poor renters, and hence risk,
+are concentrated within the CoC", not as local counts; summaries over towns or larger areas are
+more reliable than single tracts.
+
 ## 4. Results
 
 To be completed (Phases 6-8 and 12).
