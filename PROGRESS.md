@@ -43,3 +43,4 @@
 - 2026-11-10 — Phase 10: loading/error/empty states, phone layout, keyboard pin control; Phase 10 complete.
 - 2026-11-10 — Phase 11: Docker files (backend uv multi-stage non-root, frontend nginx with /api proxy, compose.yaml with postgres:18 healthcheck and pipeline profile); static validation test; untested with Docker.
 - 2026-11-10 — Phase 12: reports/STATISTICS.md generated from the database (statewide, PIT trend, 11 CoCs, 14 counties, top towns, top sites).
+- 2026-11-10 — Phase 12: reports/REPORT.md completed (question, data, methods, results, limitations, next steps).
