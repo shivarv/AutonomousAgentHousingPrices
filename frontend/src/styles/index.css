@@ -3,22 +3,46 @@
 @import "leaflet/dist/leaflet.css";
 
 /*
-  Palette: survey-map paper and harbour ink. Need/shortage colours are colour-blind safe and are
-  always paired with a sign or label, never colour alone.
+  Palette: survey-map paper and harbour ink, with brass for the one thing to press.
+  Need/shortage colours are colour-blind safe and are always paired with a sign or label,
+  never colour alone. Textures (grain, contours, graticule) are CSS only and never sit on top
+  of the data layers, so choropleth colours stay exactly as the legend says.
 */
 @theme {
   --font-sans: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-paper: #eef2f4;
   --color-paper-raised: #ffffff;
+  --color-paper-deep: #dfe7ec;
   --color-ink: #14324a;
   --color-ink-soft: #4a6274;
   --color-rule: #c9d4dc;
+  --color-harbour: #0f2a40;
+  --color-harbour-light: #1f4f6e;
   --color-marker: #c98a0b;
+  --color-marker-light: #e8b54a;
   --color-marker-soft: #f6e7c4;
   --color-shortage: #b3261e;
   --color-surplus: #1f7a5c;
   --color-estimate: #6b4fa0;
+
+  --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.7) inset, 0 1px 2px rgb(15 42 64 / 0.08),
+    0 8px 24px -12px rgb(15 42 64 / 0.25);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.35) inset, 0 1px 1px rgb(15 42 64 / 0.2),
+    0 4px 10px -4px rgb(15 42 64 / 0.35);
+}
+
+/* Fine paper fibre: tiny SVG turbulence tile, tinted harbour ink. */
+:root {
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .2 0 0 0 0 .29 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  /* Depth contours, as on a harbour chart: rings around an offshore point. */
+  --contours: repeating-radial-gradient(
+    circle at 88% 140%,
+    transparent 0 22px,
+    rgb(232 181 74 / 0.16) 22px 23px,
+    transparent 23px 46px,
+    rgb(255 255 255 / 0.09) 46px 47px
+  );
 }
 
 @layer base {
@@ -26,10 +50,209 @@
     font-feature-settings: "tnum" 1;
   }
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    @apply text-ink font-sans antialiased;
+    background:
+      var(--grain),
+      radial-gradient(120% 80% at 0% 0%, #f8fafb 0%, transparent 55%),
+      radial-gradient(90% 70% at 100% 100%, var(--color-paper-deep) 0%, transparent 60%),
+      var(--color-paper);
+    background-attachment: fixed;
   }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-marker;
+  }
+  input[type="text"],
+  input:not([type]),
+  input[type="search"],
+  input[type="number"],
+  select {
+    background-image: linear-gradient(180deg, #f6f8fa, #ffffff 60%);
+    box-shadow: 0 1px 2px rgb(15 42 64 / 0.08) inset;
+    transition:
+      border-color 120ms,
+      box-shadow 120ms;
+  }
+  input:focus-visible,
+  select:focus-visible {
+    border-color: var(--color-marker);
+    box-shadow:
+      0 1px 2px rgb(15 42 64 / 0.08) inset,
+      0 0 0 3px rgb(232 181 74 / 0.3);
+    outline: none;
+  }
+  input[type="range"] {
+    accent-color: var(--color-harbour-light);
+  }
+  table thead tr {
+    background: linear-gradient(180deg, var(--color-paper-deep), transparent);
+  }
+  table tbody tr:nth-child(even) {
+    background: rgb(223 231 236 / 0.35);
+  }
+}
+
+/* Deep harbour band: header, active controls. */
+@utility bg-harbour {
+  background:
+    var(--contours),
+    linear-gradient(115deg, var(--color-harbour) 0%, #163a56 55%, var(--color-harbour-light) 100%);
+}
+
+/* Brass hairline that fades out at both ends. */
+@utility brass-rule {
+  border-image: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-marker-light) 20%,
+      var(--color-marker) 80%,
+      transparent
+    )
+    1;
+}
+
+/* A raised sheet of paper: panels and floating map cards. */
+@utility surface-plate {
+  background:
+    var(--grain),
+    linear-gradient(180deg, rgb(255 255 255 / 0.96), rgb(247 249 250 / 0.94));
+  box-shadow: var(--shadow-plate);
+}
+
+/* The one action to press. */
+@utility btn-brass {
+  color: var(--color-harbour);
+  background: linear-gradient(180deg, var(--color-marker-light), var(--color-marker));
+  box-shadow: var(--shadow-lift);
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.3);
+  transition:
+    filter 120ms,
+    transform 120ms;
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* Secondary solid action, and the selected state of segmented controls. */
+@utility btn-ink {
+  color: #fff;
+  background: linear-gradient(180deg, var(--color-harbour-light), var(--color-harbour));
+  box-shadow: var(--shadow-lift);
+  &:hover:not(:disabled) {
+    filter: brightness(1.12);
+  }
+}
+
+@utility btn-quiet {
+  color: var(--color-ink);
+  border: 1px solid var(--color-rule);
+  background: linear-gradient(180deg, #ffffff, #f1f4f6);
+  box-shadow: 0 1px 1px rgb(15 42 64 / 0.06);
+  &:hover:not(:disabled) {
+    border-color: var(--color-ink-soft);
+  }
+}
+
+/* Short brass underline for section headings. */
+@utility heading-mark {
+  &::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    margin-top: 0.5rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-marker), var(--color-marker-light));
+  }
+}
+
+/* ---------- Map: a printed chart plate ---------- */
+@layer components {
+  .leaflet-container {
+    font-family: var(--font-sans);
+    /* water colour shows while tiles load */
+    background: radial-gradient(120% 90% at 30% 20%, #dce8ee, #bfd3de);
+  }
+  /* Quiet the street map into a cool chart tint so the data reads first. Tiles only. */
+  .leaflet-tile-pane {
+    filter: saturate(0.45) contrast(0.94) brightness(1.05);
+  }
+  /* Harbour-blue wash over the tiles only (blended inside the tile pane). */
+  .leaflet-tile-pane::before {
+    content: "";
+    position: absolute;
+    inset: -4000px;
+    z-index: 1;
+    pointer-events: none;
+    background: rgb(31 79 110 / 0.1);
+    mix-blend-mode: multiply;
+  }
+  /* Graticule drawn on the tile pane: it pans with the map and sits under the data. */
+  .leaflet-tile-pane::after {
+    content: "";
+    position: absolute;
+    inset: -4000px;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgb(20 50 74 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 50 74 / 0.07) 1px, transparent 1px),
+      linear-gradient(rgb(20 50 74 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 50 74 / 0.035) 1px, transparent 1px);
+    background-size:
+      160px 160px,
+      160px 160px,
+      32px 32px,
+      32px 32px;
+  }
+  /* Plate frame and soft edge vignette: edges only, so data in the middle is untouched.
+     Controls (z-index 1000) stay above it. */
+  .leaflet-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 450;
+    pointer-events: none;
+    box-shadow:
+      inset 0 0 0 1px rgb(15 42 64 / 0.45),
+      inset 0 0 0 5px rgb(255 255 255 / 0.55),
+      inset 0 0 0 6px rgb(201 138 11 / 0.45),
+      inset 0 0 70px rgb(15 42 64 / 0.16);
+  }
+  .leaflet-bar {
+    border: none !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+    box-shadow: var(--shadow-plate) !important;
+  }
+  .leaflet-bar a {
+    color: var(--color-ink) !important;
+    background: linear-gradient(180deg, #ffffff, #eef2f4) !important;
+    border-bottom-color: var(--color-rule) !important;
+    transition: background 120ms;
+  }
+  .leaflet-bar a:hover {
+    background: linear-gradient(180deg, var(--color-marker-light), var(--color-marker)) !important;
+  }
+  .leaflet-control-attribution {
+    border-top-left-radius: 6px;
+    background: rgb(255 255 255 / 0.75) !important;
+    backdrop-filter: blur(4px);
+    color: var(--color-ink-soft) !important;
+  }
+  .leaflet-control-attribution a {
+    color: var(--color-harbour-light) !important;
+  }
+  .leaflet-popup-content-wrapper,
+  .leaflet-tooltip {
+    border-radius: 8px;
+    color: var(--color-ink);
+    background:
+      var(--grain),
+      linear-gradient(180deg, #ffffff, #f4f7f9);
+    box-shadow: var(--shadow-plate);
   }
 }
 
