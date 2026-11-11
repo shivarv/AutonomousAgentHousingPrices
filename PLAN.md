@@ -144,10 +144,12 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests/test_data_integrity.py against the loaded housing database
 
 ### Phase 4 – Affordable housing shortage
-- [ ] Per tract from CHAS: extremely-low-income (<=30% AMI) and very-low-income (<=50% AMI)
+- [x] Per tract from CHAS: extremely-low-income (<=30% AMI) and very-low-income (<=50% AMI)
       renter households, units affordable and available to them, and the gap
       (households - available units; negative = surplus). Also affordable units per 100 ELI
       renters.
+  - [x] item: pipeline.features.affordability (CHAS Tables 8, 15C, 14B) loaded as tract metrics
+  - [x] item: tests (gap arithmetic, coverage, VLI includes ELI)
 - [ ] Context per tract: total housing units, vacant for rent/sale (ACS), subsidised units.
 - [ ] Aggregate to municipality, county and state. Tests that tract sums equal the totals.
 
