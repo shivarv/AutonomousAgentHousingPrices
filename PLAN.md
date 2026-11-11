@@ -210,9 +210,9 @@ geometry, and stay within the 8 GB data budget.
       cost scoring.
   - [x] item: pipeline.features.land_value (median LAND_VAL / lot sq ft per tract, taxable non-condo parcels; flag < 10 parcels) loaded into tract_metrics
   - [x] item: tests (filters, record summing, flag, missing stays NULL)
-- [ ] Save model, reports/model_metrics.json, feature importances, error-by-county chart,
+- [x] Save model, reports/model_metrics.json, feature importances, error-by-county chart,
       model_runs row.
-  - [ ] item: pipeline.model.artifacts (permutation importances on validation, error-by-county chart/table, model_runs row)
+  - [x] item: pipeline.model.artifacts (permutation importances on validation, error-by-county chart/table, model_runs row)
 
 ### Phase 8 – Candidate construction sites
 - [ ] Screening: parcels with vacant or developable land-use codes (document the codes used),

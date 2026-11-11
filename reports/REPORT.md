@@ -114,6 +114,32 @@ Town, county and state indexes are population-weighted means of their tracts
 town list, largely through the distance-to-service component and because one or two tracts
 decide their value; towns that share a single tract (e.g. Ashfield and Conway) share its index.
 
+### 3.4 Home-value model (cost context for sites)
+
+Target: assessed total value of 2.05 M residential assessor records (MassGIS L3, use codes
+101-105, 109, 111, 112; fiscal years 2023-2027). Split once 70/15/15, stratified by county and
+grouped by parcel so condo units of one building never straddle splits. Baseline: the median
+assessed value of the record's town in the train split (county median fallback). Models:
+ridge regression and histogram gradient boosting (scikit-learn; LightGBM could not load on
+this machine, see BLOCKERS.md) on log value, with parcel size, building, age, location,
+train-only town/tract medians and tract context (ACS income and value, Zillow ZHVI).
+Hyper-parameters and the model were chosen on the validation split only; the test split was
+scored once.
+
+| | Validation MAPE | Test MAPE | Test median APE |
+|---|---|---|---|
+| Baseline (town median) | 33.2% | 32.6% | 21.5% |
+| Ridge (best alpha) | 18.5% | — | — |
+| Gradient boosting (chosen) | 11.6% | 11.4% | 7.0% |
+
+Test MAPE is 65% below the baseline's, so the target (at least 25% lower) is met. Errors are
+largest on Nantucket (28%), Dukes (25%) and Berkshire (20%), where values are most dispersed
+(`reports/model_error_by_county.png`). The most important features (permutation importance on
+validation) are residential floor area, location (x, y) and the town and tract medians.
+Limits: the target is assessed value, not sale price; assessment years differ by town.
+Tract land value per sq ft (median assessed land value per lot sq ft, taxable non-condo
+parcels) is computed separately for site cost scoring (1,604 of 1,620 tracts).
+
 ## 4. Results
 
 To be completed (Phases 6-8 and 12).

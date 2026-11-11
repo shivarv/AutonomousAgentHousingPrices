@@ -22,3 +22,4 @@
 - 2026-11-10 — Phase 6: Need Index sensitivity (top-20 overlap 15/16/10 of 20; Spearman 0.95-0.98); REPORT.md 3.3.
 - 2026-11-10 — Phase 6: reports/top_tracts.csv (top 50 + top 10 per county) and municipality_need.csv (351 towns, population-weighted index; also in area_metrics).
 - 2026-11-10 — Phase 7: parcels cleaned (2.55 M assessor rows, 2.2 M located parcels); residential dataset 2.05 M records split 70/15/15 by county (saved once).
+- 2026-11-10 — Phase 7: home-value model (HistGradientBoosting, test MAPE 11.4% vs baseline 32.6%, target met), land value per sq ft by tract, importances, error-by-county chart, model_runs row.

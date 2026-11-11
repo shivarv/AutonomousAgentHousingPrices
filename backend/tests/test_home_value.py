@@ -81,3 +81,42 @@ def test_selection_uses_validation_only(monkeypatch) -> None:
     best = min(trials, key=lambda t: t["validation_mape"])
     assert best["params"] == params
     assert hv.predict(kind, model, frame(10)).shape == (10,)
+
+
+def test_county_error_table_from_predictions(monkeypatch) -> None:
+    from pipeline.model import artifacts
+
+    monkeypatch.setattr(
+        artifacts.pd,
+        "read_parquet",
+        lambda *_a, **_k: pd.DataFrame({"geoid": ["c1"], "name": ["Test County"]}),
+    )
+    pred = pd.DataFrame(
+        {
+            "county_geoid": ["c1", "c1"],
+            "actual": [100.0, 200.0],
+            "predicted": [110.0, 200.0],
+            "baseline": [150.0, 150.0],
+        }
+    )
+    e = artifacts.county_errors(pred)
+    assert e.loc[0, "county"] == "Test"
+    assert e.loc[0, "mape_model"] == pytest.approx(0.05)
+    assert e.loc[0, "mape_baseline"] == pytest.approx((0.5 + 0.25) / 2)
+
+
+def test_model_metrics_report_honest_target() -> None:
+    import json
+
+    from pipeline.paths import REPORTS_DIR
+
+    path = REPORTS_DIR / "model_metrics.json"
+    if not path.exists():
+        pytest.skip("model not trained")
+    m = json.loads(path.read_text())
+    assert m["target_rule"] == "test MAPE at least 25% below the baseline's"
+    imp = 1 - m["chosen_model"]["test_mape"] / m["baseline"]["test_mape"]
+    assert m["test_improvement_vs_baseline"] == pytest.approx(imp)
+    assert m["target_met"] == (imp >= 0.25)
+    best = min(m["validation_trials"], key=lambda t: t["validation_mape"])
+    assert best["params"] == m["chosen_model"]["params"]

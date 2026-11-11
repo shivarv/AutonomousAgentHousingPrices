@@ -10,7 +10,6 @@ from __future__ import annotations
 import json
 import logging
 
-import joblib
 import matplotlib
 
 matplotlib.use("Agg")
@@ -114,7 +113,7 @@ def chart(errors: pd.DataFrame, path) -> None:
 
 
 def run() -> None:
-    bundle = joblib.load(hv.MODEL_FILE)
+    bundle = hv.load_bundle()
     metrics = json.loads((REPORTS_DIR / "model_metrics.json").read_text())
     pred = pd.read_parquet(hv.TEST_PRED_FILE)
     errors = county_errors(pred)

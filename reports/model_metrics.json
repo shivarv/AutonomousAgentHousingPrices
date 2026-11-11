@@ -227,5 +227,66 @@
     "tract_zhvi",
     "use3",
     "county_geoid"
-  ]
+  ],
+  "feature_importance": {
+    "method": "permutation importance (R2 drop on log value), 30000 validation records, 3 repeats",
+    "top": [
+      {
+        "feature": "res_area",
+        "importance_mean": 0.31666278050569324,
+        "importance_std": 0.0032065368305768654
+      },
+      {
+        "feature": "x",
+        "importance_mean": 0.15423507613058465,
+        "importance_std": 0.0014916918480307648
+      },
+      {
+        "feature": "town_median_log",
+        "importance_mean": 0.13923134303795934,
+        "importance_std": 0.0015381055456195841
+      },
+      {
+        "feature": "tract_median_log",
+        "importance_mean": 0.13619920241791994,
+        "importance_std": 0.002101392344513637
+      },
+      {
+        "feature": "y",
+        "importance_mean": 0.12345883193138174,
+        "importance_std": 0.0012930564974444792
+      },
+      {
+        "feature": "use3",
+        "importance_mean": 0.06294750963915745,
+        "importance_std": 0.0012874431707922368
+      },
+      {
+        "feature": "bld_area",
+        "importance_mean": 0.06244833855613948,
+        "importance_std": 0.0009955129619927526
+      },
+      {
+        "feature": "lot_size_acres",
+        "importance_mean": 0.050261447388248594,
+        "importance_std": 0.0002552012167322132
+      },
+      {
+        "feature": "year_built",
+        "importance_mean": 0.0460318761946216,
+        "importance_std": 0.0006114081888832162
+      },
+      {
+        "feature": "parcel_area_m2",
+        "importance_mean": 0.0272299474552619,
+        "importance_std": 0.0002118940160282651
+      }
+    ]
+  },
+  "artifacts": {
+    "model": "data/processed/model/home_value_model.joblib",
+    "error_by_county_chart": "reports/model_error_by_county.png",
+    "error_by_county_table": "reports/model_error_by_county.csv",
+    "feature_importance": "reports/model_feature_importance.csv"
+  }
 }

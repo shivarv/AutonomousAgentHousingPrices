@@ -351,6 +351,19 @@ def run() -> dict[str, Any]:
     }
 
 
+def load_bundle() -> dict[str, Any]:
+    """Load the saved model. Bundles written by ``python -m`` reference ``__main__.Encodings``;
+    the alias lets them load from any module."""
+    import __main__
+
+    if not hasattr(__main__, "Encodings"):
+        __main__.Encodings = Encodings  # type: ignore[attr-defined]
+    return joblib.load(MODEL_FILE)
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    run()
+    # run through the importable module so the pickled classes reference it, not __main__
+    from pipeline.model import home_value as _hv
+
+    _hv.run()
