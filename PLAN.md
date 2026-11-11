@@ -162,10 +162,12 @@ geometry, and stay within the 8 GB data budget.
       HIC beds per CoC. These are the only exact figures; present them as CoC totals.
   - [x] item: homelessness DAO + schemas + service (CoC series with sheltered/unsheltered/total, year-on-year trend, HIC beds, statewide sum, "official CoC count" label)
   - [x] item: tests (trend arithmetic, every CoC has the latest year, state = sum of CoCs)
-- [ ] Modelled layer: allocate each CoC's latest total to its tracts. Sheltered people by share
+- [x] Modelled layer: allocate each CoC's latest total to its tracts. Sheltered people by share
       of the CoC's shelter beds located in each tract; unsheltered and at-risk weighting by the
       tract's share of severely rent-burdened ELI renter households. Tract estimates must sum
       exactly to the CoC total. Store as metric `homeless_estimate` with method and year.
+  - [x] item: pipeline.features.homeless_estimate (allocation, exact CoC sums, flags) + load + re-aggregate
+  - [x] item: tests (sums equal PIT per CoC, estimate flag/method/year on every row, non-negative)
 - [ ] Document the method and its limits in DECISIONS.md and reports/REPORT.md. Every API
       response and UI label for this metric says "estimate".
 - [ ] Sensitivity check: alternative allocation (population share); report how much the top

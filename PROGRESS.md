@@ -14,3 +14,4 @@
 - 2026-11-10 — Phase 4: tract context metrics verified for all tracts.
 - 2026-11-10 — Phase 4: aggregates to town (351, housing-share apportioned), county, CoC, neighbourhood, state; totals = tract sums.
 - 2026-11-10 — Phase 5: official CoC layer service (PIT 2012-2025 + HIC beds, trend; statewide 2025 = 28,311 = sum of 11 CoCs).
+- 2026-11-10 — Phase 5: tract homeless estimates (PIT 2025, 28,311 people across 1,620 tracts; every CoC sums exactly), loaded and re-aggregated.
