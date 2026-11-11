@@ -1,0 +1,32 @@
+{
+  "top_n": 20,
+  "alternatives": {
+    "affordability_heavy": {
+      "description": "affordable gap per ELI renter and severe rent burden weighted x2",
+      "tracts_compared": 1591,
+      "top_n": 20,
+      "top_n_overlap": 15,
+      "spearman": 0.963,
+      "median_alt_rank_of_main_top_n": 10.5,
+      "worst_alt_rank_of_main_top_n": 63
+    },
+    "homelessness_heavy": {
+      "description": "homeless estimate per 1,000 and eviction filing rate weighted x2",
+      "tracts_compared": 1591,
+      "top_n": 20,
+      "top_n_overlap": 16,
+      "spearman": 0.977,
+      "median_alt_rank_of_main_top_n": 10.5,
+      "worst_alt_rank_of_main_top_n": 228
+    },
+    "dense_components_only": {
+      "description": "rent growth and eviction rate dropped (the two components missing for many tracts)",
+      "tracts_compared": 1590,
+      "top_n": 20,
+      "top_n_overlap": 10,
+      "spearman": 0.948,
+      "median_alt_rank_of_main_top_n": 21.0,
+      "worst_alt_rank_of_main_top_n": 96
+    }
+  }
+}
