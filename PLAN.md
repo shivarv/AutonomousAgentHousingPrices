@@ -99,6 +99,9 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: pytest + ruff config and health tests passing
 - [ ] Frontend skeleton: Vite React TS, Tailwind v4, react-router, react-query, react-leaflet,
       @/ alias, layout shell; build and lint passing.
+  - [x] item: Vite React TS scaffold, Tailwind v4, @/ alias, dependencies
+  - [ ] item: app providers (react-query), router, layout shell, placeholder-free pages
+  - [ ] item: build and lint passing
 
 ### Phase 2 – Data collection (backend/pipeline/download/)
 - [ ] One idempotent download module per source, saving untouched files to data/raw/<source>/.

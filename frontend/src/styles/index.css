@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "@fontsource-variable/public-sans";
+@import "leaflet/dist/leaflet.css";
+
+/*
+  Palette: survey-map paper and harbour ink. Need/shortage colours are colour-blind safe and are
+  always paired with a sign or label, never colour alone.
+*/
+@theme {
+  --font-sans: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #eef2f4;
+  --color-paper-raised: #ffffff;
+  --color-ink: #14324a;
+  --color-ink-soft: #4a6274;
+  --color-rule: #c9d4dc;
+  --color-marker: #c98a0b;
+  --color-marker-soft: #f6e7c4;
+  --color-shortage: #b3261e;
+  --color-surplus: #1f7a5c;
+  --color-estimate: #6b4fa0;
+}
+
+@layer base {
+  html {
+    font-feature-settings: "tnum" 1;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-marker;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
