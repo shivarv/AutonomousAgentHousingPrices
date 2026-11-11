@@ -9,9 +9,13 @@ housing shortage, and which places are available and suitable for building new h
 Delivered as statewide/county/town statistics and a ranked list of candidate construction sites.
 
 **Outcome 2 – The site explorer:** An interactive map where a user can press "Show best
-location", or drag a pin anywhere, and immediately see, in three rings around that spot:
-how many people experiencing homelessness (estimated) and at-risk households are nearby and
-could benefit, and whether that area has a shortage or surplus of affordable homes.
+location", or drag a pin anywhere, and immediately see how many people experiencing
+homelessness (estimated) and at-risk households could benefit, and whether there is a shortage
+or surplus of affordable homes, in two ways:
+- **Areas:** the subdivision under the pin (tract, Boston neighbourhood, town, county or
+  homelessness region) is highlighted with its numbers, and neighbouring areas can be added to
+  a "benefit area" with a running total.
+- **Rings:** three distance rings around the pin.
 
 Boston and Greater Boston matter most (most people, most need), but everything must work
 statewide.
@@ -58,6 +62,8 @@ compose.yaml, backend/Dockerfile, frontend/Dockerfile
 | Need | Primary source | Fallback |
 |---|---|---|
 | Tract, county, municipality boundaries | Census TIGER/Line (state FIPS 25, latest year) | MassGIS municipal boundaries |
+| Boston neighbourhood boundaries | Analyze Boston (BPDA neighbourhood boundaries) | — |
+| Homelessness region (CoC) boundaries | HUD CoC GIS boundaries | Build from CoC member-municipality lists |
 | Population, income, poverty, overcrowding, tenure, rent burden, housing units, vacancy | ACS 5-year via api.census.gov for every MA tract (env var CENSUS_API_KEY) | data.census.gov bulk download |
 | Affordable housing gap | HUD CHAS tract-level data (extremely-low-income renter households; units affordable and available to them) | ACS income x gross-rent tables |
 | Homeless counts (CoC level ONLY) | HUD Point-in-Time counts for every MA Continuum of Care, sheltered vs unsheltered, several years | HUD Exchange CoC reports |
@@ -95,7 +101,8 @@ geometry, and stay within the 8 GB data budget.
 
 ### Phase 3 – Database schema and loading
 - [ ] Models + Alembic migrations: data_sources, counties, municipalities, cocs (with member
-      municipalities and boundary), tracts (geoid, county, municipality, coc, centroid,
+      municipalities and boundary), boston_neighbourhoods (boundary, member tracts by area
+      share), tracts (geoid, county, municipality, coc, neighbourhood, centroid,
       simplified GeoJSON, land area), tract_metrics (tract x metric x year, with source_id),
       homelessness_counts (coc x year x sheltered/unsheltered/total), shelters (name, type,
       beds, lat/lon, source; no DV shelters), subsidised_housing, transit_stops, parcels
@@ -169,6 +176,14 @@ geometry, and stay within the 8 GB data budget.
       affordable units available, gap (shortage or surplus), shelters and beds, subsidised units,
       population. Also return "nearby points" for drawing: tracts with their estimate and
       centroid, and shelters with beds, inside the largest ring. Response < 1 s statewide.
+- [ ] GET /api/areas/at?lat=&lon=&level=tract|neighbourhood|municipality|county|coc : the area
+      containing the point (point-in-polygon with a cached shapely STRtree), with its boundary
+      (simplified GeoJSON), neighbouring areas' ids, and the same metrics as area-stats.
+      Homeless figure is the official count at level=coc and the summed estimate otherwise;
+      the response says which. Points outside MA (or outside Boston for neighbourhood) return
+      a clear message.
+- [ ] GET /api/areas?level=&bbox= : boundaries for drawing the outline layer (simplified, cached).
+- [ ] POST /api/areas/summary {level, ids: [...]} : combined totals for a user-built benefit area.
 - [ ] GET /api/homelessness (per CoC by year, labelled CoC-level), GET /api/shelters,
       GET /api/model/metrics, GET /api/sources.
 - [ ] API tests for every endpoint against housing_test, including validation errors (radius
@@ -185,8 +200,16 @@ geometry, and stay within the 8 GB data budget.
     "Next best" steps through the list.
   - Draggable pin: drag it anywhere (or click the map) and the rings and numbers update
     (debounced call to /api/area-stats).
-  - Three concentric rings around the pin with presets: Urban 1.5 / 5 / 15 km (default) and
-    Regional 5 / 25 / 50 km, plus a custom slider per ring.
+  - Mode toggle: **Areas** (default) or **Rings**.
+  - Areas mode: a boundary-level selector (Census tract, Boston neighbourhood, City/town,
+    County, Homelessness region). Faint outline lines show all areas at that level; the area
+    under the pin is highlighted and filled, with its name and numbers. Click neighbouring
+    areas to add/remove them from the "benefit area"; a running total shows estimated homeless
+    people, at-risk households, affordable shortage/surplus, shelters and beds for the whole
+    selection. "Clear" resets it. Label the homeless figure "official count" at region level
+    and "estimate" at every other level.
+  - Rings mode: three concentric rings around the pin with presets Urban 1.5 / 5 / 15 km
+    (default) and Regional 5 / 25 / 50 km, plus a custom slider per ring.
   - Small dots around the pin inside the rings: tract centroids sized by estimated homeless
     count (labelled "estimate"), and shelters with bed counts (a distinct marker).
   - Side panel per ring: estimated homeless nearby, at-risk households, affordable units,
@@ -221,6 +244,8 @@ validate.py checks that:
 - Need Index and site scores are within 0-100 with no missing values (or each gap documented);
 - site_candidates is non-empty and no candidate overlaps >50% with open space, wetlands or flood zones;
 - /api/area-stats returns all metrics for 3 rings at a Boston, a Worcester and a Springfield point;
+- /api/areas/at returns the right tract, town, county and CoC for those three points, and the
+  summed tract estimates for a CoC equal its official count;
 - reports/model_metrics.json exists; the test result meets the target, or REPORT.md says
   plainly that it doesn't (never change the target);
 - reports/STATISTICS.md, REPORT.md, top_tracts.csv and candidate_sites.csv exist and aren't empty;
