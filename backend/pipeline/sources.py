@@ -132,7 +132,7 @@ DATASETS: tuple[Dataset, ...] = (
         "HUD, public domain",
         "property (lat/lon, tract)",
         "1987-2024 placed in service",
-        "HUD_ID, PROJECT, PROJ_ST, LATITUDE, LONGITUDE, FIPS2020, LI_UNITS, N_UNITS, YR_PIS",
+        "hud_id, project, proj_st, latitude, longitude, fips2020, li_units, n_units, yr_pis",
     ),
     Dataset(
         "hud_psh",
@@ -288,7 +288,7 @@ DATASETS: tuple[Dataset, ...] = (
         ),
         "Eviction Lab, Princeton University; free for non-commercial use with attribution",
         "census tract",
-        "2000-2018",
+        "2000-2018 (MA validated tract-years 2004-2018)",
         "fips, year, filings, filing_rate",
     ),
 )
