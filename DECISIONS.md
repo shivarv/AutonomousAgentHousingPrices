@@ -98,3 +98,9 @@ Format: date — decision — alternatives considered — reason.
   source hud_pit — OSM shelter locations (10 points, no beds) as a sheltered weight;
   integer rounding (false precision at tract level, rounding drift) — only defensible weight
   available for every tract.
+- 2026-11-10 — Homeless estimate limits (full list in reports/REPORT.md 3.2): weight measures risk,
+  not where people sleep; large-shelter tracts under-estimated; unsheltered hot spots not
+  captured; PIT 2025 vs CHAS 2018-2022 periods differ. API responses must carry tract or summed
+  homeless figures as app.schemas.estimate.HomelessFigure (label "estimate", method, year);
+  only CoC-level figures use "official CoC count" — free-text labels per endpoint — one typed
+  schema makes the label impossible to omit.

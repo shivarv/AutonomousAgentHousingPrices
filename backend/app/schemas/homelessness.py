@@ -2,7 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-OFFICIAL_LABEL = "official CoC count"
+from app.schemas.estimate import OFFICIAL_LABEL
 
 
 class PitYear(BaseModel):

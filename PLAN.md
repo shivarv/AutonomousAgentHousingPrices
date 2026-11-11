@@ -168,8 +168,10 @@ geometry, and stay within the 8 GB data budget.
       exactly to the CoC total. Store as metric `homeless_estimate` with method and year.
   - [x] item: pipeline.features.homeless_estimate (allocation, exact CoC sums, flags) + load + re-aggregate
   - [x] item: tests (sums equal PIT per CoC, estimate flag/method/year on every row, non-negative)
-- [ ] Document the method and its limits in DECISIONS.md and reports/REPORT.md. Every API
+- [x] Document the method and its limits in DECISIONS.md and reports/REPORT.md. Every API
       response and UI label for this metric says "estimate".
+  - [x] item: reports/REPORT.md method + limits section; DECISIONS.md limits entry
+  - [x] item: HomelessFigure schema (label "estimate" / "official CoC count", method, year) for Phases 9-10, with tests
 - [ ] Sensitivity check: alternative allocation (population share); report how much the top
       areas change.
 
