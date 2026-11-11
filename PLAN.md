@@ -113,8 +113,8 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: subsidised housing (LIHTC, Picture of Subsidized Households)
   - [x] item: transit GTFS (MBTA + RTAs)
   - [x] item: Zillow ZHVI/ZORI and ZCTA-tract relationship file
-  - [ ] item: MassGIS parcels (assessor attributes + developable candidates)
-  - [ ] item: build constraints (open space, wetlands, FEMA flood) and MBTA Communities 3A
+  - [x] item: MassGIS parcels (assessor attributes + developable candidates)
+  - [x] item: build constraints (open space, wetlands, FEMA flood) and MBTA Communities 3A
   - [ ] item: shelters, DESE homeless students, evictions (best effort)
   - [ ] item: pipeline.download CLI running every module
 - [ ] DATA_SOURCES.md entries for every dataset, plus a `data_sources` table loaded from it.
