@@ -33,3 +33,24 @@ class StatsOverview(BaseModel):
     metrics: dict[str, MetricValue]
     homelessness: OverviewHomelessness
     shelter_beds: ShelterBeds
+
+
+class AreaStatsRow(BaseModel):
+    """One county or town with its key figures (homeless_estimate is a modelled estimate)."""
+
+    id: str
+    name: str
+    county_geoid: str | None
+    population: float | None
+    need_index: float | None
+    eli_renter_households: float | None
+    affordable_gap_eli: float | None
+    affordable_units_per_100_eli: float | None
+    homeless_estimate: float | None
+
+
+class AreaStatsTable(BaseModel):
+    level: Literal["county", "municipality"]
+    rows: list[AreaStatsRow]
+    metrics: dict[str, MetricValue]
+    homeless_label: Literal["estimate"] = "estimate"
