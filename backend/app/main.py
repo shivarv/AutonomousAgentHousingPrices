@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.controllers import health_controller
+from app.controllers import health_controller, stats_controller
 from app.core.config import get_settings
 from app.core.exceptions import DomainError
 
@@ -24,6 +24,7 @@ def create_app() -> FastAPI:
         return JSONResponse(status_code=exc.status_code, content={"detail": exc.message})
 
     app.include_router(health_controller.router)
+    app.include_router(stats_controller.router)
     return app
 
 

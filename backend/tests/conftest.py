@@ -32,3 +32,15 @@ def client(db_session: Session) -> Iterator[TestClient]:
     app.dependency_overrides[get_db] = lambda: db_session
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture
+def seeded(db_session: Session) -> Session:
+    """Skip API tests that need data when housing_test is empty (scripts/seed_test_db.sh)."""
+    from sqlalchemy import func, select
+
+    from app.models import Tract
+
+    if not db_session.scalar(select(func.count()).select_from(Tract)):
+        pytest.skip("housing_test is empty: run scripts/seed_test_db.sh")
+    return db_session

@@ -181,3 +181,10 @@ Format: date — decision — alternatives considered — reason.
   from). 5 km is the main ring (walk/short transit trip catchment for residents); 1.5 and 15 km
   are stored and shown. Weights favour need (60% on need, shortage and homelessness) because
   the audience is housing-need planning; they are a documented judgement, not an optimum.
+- 2026-11-10 — API tests run on a copy of the real loaded data: scripts/seed_test_db.sh migrates
+  housing_test and copies housing into it (data-only dump/restore) — synthetic fixtures (would
+  be invented numbers, and spatial endpoints need real boundaries). Data-dependent tests skip
+  with a message when housing_test is empty.
+- 2026-11-10 — Overview shelter beds = HIC year-round beds summed over the CoCs that overlap the
+  area (latest year all of them report), labelled "official CoC count" with the CoC list —
+  HIC is CoC-level only, so a county or town gets its CoCs' totals, never an apportioned number.

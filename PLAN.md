@@ -237,8 +237,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests (batch size, JSON cleaning, report selection) and REPORT.md 3.5
 
 ### Phase 9 – Backend API (controllers → services → DAOs)
-- [ ] GET /api/stats/overview?level=state|county|municipality&id= : population, homeless counts
+- [x] GET /api/stats/overview?level=state|county|municipality&id= : population, homeless counts
       (official, by CoC, with trend), shelter beds, ELI renters, affordable gap, vacancy, need index.
+  - [x] item: scripts/seed_test_db.sh (migrate housing_test, copy housing data) and `seeded` test fixture
+  - [x] item: AreaDao, MetricValue schema, StatsService.overview (CoC official counts + trend, area estimate, HIC beds), controller
+  - [x] item: API tests (state sum = CoCs, county/town, validation and 404)
 - [ ] GET /api/tracts?county=&municipality= (GeoJSON with index + key metrics; statewide must
       be fast: simplified geometry, cached) and GET /api/tracts/{geoid}.
 - [ ] GET /api/sites?county=&municipality=&limit= and GET /api/sites/{id}; GET /api/sites/best
