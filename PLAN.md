@@ -89,9 +89,9 @@ geometry, and stay within the 8 GB data budget.
 - [x] Repo skeleton: folders above, root README stub, .gitignore additions.
   - [x] item: folders (backend, frontend, scripts, reports, data/*) with keep files
   - [x] item: root README stub, .gitignore additions, PROGRESS/DECISIONS/BLOCKERS files
-- [ ] scripts/db.sh (init/start/stop/status) for the local Postgres on port 5544; databases
+- [x] scripts/db.sh (init/start/stop/status) for the local Postgres on port 5544; databases
       `housing` and `housing_test`.
-  - [ ] item: scripts/db.sh with idempotent init/start/stop/status, verified
+  - [x] item: scripts/db.sh with idempotent init/start/stop/status, verified
 - [ ] Backend skeleton: uv project (Python 3.12), FastAPI app with core/, models/, schemas/,
       dao/, services/, controllers/, dependencies.py; /api/health; Alembic; pytest + ruff passing.
 - [ ] Frontend skeleton: Vite React TS, Tailwind v4, react-router, react-query, react-leaflet,

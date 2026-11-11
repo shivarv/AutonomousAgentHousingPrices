@@ -8,3 +8,8 @@ Format: date — decision — alternatives considered — reason.
   local `--no-ff` merge (also needs approval); stop working — `gh pr` and `git merge` into main
   need an interactive approval that can't be given unattended (see BLOCKERS.md); stacking lets
   later tasks build on earlier ones while leaving the merge decision to the owner.
+- 2026-11-10 — gh works in session 2: drop branch stacking, return to normal PR mode (branch each
+  task from up-to-date main) — keep stacking — stacking was only a workaround for the blocker.
+- 2026-11-10 — scripts/db.sh uses `-k /tmp` for the Unix socket and connects over TCP
+  (localhost:5544) — socket in data/pg — the project path contains a space, which breaks socket
+  paths in some clients; TCP matches DATABASE_URL.
