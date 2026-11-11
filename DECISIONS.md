@@ -166,3 +166,11 @@ Format: date — decision — alternatives considered — reason.
   exceeds 50% in any one layer); overlaps of 1% or more are flagged — <1% treated as boundary
   slivers and not flagged (shares still stored). Result: 44,935 lots -> 40,873 sites
   (4,062 dropped, 14,067 flagged). 3A district = interior point inside a district (194).
+- 2026-11-10 — Ring statistics (sites and /api/area-stats share one module, app.services.rings):
+  geodesic circle built in an azimuthal-equidistant projection centred on the point, then
+  projected to MA State Plane; tract counts are summed with the share of the tract's area
+  inside the circle (uniform spread within a tract assumed), using the same simplified tract
+  boundaries the database stores; ring Need Index = population x share weighted mean —
+  centroid-in-circle (unstable for 1.5 km rings), block-level weights (would need a new
+  table; PLAN specifies tract area shares). Shelter beds within rings are not available
+  (OSM shelters have no bed counts; HIC beds are CoC-level only) — shelters are counted.

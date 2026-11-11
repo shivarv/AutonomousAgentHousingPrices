@@ -220,9 +220,12 @@ geometry, and stay within the 8 GB data budget.
       or FEMA 100-year flood zones (drop parcels with >50% overlap; flag partial overlap).
   - [x] item: pipeline.sites.screen (developable codes, 0.5-acre GIS lot, open space/wetland/flood overlap shares and union, 3A district, simplified boundary)
   - [x] item: tests (codes and sums, lot size and poly type, overlap union not double-counted)
-- [ ] Features per site: need index and affordable gap within 1.5/5/15 km, homeless estimate
+- [x] Features per site: need index and affordable gap within 1.5/5/15 km, homeless estimate
       and shelter beds within those rings, distance to nearest MBTA/RTA stop, inside an MBTA
       Communities (3A) district, estimated land cost, lot size, municipality.
+  - [x] item: app.services.rings (geodesic circles, tract area shares, share-weighted totals, weighted mean) shared with /api/area-stats
+  - [x] item: pipeline.sites.features (rings 1.5/5/15 km, nearest stop, shelters, land cost, municipality)
+  - [x] item: tests (circle area, shares inside/crossing/outside, missing values, land cost)
 - [ ] Site score 0-100 with documented weights; a plain-English "why this site" summary
       generated from the features (no invented facts).
 - [ ] reports/candidate_sites.csv: top 100 statewide and top 10 per county. Store all scored
