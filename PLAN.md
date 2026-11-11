@@ -95,7 +95,7 @@ geometry, and stay within the 8 GB data budget.
 - [ ] Backend skeleton: uv project (Python 3.12), FastAPI app with core/, models/, schemas/,
       dao/, services/, controllers/, dependencies.py; /api/health; Alembic; pytest + ruff passing.
   - [x] item: uv project, app layers (core/models/schemas/dao/services/controllers), /api/health
-  - [ ] item: Alembic configured against DATABASE_URL
+  - [x] item: Alembic configured against DATABASE_URL
   - [ ] item: pytest + ruff config and health tests passing
 - [ ] Frontend skeleton: Vite React TS, Tailwind v4, react-router, react-query, react-leaflet,
       @/ alias, layout shell; build and lint passing.
