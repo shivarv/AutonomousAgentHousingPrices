@@ -109,7 +109,7 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: boundaries (TIGER 2026 tracts/towns/counties, Boston neighbourhoods, HUD CoC 2025)
   - [x] item: ACS 2020-2024 5-year tract variables
   - [x] item: HUD CHAS 2018-2022 tract tables + dictionary
-  - [ ] item: HUD PIT and HIC counts by CoC
+  - [x] item: HUD PIT and HIC counts by CoC
   - [ ] item: subsidised housing (LIHTC, Picture of Subsidized Households)
   - [ ] item: transit GTFS (MBTA + RTAs)
   - [ ] item: Zillow ZHVI/ZORI and ZCTA-tract relationship file
