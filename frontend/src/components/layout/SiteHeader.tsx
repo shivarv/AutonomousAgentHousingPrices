@@ -9,11 +9,13 @@ const NAV_ITEMS = [
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-rule bg-paper-raised">
-      <div className="flex flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between md:px-6">
-        <NavLink to="/" className="flex items-baseline gap-2 text-ink">
-          <span className="text-lg font-bold tracking-tight">Massachusetts Housing Need</span>
-          <span className="text-sm font-medium text-ink-soft">and Site Finder</span>
+    <header className="bg-harbour brass-rule relative border-b-2 text-white">
+      <div className="flex flex-col gap-3 px-4 py-3.5 md:flex-row md:items-center md:justify-between md:px-6">
+        <NavLink to="/" className="group flex items-baseline gap-2">
+          <span className="text-lg font-bold tracking-tight drop-shadow-sm">
+            Massachusetts Housing Need
+          </span>
+          <span className="text-sm font-medium text-marker-light/90">and Site Finder</span>
         </NavLink>
         <nav aria-label="Main">
           <ul className="flex flex-wrap gap-x-1 gap-y-1 text-sm">
@@ -23,10 +25,10 @@ export function SiteHeader() {
                   to={item.to}
                   end={item.end}
                   className={({ isActive }) =>
-                    `block rounded-sm px-3 py-1.5 font-medium ${
+                    `block rounded-full px-3.5 py-1.5 font-medium transition-colors ${
                       isActive
-                        ? 'bg-ink text-paper-raised'
-                        : 'text-ink-soft hover:bg-paper hover:text-ink'
+                        ? 'btn-brass font-semibold'
+                        : 'text-white/75 hover:bg-white/10 hover:text-white'
                     }`
                   }
                 >

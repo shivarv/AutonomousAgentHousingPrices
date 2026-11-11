@@ -93,11 +93,11 @@ export function SiteExplorer() {
         </div>
       </section>
       <aside
-        className="w-full space-y-4 border-t border-rule bg-paper-raised p-4 lg:w-[27rem] lg:overflow-y-auto lg:border-t-0 lg:border-l"
+        className="surface-plate relative z-[1] w-full space-y-4 border-t border-rule p-4 lg:w-[27rem] lg:overflow-y-auto lg:border-t-0 lg:border-l lg:shadow-[-8px_0_24px_-12px_rgb(15_42_64/0.35)]"
         aria-label="Controls and numbers"
       >
         <div>
-          <h1 className="text-xl font-bold tracking-tight">Site explorer</h1>
+          <h1 className="heading-mark text-xl font-bold tracking-tight">Site explorer</h1>
           <p className="text-sm text-ink-soft">
             Drop a pin to see who could benefit from new affordable homes there.
           </p>

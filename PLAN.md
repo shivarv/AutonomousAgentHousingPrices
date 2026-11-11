@@ -356,6 +356,11 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: frontend/vercel.json; scripts/publish_db.sh (pg_dump/pg_restore to TARGET_DATABASE_URL)
   - [x] item: README deploy section, DECISIONS, PROGRESS
 
+### Phase 14 – Visual refresh (added 2026-11-11 at the owner's request)
+- [x] Textured, gradient "harbour chart" styling in CSS only; data colours unchanged.
+  - [x] item: theme tokens, grain/contour textures, button utilities, Leaflet chart-plate CSS
+  - [x] item: apply surfaces, buttons and heading marks in header, explorer, legend, overview
+
 ## Definition of done
 All tasks merged into main AND `uv run --project backend python scripts/validate.py` exits 0.
 validate.py checks that:

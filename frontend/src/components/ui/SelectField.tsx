@@ -24,7 +24,7 @@ export function SelectField({ label, value, options, onChange, placeholder }: Se
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="min-w-0 rounded-sm border border-rule bg-paper-raised px-2 py-1.5 text-sm"
+        className="min-w-0 rounded-md border border-rule bg-paper-raised px-2.5 py-1.5 text-sm"
       >
         {placeholder !== undefined && <option value="">{placeholder}</option>}
         {options.map((o) => (
