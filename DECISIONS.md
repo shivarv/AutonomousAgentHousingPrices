@@ -108,3 +108,9 @@ Format: date — decision — alternatives considered — reason.
   (2/20 top tracts shared with population-share allocation), towns are robust (15/20). Main
   weight unchanged (PLAN.md's at-risk weight); REPORT.md tells users to prefer town or larger
   summaries — switching weight to look more stable — the test is diagnostic, not a selection.
+- 2026-11-10 — Need Index components are scaled by statewide percentile rank, (rank-1)/(n-1), among
+  tracts with a value — min-max (dominated by small-denominator outliers, e.g. poverty_rate 1.0
+  in tiny tracts); z-scores (not 0-1) — robust and comparable across components. Directions:
+  all "higher = more need"; distance to nearest shelter or subsidised development counts as
+  need (farther = less access). Rent growth is ZORI only (519 tracts; no other tract rent
+  series) and eviction rate is Eviction Lab 2014-2016 (1,137 tracts); missing stays NULL.
