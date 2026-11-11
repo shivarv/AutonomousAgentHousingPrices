@@ -13,3 +13,7 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — scripts/db.sh uses `-k /tmp` for the Unix socket and connects over TCP
   (localhost:5544) — socket in data/pg — the project path contains a space, which breaks socket
   paths in some clients; TCP matches DATABASE_URL.
+- 2026-11-10 — Backend is a non-packaged uv project (`tool.uv.package = false`), imports rooted at
+  backend/ (`app.*`, `pipeline.*`) — src-layout package — simplest for `uv run` and Alembic.
+- 2026-11-10 — Alembic URL from app settings, overridable by ALEMBIC_DATABASE_URL (to migrate
+  housing_test) — separate ini sections — one source of truth for the URL.
