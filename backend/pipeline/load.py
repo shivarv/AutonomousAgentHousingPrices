@@ -63,6 +63,7 @@ METRIC_FILES = [
     "metrics_chas",
     "metrics_homeless",
     "metrics_need",
+    "metrics_land",
 ]
 
 

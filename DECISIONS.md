@@ -139,3 +139,18 @@ Format: date — decision — alternatives considered — reason.
   FY is a feature). Split 70/15/15 stratified by county and grouped by parcel LOC_ID so condo
   units of one building never straddle train and test — record-level split (leaks
   near-identical units). Split saved once (data/processed/model/split.parquet), reused after.
+- 2026-11-10 — Tract land value per sq ft = median over taxable, non-condominium parcels of
+  assessed LAND_VAL / lot size (0.01-500 acres, land value > 0); parcels with several assessor
+  lines are summed once. Condos (102) excluded (unit land share vs whole-lot size), exempt (9xx)
+  excluded (nominal land values in many towns) — mean (outlier-driven), residential-only
+  (vacant/commercial land is what sites are). Tracts with < 10 parcels flagged; 16 tracts with
+  none stay NULL. Tract-level only (a median is not summable, so no area aggregates).
+- 2026-11-10 — Home-value model: scikit-learn HistGradientBoostingRegressor replaces LightGBM
+  (blocked, see BLOCKERS.md) — XGBoost/CatBoost (same libomp issue / heavy) — same algorithm
+  family, OpenMP bundled. Log-value target, predictions clipped to the train log range; ridge
+  on log1p sizes as the linear model. Grid: 3 ridge alphas, 8 HGB settings, chosen on
+  validation MAPE (lr 0.1, 255 leaves, 600 iterations; val MAPE 0.116). Test scored once:
+  0.114 vs baseline 0.326 (-65%, target -25% met). Session 4 re-ran the identical,
+  deterministic script only because the saved model file was missing after the session-3
+  checkpoint; no setting changed and the test numbers were bit-identical, so this is not a
+  second look at the test split.

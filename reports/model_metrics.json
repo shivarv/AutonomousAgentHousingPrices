@@ -1,0 +1,292 @@
+{
+  "target": "assessed TOTAL_VAL of residential parcels (MassGIS L3, FY2023-2027)",
+  "metric": "MAPE (mean absolute percentage error)",
+  "target_rule": "test MAPE at least 25% below the baseline's",
+  "split_sizes": {
+    "train": 1439708,
+    "validation": 307479,
+    "test": 305831
+  },
+  "baseline": {
+    "name": "municipality median assessed value (train), county median fallback",
+    "validation_mape": 0.3322809072718506,
+    "test_mape": 0.3258994181986236,
+    "test_median_ape": 0.2146562905317769
+  },
+  "chosen_model": {
+    "name": "hist_gradient_boosting",
+    "params": {
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 255,
+      "max_iter": 600
+    },
+    "validation_mape": 0.1158887715609396,
+    "test_mape": 0.1136601832045307,
+    "test_median_ape": 0.07035093184188802
+  },
+  "test_improvement_vs_baseline": 0.6512415277303164,
+  "target_met": true,
+  "selection": "hyper-parameters and model chosen on validation MAPE only; test scored once",
+  "validation_trials": [
+    {
+      "model": "ridge",
+      "params": {
+        "alpha": 0.1
+      },
+      "validation_mape": 0.18499947786750515
+    },
+    {
+      "model": "ridge",
+      "params": {
+        "alpha": 1.0
+      },
+      "validation_mape": 0.18499941947242934
+    },
+    {
+      "model": "ridge",
+      "params": {
+        "alpha": 10.0
+      },
+      "validation_mape": 0.18499887207767002
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63,
+        "max_iter": 300
+      },
+      "validation_mape": 0.12627983784829178
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 63,
+        "max_iter": 600
+      },
+      "validation_mape": 0.12170333896408335
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 255,
+        "max_iter": 300
+      },
+      "validation_mape": 0.11843970792306212
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 255,
+        "max_iter": 600
+      },
+      "validation_mape": 0.1158887715609396
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.2,
+        "max_leaf_nodes": 63,
+        "max_iter": 300
+      },
+      "validation_mape": 0.12409446382643001
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.2,
+        "max_leaf_nodes": 63,
+        "max_iter": 600
+      },
+      "validation_mape": 0.12085037548672566
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.2,
+        "max_leaf_nodes": 255,
+        "max_iter": 300
+      },
+      "validation_mape": 0.11784917077100567
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "params": {
+        "learning_rate": 0.2,
+        "max_leaf_nodes": 255,
+        "max_iter": 600
+      },
+      "validation_mape": 0.11633800484434316
+    }
+  ],
+  "test_error_by_county": [
+    {
+      "county_geoid": "25001",
+      "records": 21982,
+      "mape_model": 0.16381978574940162,
+      "mape_baseline": 0.40655983473846335
+    },
+    {
+      "county_geoid": "25003",
+      "records": 7820,
+      "mape_model": 0.19775753260182685,
+      "mape_baseline": 0.427669805155951
+    },
+    {
+      "county_geoid": "25005",
+      "records": 24327,
+      "mape_model": 0.09000863834549856,
+      "mape_baseline": 0.2670309509042753
+    },
+    {
+      "county_geoid": "25007",
+      "records": 2221,
+      "mape_model": 0.2549992807877548,
+      "mape_baseline": 0.4977695824830941
+    },
+    {
+      "county_geoid": "25009",
+      "records": 33282,
+      "mape_model": 0.09936391321910554,
+      "mape_baseline": 0.30474048771061624
+    },
+    {
+      "county_geoid": "25011",
+      "records": 3729,
+      "mape_model": 0.14128996909592156,
+      "mape_baseline": 0.2967698316763009
+    },
+    {
+      "county_geoid": "25013",
+      "records": 19918,
+      "mape_model": 0.10966331649726242,
+      "mape_baseline": 0.25281143251209737
+    },
+    {
+      "county_geoid": "25015",
+      "records": 6724,
+      "mape_model": 0.12273608897367133,
+      "mape_baseline": 0.29705365955736945
+    },
+    {
+      "county_geoid": "25017",
+      "records": 65980,
+      "mape_model": 0.10326196807448337,
+      "mape_baseline": 0.3356492884441211
+    },
+    {
+      "county_geoid": "25019",
+      "records": 1377,
+      "mape_model": 0.278572206012058,
+      "mape_baseline": 0.765353010728597
+    },
+    {
+      "county_geoid": "25021",
+      "records": 31188,
+      "mape_model": 0.08996376770814067,
+      "mape_baseline": 0.29741317382446736
+    },
+    {
+      "county_geoid": "25023",
+      "records": 26611,
+      "mape_model": 0.11150196701641595,
+      "mape_baseline": 0.3248834276011558
+    },
+    {
+      "county_geoid": "25025",
+      "records": 23482,
+      "mape_model": 0.13581941537094272,
+      "mape_baseline": 0.4195166718314925
+    },
+    {
+      "county_geoid": "25027",
+      "records": 37190,
+      "mape_model": 0.10364918331211125,
+      "mape_baseline": 0.2832194001580761
+    }
+  ],
+  "features": [
+    "fy",
+    "lot_size_acres",
+    "res_area",
+    "bld_area",
+    "year_built",
+    "units",
+    "num_rooms",
+    "stories_num",
+    "x",
+    "y",
+    "parcel_area_m2",
+    "town_median_log",
+    "tract_median_log",
+    "tract_median_income",
+    "tract_acs_median_value",
+    "tract_zhvi",
+    "use3",
+    "county_geoid"
+  ],
+  "feature_importance": {
+    "method": "permutation importance (R2 drop on log value), 30000 validation records, 3 repeats",
+    "top": [
+      {
+        "feature": "res_area",
+        "importance_mean": 0.31666278050569324,
+        "importance_std": 0.0032065368305768654
+      },
+      {
+        "feature": "x",
+        "importance_mean": 0.15423507613058465,
+        "importance_std": 0.0014916918480307648
+      },
+      {
+        "feature": "town_median_log",
+        "importance_mean": 0.13923134303795934,
+        "importance_std": 0.0015381055456195841
+      },
+      {
+        "feature": "tract_median_log",
+        "importance_mean": 0.13619920241791994,
+        "importance_std": 0.002101392344513637
+      },
+      {
+        "feature": "y",
+        "importance_mean": 0.12345883193138174,
+        "importance_std": 0.0012930564974444792
+      },
+      {
+        "feature": "use3",
+        "importance_mean": 0.06294750963915745,
+        "importance_std": 0.0012874431707922368
+      },
+      {
+        "feature": "bld_area",
+        "importance_mean": 0.06244833855613948,
+        "importance_std": 0.0009955129619927526
+      },
+      {
+        "feature": "lot_size_acres",
+        "importance_mean": 0.050261447388248594,
+        "importance_std": 0.0002552012167322132
+      },
+      {
+        "feature": "year_built",
+        "importance_mean": 0.0460318761946216,
+        "importance_std": 0.0006114081888832162
+      },
+      {
+        "feature": "parcel_area_m2",
+        "importance_mean": 0.0272299474552619,
+        "importance_std": 0.0002118940160282651
+      }
+    ]
+  },
+  "artifacts": {
+    "model": "data/processed/model/home_value_model.joblib",
+    "error_by_county_chart": "reports/model_error_by_county.png",
+    "error_by_county_table": "reports/model_error_by_county.csv",
+    "feature_importance": "reports/model_feature_importance.csv"
+  }
+}
