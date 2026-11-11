@@ -18,3 +18,4 @@
 - 2026-11-10 — Phase 5: estimate method and limits documented (REPORT.md 3.2); HomelessFigure label schema.
 - 2026-11-10 — Phase 5: sensitivity check — population-share allocation keeps 15/20 top towns but only 2/20 top tracts (Spearman 0.89 towns, 0.36 tracts); reported in REPORT.md.
 - 2026-11-10 — Phase 6: Need Index components (8, percentile-scaled 0-1; missing kept NULL).
+- 2026-11-10 — Phase 6: Need Index (equal weights) for 1,591 tracts; 29 tracts without index, each flagged.

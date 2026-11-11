@@ -114,3 +114,11 @@ Format: date — decision — alternatives considered — reason.
   all "higher = more need"; distance to nearest shelter or subsidised development counts as
   need (farther = less access). Rent growth is ZORI only (519 tracts; no other tract rent
   series) and eviction rate is Eviction Lab 2014-2016 (1,137 tracts); missing stays NULL.
+- 2026-11-10 — Need Index = 100 x equal-weight mean of the available component scores, minimum 5 of 8
+  components; weights renormalised over available components and the missing ones named in
+  the row flag (1,212 tracts lack rent growth and/or eviction rate). 29 tracts get no index
+  (flagged "index not computed"): 22 have under 250 residents (water, parks, airport, other
+  non-residential tracts) and 7 populated tracts lack household-based ACS/CHAS renter data —
+  impute missing components (would invent values) / require all 8 (only 408 tracts). Stored
+  year 2026 (build year; inputs span 2014-2026). need_index source_id = hud_chas (primary
+  component) because source_id holds one source; the method text lists every input source.

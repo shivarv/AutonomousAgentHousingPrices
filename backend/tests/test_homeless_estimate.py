@@ -103,7 +103,8 @@ def test_loaded_estimates_are_labelled(db: Session) -> None:
         text(
             "SELECT count(*), count(*) FILTER (WHERE is_estimate AND method LIKE 'ESTIMATE:%' "
             "AND year = :y AND value >= 0) "
-            "FROM tract_metrics WHERE metric LIKE 'homeless_estimate%'"
+            "FROM tract_metrics WHERE metric IN ('homeless_estimate', "
+            "'homeless_estimate_sheltered', 'homeless_estimate_unsheltered')"
         ),
         {"y": latest},
     ).one()
