@@ -172,8 +172,10 @@ geometry, and stay within the 8 GB data budget.
       response and UI label for this metric says "estimate".
   - [x] item: reports/REPORT.md method + limits section; DECISIONS.md limits entry
   - [x] item: HomelessFigure schema (label "estimate" / "official CoC count", method, year) for Phases 9-10, with tests
-- [ ] Sensitivity check: alternative allocation (population share); report how much the top
+- [x] Sensitivity check: alternative allocation (population share); report how much the top
       areas change.
+  - [x] item: pipeline.features.homeless_sensitivity (population-share allocation, top-20 tract/town overlap, rank correlation) -> reports/homeless_sensitivity.md
+  - [x] item: tests + REPORT.md summary
 
 ### Phase 6 – Housing Need Index
 - [ ] Components scaled 0-1: affordable gap per ELI renter, severe rent burden share, eviction

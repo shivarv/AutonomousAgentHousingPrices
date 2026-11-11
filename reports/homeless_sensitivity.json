@@ -1,0 +1,29 @@
+{
+  "pit_year": 2025,
+  "main_weight": "eli_severely_burdened_renters (HUD CHAS 2018-2022)",
+  "alternative_weight": "population (ACS 2020-2024)",
+  "tracts": {
+    "areas": 1620,
+    "top_n": 20,
+    "top_n_overlap": 2,
+    "top_n_overlap_share": 0.1,
+    "spearman": 0.36,
+    "share_reallocated": 0.37
+  },
+  "municipalities": {
+    "areas": 351,
+    "top_n": 20,
+    "top_n_overlap": 15,
+    "top_n_overlap_share": 0.75,
+    "spearman": 0.886,
+    "share_reallocated": 0.193
+  },
+  "municipalities_top10": {
+    "areas": 351,
+    "top_n": 10,
+    "top_n_overlap": 8,
+    "top_n_overlap_share": 0.8,
+    "spearman": 0.886,
+    "share_reallocated": 0.193
+  }
+}

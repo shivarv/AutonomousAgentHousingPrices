@@ -104,3 +104,7 @@ Format: date — decision — alternatives considered — reason.
   homeless figures as app.schemas.estimate.HomelessFigure (label "estimate", method, year);
   only CoC-level figures use "official CoC count" — free-text labels per endpoint — one typed
   schema makes the label impossible to omit.
+- 2026-11-10 — Sensitivity result kept as is: the tract-level estimate is highly weight-dependent
+  (2/20 top tracts shared with population-share allocation), towns are robust (15/20). Main
+  weight unchanged (PLAN.md's at-risk weight); REPORT.md tells users to prefer town or larger
+  summaries — switching weight to look more stable — the test is diagnostic, not a selection.
