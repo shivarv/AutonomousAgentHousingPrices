@@ -158,8 +158,10 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: tests (unit arithmetic; DB totals equal tract sums at every level, 351 towns)
 
 ### Phase 5 – Homelessness: official counts and modelled distribution
-- [ ] Official layer: PIT counts per CoC and year (sheltered, unsheltered, total, trend) and
+- [x] Official layer: PIT counts per CoC and year (sheltered, unsheltered, total, trend) and
       HIC beds per CoC. These are the only exact figures; present them as CoC totals.
+  - [x] item: homelessness DAO + schemas + service (CoC series with sheltered/unsheltered/total, year-on-year trend, HIC beds, statewide sum, "official CoC count" label)
+  - [x] item: tests (trend arithmetic, every CoC has the latest year, state = sum of CoCs)
 - [ ] Modelled layer: allocate each CoC's latest total to its tracts. Sheltered people by share
       of the CoC's shelter beds located in each tract; unsheltered and at-risk weighting by the
       tract's share of severely rent-burdened ELI renter households. Tract estimates must sum
