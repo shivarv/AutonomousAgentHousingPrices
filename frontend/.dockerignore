@@ -1,0 +1,17 @@
+# Build context for frontend/Dockerfile: sources and npm manifests only.
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+*.log
+.eslintcache
+Dockerfile
+.dockerignore
+README.md
+.git/
+.env
+.env.*
+*.pem
+*.key
+.DS_Store
