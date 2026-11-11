@@ -44,3 +44,12 @@ class MetricDao:
                 TractMunicipality.area_share,
             )
         ).all()
+
+    def tract_municipality_weights(self) -> Sequence[Row[Any]]:
+        return self.session.execute(
+            select(
+                TractMunicipality.tract_geoid,
+                TractMunicipality.municipality_geoid,
+                TractMunicipality.housing_share,
+            )
+        ).all()
