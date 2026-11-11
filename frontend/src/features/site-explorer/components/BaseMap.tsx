@@ -6,7 +6,7 @@ export function BaseMap({ children }: { children?: ReactNode }) {
   return (
     <MapContainer
       bounds={MASSACHUSETTS_BOUNDS}
-      className="size-full min-h-[24rem]"
+      className="size-full"
       keyboard
       preferCanvas
       aria-label="Map of Massachusetts. Click the map or use the pin controls to choose a place."

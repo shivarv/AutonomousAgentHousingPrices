@@ -40,3 +40,4 @@
 - 2026-11-10 — Phase 10: site explorer map (areas and rings modes, benefit area, best/next best, address search, layers with legends, keyboard pin).
 - 2026-11-10 — Phase 10: tract and site detail panels with source and year for every number.
 - 2026-11-10 — Phase 10: Methodology & sources and About the estimates pages (numbers read from the API, none hard-coded).
+- 2026-11-10 — Phase 10: loading/error/empty states, phone layout, keyboard pin control; Phase 10 complete.

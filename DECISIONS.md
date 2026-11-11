@@ -188,3 +188,8 @@ Format: date — decision — alternatives considered — reason.
 - 2026-11-10 — Overview shelter beds = HIC year-round beds summed over the CoCs that overlap the
   area (latest year all of them report), labelled "official CoC count" with the CoC list —
   HIC is CoC-level only, so a county or town gets its CoCs' totals, never an apportioned number.
+- 2026-11-10 — Frontend: charts are hand-built SVG/HTML (single-series PIT trend line, single-series
+  county bars, tables) — a chart library (new dependency for two simple charts). Choropleths use
+  classed ColorBrewer scales (Blues for the Need Index, BrBG diverging for the ELI gap, Purples for
+  the homeless estimate), colour-blind safe, always with a legend and words (shortage/surplus).
+  The Census Geocoder is called through GET /api/geocode because it sends no CORS headers.

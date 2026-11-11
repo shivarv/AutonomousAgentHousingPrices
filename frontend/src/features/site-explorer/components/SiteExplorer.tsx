@@ -9,6 +9,7 @@ import { BestSiteButtons } from '@/features/site-explorer/components/BestSiteBut
 import { ExplorerMap } from '@/features/site-explorer/components/ExplorerMap'
 import { LayerSelect } from '@/features/site-explorer/components/LayerSelect'
 import { MapLegend } from '@/features/site-explorer/components/MapLegend'
+import { MapStatus } from '@/features/site-explorer/components/MapStatus'
 import { ModeToggle } from '@/features/site-explorer/components/ModeToggle'
 import { PinNudger } from '@/features/site-explorer/components/PinNudger'
 import { RingsPanel } from '@/features/site-explorer/components/RingsPanel'
@@ -84,8 +85,9 @@ export function SiteExplorer() {
 
   return (
     <div className="flex flex-1 flex-col lg:h-[calc(100dvh-7.5rem)] lg:flex-none lg:flex-row">
-      <section className="relative flex min-h-[60vh] flex-1" aria-label="Map">
+      <section className="relative flex h-[60vh] min-h-80 lg:h-auto lg:flex-1" aria-label="Map">
         <ExplorerMap s={s} pin={pin} stats={stats.data} focus={focus} />
+        <MapStatus layer={s.layer} mode={s.mode} level={s.level} />
         <div className="pointer-events-none absolute bottom-6 left-2 z-[500]">
           <MapLegend layer={s.layer} showRings={s.mode === 'rings'} />
         </div>
