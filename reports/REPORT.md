@@ -84,6 +84,31 @@ estimates should be read as "where severely cost-burdened very poor renters, and
 are concentrated within the CoC", not as local counts; summaries over towns or larger areas are
 more reliable than single tracts.
 
+### 3.3 Housing Need Index (0-100)
+
+Eight tract components, each oriented so that higher means more need: affordable gap per ELI
+renter household (CHAS), severe rent burden share (ACS), eviction filing rate (Eviction Lab
+2014-2016), poverty rate (ACS), overcrowding rate (ACS), 5-year rent growth (Zillow ZORI),
+homeless estimate per 1,000 residents (modelled estimate, 3.2), and distance to the nearest
+shelter or subsidised housing development (farther = less access). Each is scaled to 0-1 by
+its statewide percentile rank. The index is 100 x the equal-weight mean of the components a
+tract has, with a minimum of 5 of 8; missing components are never imputed, the weights are
+renormalised over the available ones, and the row flag names what is missing. 1,591 of 1,620
+tracts have an index; the 29 without one (mostly water, park and other non-residential tracts,
+plus 7 populated tracts without renter-household data) are flagged.
+
+Limits: rent growth exists for only 519 tracts and eviction data for 1,137 (and is from
+2014-2016); percentile scores show relative, not absolute, need; components are correlated
+(several measure poverty and rent burden), so equal weights still emphasise affordability.
+
+**Sensitivity** (`reports/need_index_sensitivity.md`): with three alternative weightings the
+rank correlation with the main index stays at 0.95-0.98. Of the main top 20 tracts, 15 stay
+in the top 20 when affordability components are doubled, 16 when homelessness and eviction are
+doubled, but only 10 when the two sparse components (rent growth, eviction) are dropped —
+the top of the ranking is partly driven by where those sparse data exist. Individual tracts
+can move far (e.g. a top-20 Amherst tract falls to rank 228 when homelessness/eviction are
+doubled), so the index is best used to shortlist areas, not to order neighbouring tracts.
+
 ## 4. Results
 
 To be completed (Phases 6-8 and 12).
