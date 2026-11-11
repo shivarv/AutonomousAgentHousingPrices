@@ -18,6 +18,7 @@ from app.dao.tract_dao import TractDao
 from app.services.area_service import AreaService
 from app.services.data_source_service import DataSourceService
 from app.services.geo_index import get_geo_index
+from app.services.geocode_service import GeocodeService
 from app.services.health_service import HealthService
 from app.services.homelessness_service import HomelessnessService
 from app.services.model_service import ModelService
@@ -68,3 +69,7 @@ def get_model_service(db: DbSession) -> ModelService:
 
 def get_data_source_service(db: DbSession) -> DataSourceService:
     return DataSourceService(DataSourceDao(db))
+
+
+def get_geocode_service() -> GeocodeService:
+    return GeocodeService()
