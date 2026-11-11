@@ -12,7 +12,7 @@ export function RingSliders({ s }: { s: ExplorerState }) {
             type="button"
             aria-pressed={s.preset === k}
             onClick={() => s.choosePreset(k)}
-            className={`rounded-sm border px-2.5 py-1 text-sm ${s.preset === k ? 'border-ink bg-ink text-paper-raised' : 'border-rule bg-paper-raised'}`}
+            className={`rounded-md px-2.5 py-1 text-sm ${s.preset === k ? 'btn-ink' : 'btn-quiet'}`}
           >
             {RING_PRESETS[k].label} {RING_PRESETS[k].radii.join(' / ')} km
           </button>

@@ -27,12 +27,12 @@ export function AddressSearch({ onFound }: { onFound: (p: LatLon) => void }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="e.g. 1 City Hall Sq, Boston"
-          className="min-w-0 flex-1 rounded-sm border border-rule bg-paper-raised px-2 py-1.5 text-sm"
+          className="min-w-0 flex-1 rounded-md border border-rule bg-paper-raised px-2.5 py-1.5 text-sm"
         />
         <button
           type="submit"
           disabled={geo.isPending}
-          className="rounded-sm bg-ink px-3 py-1.5 text-sm font-medium text-paper-raised disabled:opacity-60"
+          className="btn-ink rounded-md px-3.5 py-1.5 text-sm font-medium disabled:opacity-60"
         >
           {geo.isPending ? 'Searching' : 'Search'}
         </button>

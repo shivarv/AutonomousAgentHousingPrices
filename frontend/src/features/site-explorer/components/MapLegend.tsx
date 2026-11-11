@@ -7,7 +7,7 @@ export function MapLegend({ layer, showRings }: { layer: BackgroundLayer; showRi
   return (
     <details
       open={WIDE}
-      className="pointer-events-auto max-w-56 rounded-sm bg-paper-raised/95 p-2 text-xs shadow-sm"
+      className="surface-plate pointer-events-auto max-w-56 rounded-lg border border-white/60 p-2.5 text-xs backdrop-blur-sm"
     >
       <summary className="cursor-pointer font-semibold">
         Legend: {LAYER_TITLES[layer]}
