@@ -337,8 +337,10 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: compose.yaml (postgres:18 healthcheck, backend, frontend, optional pipeline profile), static validation test, README note
 
 ### Phase 12 – Statistics, report and final checks
-- [ ] reports/STATISTICS.md (Outcome 1 in writing): statewide and per-county homeless counts and
+- [x] reports/STATISTICS.md (Outcome 1 in writing): statewide and per-county homeless counts and
       trends, shelter capacity, affordable shortage, top need areas, top candidate sites.
+  - [x] item: pipeline.stats_report (figures via StatsService/HomelessnessService/SiteService; CoC official counts, county estimates labelled) + tests
+  - [x] item: reports/STATISTICS.md generated
 - [ ] reports/REPORT.md: question, data, methods (especially the homeless estimate and site
       scoring), results, limitations, next steps.
 - [ ] README.md: what it is, how to run (local and Docker), how to rebuild data from scratch.
