@@ -8,9 +8,10 @@ export function BaseMap({ children }: { children?: ReactNode }) {
       bounds={MASSACHUSETTS_BOUNDS}
       className="size-full min-h-[24rem]"
       keyboard
-      aria-label="Map of Massachusetts"
+      preferCanvas
+      aria-label="Map of Massachusetts. Click the map or use the pin controls to choose a place."
     >
-      <TileLayer url={OSM_TILE_URL} attribution={OSM_ATTRIBUTION} />
+      <TileLayer url={OSM_TILE_URL} attribution={OSM_ATTRIBUTION} opacity={0.75} />
       {children}
     </MapContainer>
   )
