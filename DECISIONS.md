@@ -76,3 +76,12 @@ Format: date — decision — alternatives considered — reason.
   at that rent (Tables 15C, 14B); complete-facility units only. ELI/VLI renters and severe burden
   from Table 8. Statewide: 314,258 ELI renters, 144,912 available units (46 per 100), gap
   169,346 — alternative ACS income x rent tables — CHAS is the primary source in PLAN.md.
+- 2026-11-10 — Area aggregates: counties, CoCs, Boston neighbourhoods and state sum each tract
+  once in its primary area (tracts nest exactly in counties). Towns: 37 small towns are no
+  tract's primary town and 38 tracts cross town lines, so tract counts are apportioned to towns
+  by each tract's share of 2020 census-block housing units in the town (block internal point in
+  town polygon), stored as tract_municipalities.housing_share; 14 tracts with no housing units
+  use their area share. Weights sum to 1 per tract, so town totals add up to the state total.
+  Rates are recomputed from summed numerators/denominators — primary-town only (leaves 37 towns
+  with no figures); area-share weights (poor proxy for where people live) — all 351 towns need
+  figures and housing units track where households are.

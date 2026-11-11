@@ -12,3 +12,4 @@
 - 2026-11-10 — Phase 3: data integrity tests (8) pass against the loaded database.
 - 2026-11-10 — Phase 4: CHAS affordable gap per tract (ELI/VLI renters, affordable & available units, gap, per-100).
 - 2026-11-10 — Phase 4: tract context metrics verified for all tracts.
+- 2026-11-10 — Phase 4: aggregates to town (351, housing-share apportioned), county, CoC, neighbourhood, state; totals = tract sums.

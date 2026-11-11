@@ -9,7 +9,6 @@ from sqlalchemy.orm import Session
 from app.core.database import get_session_factory
 
 LEVEL_COLUMN = {
-    "municipality": "municipality_geoid",
     "county": "county_geoid",
     "coc": "coc_number",
 }
@@ -65,6 +64,43 @@ def test_area_totals_equal_tract_sums(db: Session, level: str, metric: str) -> N
     assert sum(stored.values()) == pytest.approx(_state_total(db, metric))
 
 
+@pytest.mark.parametrize("metric", METRICS)
+def test_municipality_totals_equal_weighted_tract_sums(db: Session, metric: str) -> None:
+    rows = dict(
+        db.execute(
+            text(
+                "SELECT tm.municipality_geoid, sum(m.value * tm.housing_share) "
+                "FROM tract_metrics m JOIN tract_municipalities tm "
+                "ON tm.tract_geoid = m.tract_geoid "
+                "WHERE m.metric = :m AND tm.housing_share > 0 GROUP BY 1"
+            ),
+            {"m": metric},
+        ).all()
+    )
+    stored = dict(
+        db.execute(
+            text(
+                "SELECT area_id, value FROM area_metrics WHERE level='municipality' AND metric=:m"
+            ),
+            {"m": metric},
+        ).all()
+    )
+    assert stored.keys() == rows.keys()
+    for area, total in rows.items():
+        assert stored[area] == pytest.approx(total), area
+    assert sum(stored.values()) == pytest.approx(_state_total(db, metric))
+
+
+def test_town_weights_sum_to_one_per_tract(db: Session) -> None:
+    bad = db.execute(
+        text(
+            "SELECT tract_geoid FROM tract_municipalities GROUP BY 1 "
+            "HAVING abs(sum(coalesce(housing_share, -1)) - 1) > 1e-9"
+        )
+    ).all()
+    assert bad == []
+
+
 def test_351_municipalities_and_14_counties_aggregated(db: Session) -> None:
     counts = dict(
         db.execute(
@@ -77,6 +113,4 @@ def test_351_municipalities_and_14_counties_aggregated(db: Session) -> None:
     assert counts["county"] == 14
     assert counts["coc"] == 11
     assert counts["state"] == 1
-    # every town that is the primary town of at least one tract
-    primary = db.execute(text("SELECT count(DISTINCT municipality_geoid) FROM tracts")).scalar()
-    assert counts["municipality"] == primary
+    assert counts["municipality"] == 351
