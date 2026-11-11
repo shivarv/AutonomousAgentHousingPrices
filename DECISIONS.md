@@ -154,3 +154,15 @@ Format: date — decision — alternatives considered — reason.
   deterministic script only because the saved model file was missing after the session-3
   checkpoint; no setting changed and the test numbers were bit-identical, so this is not a
   second look at the test split.
+- 2026-11-10 — Site screening codes: MA DOR vacant-land codes 130/131 (developable / potentially
+  developable residential), 390/391 (commercial), 440/441 (industrial); undevelopable vacant
+  land (132/392/442) and tax-exempt (9xx, public land whose vacancy the code does not record)
+  are excluded — all vacant codes (132 = undevelopable by definition). Minimum lot 0.5 acre
+  (PLAN start value, kept) on GIS polygon area — assessor LOT_SIZE (missing for many vacant
+  parcels, and it barely correlates with polygon area). Constraints: all MassGIS open-space
+  polygons (any protection level, conservative), all MassDEP wetland types incl. open water,
+  FEMA NFHL SFHA_TF='T' (A, AE, AH, AO, VE). A parcel is dropped when more than 50% of its
+  area falls in the union of the three layers (stricter than per-layer, so no kept parcel
+  exceeds 50% in any one layer); overlaps of 1% or more are flagged — <1% treated as boundary
+  slivers and not flagged (shares still stored). Result: 44,935 lots -> 40,873 sites
+  (4,062 dropped, 14,067 flagged). 3A district = interior point inside a district (194).
