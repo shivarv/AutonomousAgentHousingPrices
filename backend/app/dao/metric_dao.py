@@ -4,7 +4,7 @@ from typing import Any
 from sqlalchemy import Row, select
 from sqlalchemy.orm import Session
 
-from app.models import DataSource, Tract, TractMetric
+from app.models import DataSource, Tract, TractMetric, TractMunicipality
 
 
 class MetricDao:
@@ -33,5 +33,14 @@ class MetricDao:
                 Tract.county_geoid,
                 Tract.coc_number,
                 Tract.neighbourhood_id,
+            )
+        ).all()
+
+    def tract_municipality_rows(self) -> Sequence[Row[Any]]:
+        return self.session.execute(
+            select(
+                TractMunicipality.tract_geoid,
+                TractMunicipality.municipality_geoid,
+                TractMunicipality.area_share,
             )
         ).all()
