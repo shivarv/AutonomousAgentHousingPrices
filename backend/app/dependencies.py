@@ -7,10 +7,13 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.dao.area_dao import AreaDao
+from app.dao.geo_dao import GeoDao
 from app.dao.health_dao import HealthDao
 from app.dao.homelessness_dao import HomelessnessDao
 from app.dao.site_dao import SiteDao
 from app.dao.tract_dao import TractDao
+from app.services.area_service import AreaService
+from app.services.geo_index import get_geo_index
 from app.services.health_service import HealthService
 from app.services.homelessness_service import HomelessnessService
 from app.services.site_service import SiteService
@@ -43,3 +46,7 @@ def get_tract_service(db: DbSession) -> TractService:
 
 def get_site_service(db: DbSession) -> SiteService:
     return SiteService(SiteDao(db))
+
+
+def get_area_service(db: DbSession) -> AreaService:
+    return AreaService(get_geo_index(GeoDao(db), db_key(db)))

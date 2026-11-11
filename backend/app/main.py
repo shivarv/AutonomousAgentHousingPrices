@@ -6,6 +6,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 
 from app.controllers import (
+    area_controller,
     health_controller,
     site_controller,
     stats_controller,
@@ -34,6 +35,7 @@ def create_app() -> FastAPI:
     app.include_router(stats_controller.router)
     app.include_router(tract_controller.router)
     app.include_router(site_controller.router)
+    app.include_router(area_controller.router)
     return app
 
 

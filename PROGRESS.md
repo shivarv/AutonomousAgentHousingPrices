@@ -30,3 +30,4 @@
 - 2026-11-10 — Phase 9: GET /api/stats/overview (state/county/town; CoC counts with trend, area estimate, HIC beds); housing_test seeded from housing for API tests.
 - 2026-11-10 — Phase 9: GET /api/tracts (cached GeoJSON, filters) and /api/tracts/{geoid} (all metrics with source/year, estimate label).
 - 2026-11-10 — Phase 9: GET /api/sites, /api/sites/best (offset = next best), /api/sites/{id}.
+- 2026-11-10 — Phase 9: POST /api/area-stats (geodesic rings, tract area shares; ~30-50 ms warm).
