@@ -121,7 +121,8 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: dataset registry + DATA_SOURCES.md generated from download manifests
   - [x] item: DataSource model + first Alembic migration
   - [x] item: data_sources loader (DAO + service) from DATA_SOURCES.md, with tests
-- [ ] reports/data_audit.md: rows, years, geography, missing-value rates, known issues.
+- [x] reports/data_audit.md: rows, years, geography, missing-value rates, known issues.
+  - [x] item: pipeline.audit generating reports/data_audit.md for all 23 datasets
 
 ### Phase 3 – Database schema and loading
 - [ ] Models + Alembic migrations: data_sources, counties, municipalities, cocs (with member
