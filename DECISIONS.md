@@ -193,3 +193,12 @@ Format: date — decision — alternatives considered — reason.
   classed ColorBrewer scales (Blues for the Need Index, BrBG diverging for the ELI gap, Purples for
   the homeless estimate), colour-blind safe, always with a legend and words (shortage/surplus).
   The Census Geocoder is called through GET /api/geocode because it sends no CORS headers.
+- 2026-11-10 — Docker (Phase 11): backend image built with uv (`uv sync --locked --no-dev`) on
+  python:3.12-slim, non-root uid 1001, code at /srv/backend so pipeline/paths.py's project root
+  is /srv and an on-demand `pipeline` compose profile mounts data/, reports/ and DATA_SOURCES.md
+  there; frontend served by nginx-unprivileged which proxies /api to the backend (same origin,
+  no CORS or build-time API URL needed) — a Node static server (`serve`/`vite preview`: no
+  proxy, so the browser would need the API URL and CORS). The database password defaults to a
+  local-only `${POSTGRES_PASSWORD:-housing}`; CENSUS_API_KEY is passed through from the shell.
+  Docker is not installed, so validation is static (pytest test_docker_files.py); pyyaml added
+  as a dev dependency for it.

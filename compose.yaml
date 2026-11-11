@@ -1,0 +1,89 @@
+# Massachusetts Housing Need & Site Finder — full stack.
+#   docker compose up --build                         # db + backend (migrations, then API) + frontend
+#   open http://localhost:8080
+#   docker compose --profile pipeline run --rm pipeline python -m pipeline.download   # rebuild data
+# Untested here: Docker is not installed on the machine these files were written on (see README).
+#
+# The database starts empty; the API needs the pipeline to have loaded it (see README,
+# "Rebuild the data"). The password defaults to a local-only value; set POSTGRES_PASSWORD
+# in your shell or a git-ignored .env file for anything else.
+
+name: ma-housing
+
+x-backend-env: &backend-env
+  DATABASE_URL: postgresql+psycopg://housing:${POSTGRES_PASSWORD:-housing}@db:5432/housing
+  CORS_ORIGINS: '["http://localhost:8080"]'
+
+services:
+  db:
+    image: postgres:18.1
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: housing
+      POSTGRES_DB: housing
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-housing}
+    volumes:
+      # Postgres 18 images keep PGDATA under /var/lib/postgresql/18/docker; mount the parent.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U housing -d housing"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: ma-housing-backend:0.1.0
+    restart: unless-stopped
+    environment: *backend-env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2).status == 200 else 1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ma-housing-frontend:0.1.0
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  # Data pipeline (download, clean, load, features, model, sites). Same image as the backend,
+  # with the project's data/ and reports/ folders and DATA_SOURCES.md mounted where
+  # pipeline/paths.py expects them (the parent of /srv/backend). Run on demand only.
+  pipeline:
+    profiles: ["pipeline"]
+    image: ma-housing-backend:0.1.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      <<: *backend-env
+      # Passed through from your shell; never written to any file.
+      CENSUS_API_KEY: ${CENSUS_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./data:/srv/data
+      - ./reports:/srv/reports
+      - ./DATA_SOURCES.md:/srv/DATA_SOURCES.md
+    command: ["python", "-m", "pipeline.load"]
+
+volumes:
+  pgdata:

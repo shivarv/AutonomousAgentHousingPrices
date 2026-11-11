@@ -328,13 +328,13 @@ geometry, and stay within the 8 GB data budget.
   - [x] item: keyboard: arrow-key pin control, focus-visible outlines, labelled controls, radio/pressed states; phone-width screenshots checked
 
 ### Phase 11 – Docker
-- [ ] backend/Dockerfile (multi-stage, uv, non-root), frontend/Dockerfile (build + static
+- [x] backend/Dockerfile (multi-stage, uv, non-root), frontend/Dockerfile (build + static
       server), compose.yaml (postgres:18 with healthcheck, backend runs migrations then
       uvicorn, frontend), .dockerignore files. Validate YAML parses and paths exist; note in
       README that it's untested here.
   - [x] item: backend/Dockerfile (uv multi-stage, non-root, migrations then uvicorn) + backend/.dockerignore
   - [x] item: frontend/Dockerfile (npm build, nginx static server proxying /api) + frontend/.dockerignore
-  - [ ] item: compose.yaml (postgres:18 healthcheck, backend, frontend, optional pipeline profile), static validation test, README note
+  - [x] item: compose.yaml (postgres:18 healthcheck, backend, frontend, optional pipeline profile), static validation test, README note
 
 ### Phase 12 – Statistics, report and final checks
 - [ ] reports/STATISTICS.md (Outcome 1 in writing): statewide and per-county homeless counts and
