@@ -189,8 +189,11 @@ geometry, and stay within the 8 GB data budget.
 - [x] Sensitivity check with 3 alternative weightings; report top-20 stability.
   - [x] item: pipeline.index.sensitivity (affordability-heavy, homelessness/eviction-heavy, dense-components-only) -> reports/need_index_sensitivity.md/.json
   - [x] item: tests + REPORT.md summary
-- [ ] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
+- [x] reports/top_tracts.csv (top 50 statewide plus top 10 per county) and a municipality
       summary (population-weighted index).
+  - [x] item: population-weighted need_index in area_metrics (town/county/CoC/neighbourhood/state)
+  - [x] item: pipeline.index.report -> reports/top_tracts.csv and reports/municipality_need.csv
+  - [x] item: tests (weighted mean arithmetic, CSV contents)
 
 ### Phase 7 – Home-value model (cost context for sites)
 - [ ] Residential parcels statewide; split 70/15/15 stratified by county; test split saved once,

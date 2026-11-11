@@ -109,6 +109,11 @@ the top of the ranking is partly driven by where those sparse data exist. Indivi
 can move far (e.g. a top-20 Amherst tract falls to rank 228 when homelessness/eviction are
 doubled), so the index is best used to shortlist areas, not to order neighbouring tracts.
 
+Town, county and state indexes are population-weighted means of their tracts
+(`reports/municipality_need.csv`, `reports/top_tracts.csv`). Small rural towns rank high in the
+town list, largely through the distance-to-service component and because one or two tracts
+decide their value; towns that share a single tract (e.g. Ashfield and Conway) share its index.
+
 ## 4. Results
 
 To be completed (Phases 6-8 and 12).
