@@ -5,7 +5,13 @@ from app.dao.area_dao import AreaDao
 from app.schemas.estimate import HomelessFigure
 from app.schemas.homelessness import CocHomelessness
 from app.schemas.metric import MetricValue
-from app.schemas.stats import OverviewHomelessness, ShelterBeds, StatsOverview
+from app.schemas.stats import (
+    AreaStatsRow,
+    AreaStatsTable,
+    OverviewHomelessness,
+    ShelterBeds,
+    StatsOverview,
+)
 from app.services.homelessness_service import HomelessnessService
 
 STATE_ID = "25"
@@ -27,6 +33,14 @@ OVERVIEW_METRICS = (
     "hud_assisted_units",
     "lihtc_low_income_units",
     "need_index",
+    "homeless_estimate",
+)
+TABLE_METRICS = (
+    "population",
+    "need_index",
+    "eli_renter_households",
+    "affordable_gap_eli",
+    "affordable_units_per_100_eli",
     "homeless_estimate",
 )
 AREA_NOTE = (
@@ -95,3 +109,28 @@ class StatsService:
             ),
             shelter_beds=beds_for(cocs),
         )
+
+    def table(self, level: str) -> AreaStatsTable:
+        """Every county or town with key figures, for rankings and filters."""
+        if level not in ("county", "municipality"):
+            raise ValidationError("level must be county or municipality")
+        areas = self.areas.area_rows(level, with_boundary=False)
+        ids = [a["id"] for a in areas]
+        values: dict[str, dict[str, float | None]] = {}
+        meta: dict[str, MetricValue] = {}
+        for r in self.areas.metrics(level, ids):
+            if r.metric in TABLE_METRICS:
+                values.setdefault(r.area_id, {})[r.metric] = r.value
+                if r.metric not in meta:
+                    m = MetricValue.from_row(r)
+                    meta[r.metric] = m.model_copy(update={"value": None})
+        rows = [
+            AreaStatsRow(
+                id=a["id"],
+                name=a["name"],
+                county_geoid=a.get("county_geoid") if level == "municipality" else a["id"],
+                **{m: values.get(a["id"], {}).get(m) for m in TABLE_METRICS},
+            )
+            for a in areas
+        ]
+        return AreaStatsTable(level=level, rows=rows, metrics=meta)  # type: ignore[arg-type]

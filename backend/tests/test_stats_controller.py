@@ -36,3 +36,16 @@ def test_overview_errors(client: TestClient, seeded) -> None:
     r = client.get("/api/stats/overview", params={"level": "county", "id": "99999"})
     assert r.status_code == 404
     assert client.get("/api/stats/overview", params={"level": "planet"}).status_code == 422
+
+
+def test_area_tables(client: TestClient, seeded) -> None:
+    counties = client.get("/api/stats/areas", params={"level": "county"}).json()
+    assert len(counties["rows"]) == 14
+    state = client.get("/api/stats/overview").json()
+    gap = sum(r["affordable_gap_eli"] for r in counties["rows"])
+    assert abs(gap - state["metrics"]["affordable_gap_eli"]["value"]) < 1
+    assert counties["homeless_label"] == "estimate"
+    towns = client.get("/api/stats/areas", params={"level": "municipality"}).json()
+    assert len(towns["rows"]) == 351
+    assert all(r["county_geoid"] for r in towns["rows"])
+    assert client.get("/api/stats/areas", params={"level": "tract"}).status_code == 422
